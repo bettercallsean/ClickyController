@@ -154,7 +154,7 @@ namespace ClickyController
 
     public class Keyboard : Controller
     {
-        public static void KeyInput(ushort keyCode)
+        public static void KeyPress(ushort keyCode)
         {
             INPUT keyPress = new INPUT
             {
@@ -186,15 +186,10 @@ namespace ClickyController
 
             INPUT[] inputs = new INPUT[] { keyPress, keyRelease };
 
-
-
-            if (SendInput(2, inputs, INPUT.Size) == 0)
-            {
-                int error = Marshal.GetLastWin32Error();
-                Console.WriteLine(error);
-            }
+            SendInput(2, inputs, INPUT.Size);
 
         }
+
     }
 
 }
