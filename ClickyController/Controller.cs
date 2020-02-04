@@ -137,14 +137,57 @@ namespace ClickyController
             SendInput(2, inputs, INPUT.Size);
         }
 
+        private static void MouseAction(uint buttonActionCode)
+        {
+            INPUT buttonAction = new INPUT
+            {
+                type = 0
+            };
+
+            buttonAction.union.mouseInput = new MOUSEINPUT
+            {
+                xPosition = 0,
+                yPosition = 0,
+                mouseButtonData = 0,
+                mouseButtonAction = buttonActionCode,
+                time = 0,
+                extraInfo = GetMessageExtraInfo()
+            };
+
+            INPUT[] inputs = new INPUT[] { buttonAction };
+
+            SendInput(1, inputs, INPUT.Size);
+        }
+
+       
+        public static void LeftClick()
+        {
+            MouseClick(0x0002, 0x0004);
+        }
+
+        public static void LeftPress()
+        {
+            MouseAction(0x0002);
+        }
+
+        public static void LeftRelease()
+        {
+            MouseAction(0x0004);
+        }
+
         public static void RightClick()
         {
             MouseClick(0x0008, 0x0010);
         }
 
-        public static void LeftClick()
+        public static void RightPress()
         {
-            MouseClick(0x0002, 0x0004);
+            MouseAction(0x0008);
+        }
+
+        public static void RightRelease()
+        {
+            MouseAction(0x0010);
         }
     }
 }
