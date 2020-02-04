@@ -4,7 +4,6 @@ using System.Runtime.InteropServices;
 namespace ClickyController
 {
     
-
     public class Controller
     {
 
@@ -12,11 +11,11 @@ namespace ClickyController
         private static extern uint SendInput(uint numberOfInputs, INPUT[] input, int inputSize);
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
-        public static extern IntPtr GetMessageExtraInfo();
+        private static extern IntPtr GetMessageExtraInfo();
 
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct INPUT
+        private struct INPUT
         {
             internal uint type;
             internal InputUnion union;
@@ -28,7 +27,7 @@ namespace ClickyController
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct MOUSEINPUT
+        private struct MOUSEINPUT
         {
             /* Stores data necessary for Windows to perform an action with the mouse */
             internal int xPosition;
@@ -40,7 +39,7 @@ namespace ClickyController
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct KEYBDINPUT
+        private struct KEYBDINPUT
         {
             /* Stores data necessary for Windows to perform an action with the keyboard */
             internal ushort virtualKeyCode;
@@ -52,7 +51,7 @@ namespace ClickyController
 
 
         [StructLayout(LayoutKind.Explicit)]
-        internal struct InputUnion
+        private struct InputUnion
         {
             [FieldOffset(0)]
             internal MOUSEINPUT mouseInput;
@@ -62,37 +61,35 @@ namespace ClickyController
 
         public static void KeyboardInput(ushort keyCode)
         {
-
-
-            INPUT input = new INPUT
+            INPUT keyPress = new INPUT
             {
                 type = 1
             };
 
-            input.union.keyboardInput = new KEYBDINPUT
+            keyPress.union.keyboardInput = new KEYBDINPUT
             {
                 virtualKeyCode = keyCode,
                 time = 0,
-                extraInfo = IntPtr.Zero,
+                extraInfo = GetMessageExtraInfo(),
                 hardwareScanCode = 0,
                 keystrokeFlags = 0
             };
 
-            INPUT input2 = new INPUT
+            INPUT keyRelease = new INPUT
             {
                 type = 1
             };
 
-            input2.union.keyboardInput = new KEYBDINPUT
+            keyRelease.union.keyboardInput = new KEYBDINPUT
             {
                 virtualKeyCode = keyCode,
                 time = 0,
-                extraInfo = IntPtr.Zero,
+                extraInfo = GetMessageExtraInfo(),
                 hardwareScanCode = 0,
                 keystrokeFlags = 2
             };
 
-            INPUT[] inputs = new INPUT[] { input, input2 };
+            INPUT[] inputs = new INPUT[] { keyPress, keyRelease };
 
             
 
@@ -106,39 +103,37 @@ namespace ClickyController
 
         public static void LeftClick()
         {
-            INPUT input = new INPUT
+            INPUT buttonDown = new INPUT
             {
                 type = 0
             };
 
-            input.union.mouseInput = new MOUSEINPUT
+            buttonDown.union.mouseInput = new MOUSEINPUT
             {
                 xPosition = 0,
                 yPosition = 0,
                 mouseButtonData = 0,
                 mouseButtonAction = 0x0002,
                 time = 0,
-                extraInfo = IntPtr.Zero
+                extraInfo = GetMessageExtraInfo()
             };
 
-            INPUT input2 = new INPUT
+            INPUT buttonRelease = new INPUT
             {
                 type = 0
             };
 
-            input2.union.mouseInput = new MOUSEINPUT
+            buttonRelease.union.mouseInput = new MOUSEINPUT
             {
                 xPosition = 0,
                 yPosition = 0,
                 mouseButtonData = 0,
                 mouseButtonAction = 0x0004,
                 time = 0,
-                extraInfo = IntPtr.Zero
+                extraInfo = GetMessageExtraInfo()
             };
 
-
-
-            INPUT[] inputs = new INPUT[] { input, input2 };
+            INPUT[] inputs = new INPUT[] { buttonDown, buttonRelease };
 
             SendInput(2, inputs, INPUT.Size);
         }
