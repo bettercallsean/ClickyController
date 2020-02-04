@@ -8,14 +8,14 @@ namespace ClickyController
     {
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
-        private static extern uint SendInput(uint numberOfInputs, INPUT[] input, int inputSize);
+        internal static extern uint SendInput(uint numberOfInputs, INPUT[] input, int inputSize);
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
-        private static extern IntPtr GetMessageExtraInfo();
+        internal static extern IntPtr GetMessageExtraInfo();
 
 
         [StructLayout(LayoutKind.Sequential)]
-        private struct INPUT
+        internal struct INPUT
         {
             internal uint type;
             internal InputUnion union;
@@ -26,7 +26,7 @@ namespace ClickyController
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        private struct MOUSEINPUT
+        internal struct MOUSEINPUT
         {
             /* Stores data necessary for Windows to perform an action with the mouse */
             internal int xPosition;
@@ -38,7 +38,7 @@ namespace ClickyController
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        private struct KEYBDINPUT
+        internal struct KEYBDINPUT
         {
             /* Stores data necessary for Windows to perform an action with the keyboard */
             internal ushort virtualKeyCode;
@@ -50,56 +50,17 @@ namespace ClickyController
 
 
         [StructLayout(LayoutKind.Explicit)]
-        private struct InputUnion
+        internal struct InputUnion
         {
             [FieldOffset(0)]
             internal MOUSEINPUT mouseInput;
             [FieldOffset(0)]
             internal KEYBDINPUT keyboardInput;
         } 
+    }
 
-        public static void KeyboardInput(ushort keyCode)
-        {
-            INPUT keyPress = new INPUT
-            {
-                type = 1
-            };
-
-            keyPress.union.keyboardInput = new KEYBDINPUT
-            {
-                virtualKeyCode = keyCode,
-                time = 0,
-                extraInfo = GetMessageExtraInfo(),
-                hardwareScanCode = 0,
-                keystrokeFlags = 0
-            };
-
-            INPUT keyRelease = new INPUT
-            {
-                type = 1
-            };
-
-            keyRelease.union.keyboardInput = new KEYBDINPUT
-            {
-                virtualKeyCode = keyCode,
-                time = 0,
-                extraInfo = GetMessageExtraInfo(),
-                hardwareScanCode = 0,
-                keystrokeFlags = 2
-            };
-
-            INPUT[] inputs = new INPUT[] { keyPress, keyRelease };
-
-            
-
-            if (SendInput(2, inputs, INPUT.Size) == 0)
-            {
-                int error = Marshal.GetLastWin32Error();
-                Console.WriteLine(error);
-            }
-                
-        }
-
+    public class Mouse : Controller
+    {
         private static void MouseClick(uint buttonDownActionCode, uint buttonReleaseActionCode)
         {
             INPUT buttonDown = new INPUT
@@ -159,7 +120,7 @@ namespace ClickyController
             SendInput(1, inputs, INPUT.Size);
         }
 
-       
+
         public static void LeftClick()
         {
             MouseClick(0x0002, 0x0004);
@@ -190,4 +151,50 @@ namespace ClickyController
             MouseAction(0x0010);
         }
     }
+
+    public class Keyboard : Controller
+    {
+        public static void KeyInput(ushort keyCode)
+        {
+            INPUT keyPress = new INPUT
+            {
+                type = 1
+            };
+
+            keyPress.union.keyboardInput = new KEYBDINPUT
+            {
+                virtualKeyCode = keyCode,
+                time = 0,
+                extraInfo = GetMessageExtraInfo(),
+                hardwareScanCode = 0,
+                keystrokeFlags = 0
+            };
+
+            INPUT keyRelease = new INPUT
+            {
+                type = 1
+            };
+
+            keyRelease.union.keyboardInput = new KEYBDINPUT
+            {
+                virtualKeyCode = keyCode,
+                time = 0,
+                extraInfo = GetMessageExtraInfo(),
+                hardwareScanCode = 0,
+                keystrokeFlags = 2
+            };
+
+            INPUT[] inputs = new INPUT[] { keyPress, keyRelease };
+
+
+
+            if (SendInput(2, inputs, INPUT.Size) == 0)
+            {
+                int error = Marshal.GetLastWin32Error();
+                Console.WriteLine(error);
+            }
+
+        }
+    }
+
 }
