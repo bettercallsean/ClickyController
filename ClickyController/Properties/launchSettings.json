@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ClickyController": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}
