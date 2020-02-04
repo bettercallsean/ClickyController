@@ -23,7 +23,6 @@ namespace ClickyController
             {
                 get { return Marshal.SizeOf(typeof(INPUT)); }
             }
-
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -101,7 +100,7 @@ namespace ClickyController
                 
         }
 
-        public static void LeftClick()
+        private static void MouseClick(uint buttonDownActionCode, uint buttonReleaseActionCode)
         {
             INPUT buttonDown = new INPUT
             {
@@ -113,7 +112,7 @@ namespace ClickyController
                 xPosition = 0,
                 yPosition = 0,
                 mouseButtonData = 0,
-                mouseButtonAction = 0x0002,
+                mouseButtonAction = buttonDownActionCode,
                 time = 0,
                 extraInfo = GetMessageExtraInfo()
             };
@@ -128,7 +127,7 @@ namespace ClickyController
                 xPosition = 0,
                 yPosition = 0,
                 mouseButtonData = 0,
-                mouseButtonAction = 0x0004,
+                mouseButtonAction = buttonReleaseActionCode,
                 time = 0,
                 extraInfo = GetMessageExtraInfo()
             };
@@ -136,6 +135,16 @@ namespace ClickyController
             INPUT[] inputs = new INPUT[] { buttonDown, buttonRelease };
 
             SendInput(2, inputs, INPUT.Size);
+        }
+
+        public static void RightClick()
+        {
+            MouseClick(0x0008, 0x0010);
+        }
+
+        public static void LeftClick()
+        {
+            MouseClick(0x0002, 0x0004);
         }
     }
 }
