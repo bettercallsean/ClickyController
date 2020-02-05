@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Runtime.InteropServices;
+using Newtonsoft.Json;
 
 namespace ClickyController
 {
@@ -12,7 +15,6 @@ namespace ClickyController
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         internal static extern IntPtr GetMessageExtraInfo();
-
 
         [StructLayout(LayoutKind.Sequential)]
         internal struct INPUT
@@ -188,6 +190,27 @@ namespace ClickyController
 
             SendInput(2, inputs, INPUT.Size);
 
+        }
+
+        public static void KeyDown(ushort keyCode)
+        {
+            INPUT keyPress = new INPUT
+            {
+                type = 1
+            };
+
+            keyPress.union.keyboardInput = new KEYBDINPUT
+            {
+                virtualKeyCode = 0,
+                time = 0,
+                extraInfo = GetMessageExtraInfo(),
+                hardwareScanCode = keyCode,
+                keystrokeFlags = 0x0008
+            };
+
+            INPUT[] inputs = new INPUT[] { keyPress };
+
+            SendInput(1, inputs, INPUT.Size);
         }
 
     }
