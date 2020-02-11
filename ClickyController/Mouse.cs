@@ -13,6 +13,7 @@ namespace ClickyController
 
     public class Mouse : Controller
     {
+        // Windows API that returns the position of the cursor with its X and Y coordinates
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         private static extern bool GetCursorPos(out POINT mousePosition);
 
@@ -20,6 +21,9 @@ namespace ClickyController
 
         private static void MouseClick(uint buttonDownActionCode, uint buttonReleaseActionCode)
         {
+            // Performs a simple mouse click - the button is pressed and releasd almost instantly 
+            // (like when you click something with a normal mouse, crazy right?)
+
             INPUT buttonDown = new INPUT
             {
                 type = 0
@@ -57,6 +61,11 @@ namespace ClickyController
 
         private static void MouseAction(uint buttonActionCode)
         {
+            /*
+             * Performs a mouse action (that is, either Down or Release). This allows a user to perform an action like dragging the mouse
+             * or long button presses. There's a whole range of possibilities, let your imagination run free.
+             */
+
             INPUT buttonAction = new INPUT
             {
                 type = 0
@@ -78,6 +87,8 @@ namespace ClickyController
         }
 
 
+        // Like a ready-meal, these methods perform most  of the actions you would normally do with a mouse without the 
+        // hassle of making it yourself
         public static void LeftClick()
         {
             MouseClick(0x0002, 0x0004);
@@ -119,8 +130,8 @@ namespace ClickyController
             private set => _mousePosition = value;
         }
 
-        public static long XPosition => MousePosition.xPosition;
-        public static long YPosition => MousePosition.yPosition;
+        public static int XPosition => MousePosition.xPosition;
+        public static int YPosition => MousePosition.yPosition;
 
     }
 }
