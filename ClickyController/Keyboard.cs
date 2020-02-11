@@ -7,7 +7,6 @@ namespace ClickyController
 {
     public class Keyboard : Controller
     {
-
         private static Dictionary<string, ushort> keyToVirtualKeyDictionary = JsonConvert.DeserializeObject<Dictionary<string, ushort>>(Properties.Resources.VirtualKeyCodes);
         private static Dictionary<string, ushort> keyToScanCodeDictionary = JsonConvert.DeserializeObject<Dictionary<string, ushort>>(Properties.Resources.ScanCodes);
 
@@ -114,6 +113,44 @@ namespace ClickyController
             SendInput(1, inputs, INPUT.Size);
         }
 
+        public static void KeyPressScanCode(string character)
+        {
+            ushort scanCode = keyToScanCodeDictionary[character];
+
+            INPUT keyDown = new INPUT
+            {
+                type = 1
+            };
+
+            keyDown.union.keyboardInput = new KEYBDINPUT
+            {
+                virtualKeyCode = 0,
+                time = 0,
+                extraInfo = GetMessageExtraInfo(),
+                hardwareScanCode = scanCode,
+                keystrokeFlags = 0x0008
+            };
+
+            INPUT keyRelease = new INPUT
+            {
+                type = 1
+            };
+
+            keyRelease.union.keyboardInput = new KEYBDINPUT
+            {
+                virtualKeyCode = 0,
+                time = 0,
+                extraInfo = GetMessageExtraInfo(),
+                hardwareScanCode = scanCode,
+                keystrokeFlags = 0x0008 | 0x0002
+            };
+
+            INPUT[] inputs = new INPUT[] { keyDown, keyRelease };
+
+            SendInput(2, inputs, INPUT.Size);
+
+        }
+
         public static void KeyDownScanCode(string character)
         {
             INPUT keyPress = new INPUT
@@ -155,44 +192,6 @@ namespace ClickyController
             INPUT[] inputs = new INPUT[] { keyPress };
 
             SendInput(1, inputs, INPUT.Size);
-        }
-
-        public static void KeyPressScanCode(string character)
-        {
-            ushort scanCode = keyToScanCodeDictionary[character];
-
-            INPUT keyDown = new INPUT
-            {
-                type = 1
-            };
-
-            keyDown.union.keyboardInput = new KEYBDINPUT
-            {
-                virtualKeyCode = 0,
-                time = 0,
-                extraInfo = GetMessageExtraInfo(),
-                hardwareScanCode = scanCode,
-                keystrokeFlags = 0x0008
-            };
-
-            INPUT keyRelease = new INPUT
-            {
-                type = 1
-            };
-
-            keyRelease.union.keyboardInput = new KEYBDINPUT
-            {
-                virtualKeyCode = 0,
-                time = 0,
-                extraInfo = GetMessageExtraInfo(),
-                hardwareScanCode = scanCode,
-                keystrokeFlags = 0x0008 | 0x0002
-            };
-
-            INPUT[] inputs = new INPUT[] { keyDown, keyRelease };
-
-            SendInput(2, inputs, INPUT.Size);
-
         }
 
     }
