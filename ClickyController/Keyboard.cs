@@ -13,8 +13,6 @@ namespace ClickyController
 
         public static void KeyPress(string character)
         {
-            ushort keyCode = keyToVirtualKeyDictionary[character];
-
             INPUT keyPress = new INPUT
             {
                 type = 1
@@ -22,7 +20,7 @@ namespace ClickyController
 
             keyPress.union.keyboardInput = new KEYBDINPUT
             {
-                virtualKeyCode = keyCode,
+                virtualKeyCode = keyToVirtualKeyDictionary[character],
                 time = 0,
                 extraInfo = GetMessageExtraInfo(),
                 hardwareScanCode = 0,
@@ -36,7 +34,7 @@ namespace ClickyController
 
             keyRelease.union.keyboardInput = new KEYBDINPUT
             {
-                virtualKeyCode = keyCode,
+                virtualKeyCode = keyToVirtualKeyDictionary[character],
                 time = 0,
                 extraInfo = GetMessageExtraInfo(),
                 hardwareScanCode = 0,
