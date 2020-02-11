@@ -7,16 +7,18 @@ namespace ClickyController
 {
     public class Keyboard : Controller
     {
-        private static Dictionary<string, ushort> keyToVirtualKeyDictionary = JsonConvert.DeserializeObject<Dictionary<string, ushort>>(Properties.Resources.VirtualKeyCodes);
-        private static Dictionary<string, string> keyToVirtualKeyShiftDictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(Properties.Resources.VirtualKeyCodesShift);
-        private static Dictionary<string, ushort> keyToScanCodeDictionary = JsonConvert.DeserializeObject<Dictionary<string, ushort>>(Properties.Resources.ScanCodes);
+        private static readonly Dictionary<string, ushort> keyToVirtualKeyDictionary = JsonConvert.DeserializeObject<Dictionary<string, ushort>>(Properties.Resources.VirtualKeyCodes);
+        private static readonly Dictionary<string, string> keyToVirtualKeyShiftDictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(Properties.Resources.VirtualKeyCodesShift);
+        private static readonly Dictionary<string, ushort> keyToScanCodeDictionary = JsonConvert.DeserializeObject<Dictionary<string, ushort>>(Properties.Resources.ScanCodes);
 
         public static void KeyPress(string character)
         {
             bool holdShift = false;
 
-            // If the character entered requires the SHIFT key to be pressed, this Dictionary will contain the
-            // normal key that needs to be pressed e.g. "!" is on the "1" key
+            // If the character entered requires the SHIFT key to be pressed, the keyToVirtualKeyShiftDictionary dictionary will contain the
+            // normal key that needs to be pressed 
+            // e.g. "!" is on the "1" key
+            // "~" is on the "#" key
             if (!keyToVirtualKeyDictionary.ContainsKey(character.ToString()))
             {
                 try
