@@ -57,8 +57,10 @@ namespace ClickyController
                 {
                     if (char.IsUpper(letter))
                     {
-                        //TODO Differentiate bettwen upper and lowercase and reflect that in text entry
-                        KeyDown();
+                        // Simulates holding 'SHIFT' in order to create a capitalised version of a character 
+                        KeyDown("SHIFT");
+                        KeyPress(letter.ToString().ToLower());
+                        KeyRelease("SHIFT");
                     }
                     else
                     {
@@ -72,7 +74,7 @@ namespace ClickyController
             }
         }
 
-        public static void KeyDown(ushort keyCode)
+        public static void KeyDown(string character)
         {
             INPUT keyPress = new INPUT
             {
@@ -81,7 +83,7 @@ namespace ClickyController
 
             keyPress.union.keyboardInput = new KEYBDINPUT
             {
-                virtualKeyCode = keyCode,
+                virtualKeyCode = keyToVirtualKeyDictionary[character],
                 time = 0,
                 extraInfo = GetMessageExtraInfo(),
                 hardwareScanCode = 0,
@@ -93,7 +95,7 @@ namespace ClickyController
             SendInput(1, inputs, INPUT.Size);
         }
 
-        public static void KeyRelease(ushort keyCode)
+        public static void KeyRelease(string character)
         {
             INPUT keyPress = new INPUT
             {
@@ -102,7 +104,7 @@ namespace ClickyController
 
             keyPress.union.keyboardInput = new KEYBDINPUT
             {
-                virtualKeyCode = keyCode,
+                virtualKeyCode = keyToVirtualKeyDictionary[character],
                 time = 0,
                 extraInfo = GetMessageExtraInfo(),
                 hardwareScanCode = 0,
@@ -114,7 +116,7 @@ namespace ClickyController
             SendInput(1, inputs, INPUT.Size);
         }
 
-        public static void KeyDownScanCode(ushort scanCode)
+        public static void KeyDownScanCode(string character)
         {
             INPUT keyPress = new INPUT
             {
@@ -126,7 +128,7 @@ namespace ClickyController
                 virtualKeyCode = 0,
                 time = 0,
                 extraInfo = GetMessageExtraInfo(),
-                hardwareScanCode = scanCode,
+                hardwareScanCode = keyToScanCodeDictionary[character],
                 keystrokeFlags = 0x0008
             };
 
@@ -135,9 +137,8 @@ namespace ClickyController
             SendInput(1, inputs, INPUT.Size);
         }
 
-        public static void KeyReleaseScanCode(ushort scanCode)
+        public static void KeyReleaseScanCode(string character)
         {
-            scanCode += 128;
 
             INPUT keyPress = new INPUT
             {
@@ -149,7 +150,7 @@ namespace ClickyController
                 virtualKeyCode = 0,
                 time = 0,
                 extraInfo = GetMessageExtraInfo(),
-                hardwareScanCode = scanCode,
+                hardwareScanCode = keyToScanCodeDictionary[character],
                 keystrokeFlags = 0x0008 | 0x0002
             };
 
