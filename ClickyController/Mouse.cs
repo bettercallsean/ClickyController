@@ -87,7 +87,7 @@ namespace ClickyController
         }
 
 
-        // Like a ready-meal, these methods perform most  of the actions you would normally do with a mouse without the 
+        // Like a ready-meal, these methods perform most of the actions you would normally do with a mouse without the 
         // hassle of making it yourself
         public static void LeftClick()
         {
