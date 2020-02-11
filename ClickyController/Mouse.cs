@@ -5,17 +5,18 @@ using System.Text;
 
 namespace ClickyController
 {
+    public struct POINT
+    {
+        internal int xPosition;
+        internal int yPosition;
+    }
+
     public class Mouse : Controller
     {
-
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         private static extern bool GetCursorPos(out POINT mousePosition);
 
-        private struct POINT
-        {
-            long xPosition;
-            long yPosition;
-        }
+        private static POINT _mousePosition;
 
         private static void MouseClick(uint buttonDownActionCode, uint buttonReleaseActionCode)
         {
@@ -106,6 +107,20 @@ namespace ClickyController
         {
             MouseAction(0x0010);
         }
-    }
 
+        public static POINT MousePosition
+        {
+            get
+            {
+                GetCursorPos(out _mousePosition);
+                return _mousePosition;
+            }
+
+            private set => _mousePosition = value;
+        }
+
+        public static long XPosition => MousePosition.xPosition;
+        public static long YPosition => MousePosition.yPosition;
+
+    }
 }
