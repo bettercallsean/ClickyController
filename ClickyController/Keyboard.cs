@@ -8,10 +8,28 @@ namespace ClickyController
     public class Keyboard : Controller
     {
         private static Dictionary<string, ushort> keyToVirtualKeyDictionary = JsonConvert.DeserializeObject<Dictionary<string, ushort>>(Properties.Resources.VirtualKeyCodes);
+        private static Dictionary<string, string> keyToVirtualKeyShiftDictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(Properties.Resources.VirtualKeyCodesShift);
         private static Dictionary<string, ushort> keyToScanCodeDictionary = JsonConvert.DeserializeObject<Dictionary<string, ushort>>(Properties.Resources.ScanCodes);
 
         public static void KeyPress(string character)
         {
+            bool holdShift = false;
+
+            // If the character entered requires the SHIFT key to be pressed, this Dictionary will contain the
+            // normal key that needs to be pressed e.g. "!" is on the "1" key
+            if (!keyToVirtualKeyDictionary.ContainsKey(character.ToString()))
+            {
+                try
+                {
+                    character = keyToVirtualKeyShiftDictionary[character];
+                    holdShift = true;
+                }
+                catch(KeyNotFoundException e)
+                {
+                    Console.WriteLine(e);
+                }
+            }
+
             INPUT keyPress = new INPUT
             {
                 type = 1
@@ -42,8 +60,14 @@ namespace ClickyController
 
             INPUT[] inputs = new INPUT[] { keyPress, keyRelease };
 
-            SendInput(2, inputs, INPUT.Size);
-
+            if (holdShift)
+            {
+                KeyDown("SHIFT");
+                SendInput(2, inputs, INPUT.Size);
+                KeyRelease("SHIFT");
+            }
+            else
+                SendInput(2, inputs, INPUT.Size);
         }
 
         public static void EnterText(string textEntry)
@@ -60,9 +84,8 @@ namespace ClickyController
                         KeyRelease("SHIFT");
                     }
                     else
-                    {
                         KeyPress(letter.ToString());
-                    }
+
                 }
                 catch (KeyNotFoundException e)
                 {
