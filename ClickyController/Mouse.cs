@@ -17,6 +17,9 @@ namespace ClickyController
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         private static extern bool GetCursorPos(out POINT mousePosition);
 
+        [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
+        private static extern bool SetCursorPos(int x, int y);
+
         private static POINT _mousePosition;
 
         private static void MouseClick(uint buttonDownActionCode, uint buttonReleaseActionCode)
@@ -86,6 +89,15 @@ namespace ClickyController
             SendInput(1, inputs, INPUT.Size);
         }
 
+        public static void MoveMouse(int xPosition, int yPosition, bool relative = false)
+        {
+            if(relative)
+            {
+                xPosition = XPosition + xPosition;
+                yPosition = YPosition + yPosition;
+            }
+            SetCursorPos(xPosition, yPosition);
+        }
 
         // Like a ready-meal, these methods perform most of the actions you would normally do with a mouse without the 
         // hassle of making it yourself
@@ -130,8 +142,16 @@ namespace ClickyController
             private set => _mousePosition = value;
         }
 
-        public static int XPosition => MousePosition.xPosition;
-        public static int YPosition => MousePosition.yPosition;
+        public static int XPosition
+        {
+            get => MousePosition.xPosition;
+            private set => _mousePosition.xPosition = value;
+        }
+        public static int YPosition
+        { 
+            get => MousePosition.yPosition;
+            private set => _mousePosition.yPosition = value;
+        }
 
     }
 }
