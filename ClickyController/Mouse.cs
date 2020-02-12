@@ -89,13 +89,14 @@ namespace ClickyController
             SendInput(1, inputs, INPUT.Size);
         }
 
-        public static void MoveMouse(int xPosition, int yPosition, bool relative = false)
+        public static void MoveMouse(int xPosition, int yPosition, bool relativeToMousePosition = false)
         {
-            if(relative)
+            if(relativeToMousePosition)
             {
                 xPosition = XPosition + xPosition;
                 yPosition = YPosition + yPosition;
             }
+
             SetCursorPos(xPosition, yPosition);
         }
 
