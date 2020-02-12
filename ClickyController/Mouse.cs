@@ -17,6 +17,7 @@ namespace ClickyController
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         private static extern bool GetCursorPos(out POINT mousePosition);
 
+        // Windows API that moves the mouse to the given X/Y coordinates
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         private static extern bool SetCursorPos(int x, int y);
 
@@ -91,6 +92,8 @@ namespace ClickyController
 
         public static void MoveMouse(int xPosition, int yPosition, bool relativeToMousePosition = false)
         {
+            // If relativeToMousePosition is true, the mouse is moved a given number of pixels along the X/Y axis
+            // relative to where the mouse cursor is currently located on screen.
             if(relativeToMousePosition)
             {
                 xPosition = XPosition + xPosition;
