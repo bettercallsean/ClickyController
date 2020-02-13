@@ -15,10 +15,11 @@ namespace ClickyController
         {
             bool holdShift = false;
 
-            // If the character entered requires the SHIFT key to be pressed, the keyToVirtualKeyShiftDictionary dictionary will contain the
-            // normal key that needs to be pressed 
-            // e.g. "!" is on the "1" key
-            // "~" is on the "#" key
+            /* If the character entered requires the SHIFT key to be pressed, the keyToVirtualKeyShiftDictionary dictionary will contain the
+             normal key that needs to be pressed 
+             e.g. "!" is on the "1" key, "~" is on the "#" key 
+             */
+
             if (!keyToVirtualKeyDictionary.ContainsKey(character.ToString()))
             {
                 try
