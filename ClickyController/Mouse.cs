@@ -37,8 +37,8 @@ namespace ClickyController
             {
                 xPosition = 0,
                 yPosition = 0,
-                mouseButtonData = 0,
-                mouseButtonAction = buttonDownActionCode,
+                mouseData = 0,
+                mouseAction = buttonDownActionCode,
                 time = 0,
                 extraInfo = GetMessageExtraInfo()
             };
@@ -52,8 +52,8 @@ namespace ClickyController
             {
                 xPosition = 0,
                 yPosition = 0,
-                mouseButtonData = 0,
-                mouseButtonAction = buttonReleaseActionCode,
+                mouseData = 0,
+                mouseAction = buttonReleaseActionCode,
                 time = 0,
                 extraInfo = GetMessageExtraInfo()
             };
@@ -63,12 +63,11 @@ namespace ClickyController
             SendInput(2, inputs, INPUT.Size);
         }
 
-        private static void MouseAction(uint buttonActionCode)
+        private static void MouseAction(uint mouseActionCode, uint mouseData = 0)
         {
-            /*
-             * Performs a mouse action (that is, either Down or Release). This allows a user to perform an action like dragging the mouse
-             * or long button presses. There's a whole range of possibilities, let your imagination run free.
-             */
+            
+            //  Performs a mouse action (that is, either Down or Release). This allows a user to perform an action like dragging the mouse
+            //  or long button presses. There's a whole range of possibilities, let your imagination run free.
 
             INPUT buttonAction = new INPUT
             {
@@ -79,8 +78,8 @@ namespace ClickyController
             {
                 xPosition = 0,
                 yPosition = 0,
-                mouseButtonData = 0,
-                mouseButtonAction = buttonActionCode,
+                mouseData = mouseData,
+                mouseAction = mouseActionCode,
                 time = 0,
                 extraInfo = GetMessageExtraInfo()
             };
@@ -133,6 +132,39 @@ namespace ClickyController
         public static void RightRelease()
         {
             MouseAction(0x0010);
+        }
+
+        public static void MiddleClick()
+        {
+            MouseClick(0x0020, 0x0040);
+        }
+
+        public static void MiddleDown()
+        {
+            MouseAction(0x0020);
+        }
+
+        public static void MiddleRelease()
+        {
+            MouseAction(0x0040);
+        }
+
+        public static void WheelDown()
+        {
+            /* A single 'wheel click' is represented as the value 120. A positive value represents scrolling up (moving the wheel away from the user)
+             * Whereas a negative value represents a scrolling down (moving the wheel towards the uesr). However, the DWORD equivalent in C# is uint,
+             * which can't store negative values (as it's unsigned). To counter this, the unchecked operator is used to supress overflow checking.
+             * https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/unchecked
+             */
+
+            uint wheelClickData = unchecked((uint)-120);
+            MouseAction(0x0800, wheelClickData);
+        }
+
+        public static void WheelUp()
+        {
+            uint wheelClickData = 120;
+            MouseAction(0x0800, wheelClickData);
         }
 
         public static POINT MousePosition
