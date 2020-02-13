@@ -33,8 +33,8 @@ namespace ClickyController
             /* Stores data necessary for Windows to perform an action with the mouse */
             internal int xPosition;
             internal int yPosition;
-            internal uint mouseButtonData;
-            internal uint mouseButtonAction;
+            internal uint mouseData;
+            internal uint mouseAction;
             internal uint time;
             internal IntPtr extraInfo;
         }
