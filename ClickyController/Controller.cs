@@ -30,7 +30,7 @@ namespace ClickyController
         [StructLayout(LayoutKind.Sequential)]
         internal struct MOUSEINPUT
         {
-            /* Stores data necessary for Windows to perform an action with the mouse */
+            // Stores data necessary for Windows to perform an action with the mouse
             internal int xPosition;
             internal int yPosition;
             internal uint mouseData;
@@ -42,7 +42,7 @@ namespace ClickyController
         [StructLayout(LayoutKind.Sequential)]
         internal struct KEYBDINPUT
         {
-            /* Stores data necessary for Windows to perform an action with the keyboard */
+            // Stores data necessary for Windows to perform an action with the keyboard
             internal ushort virtualKeyCode;
             internal ushort hardwareScanCode;
             internal uint keystrokeFlags;
