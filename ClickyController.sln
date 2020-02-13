@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClickyController", "ClickyController\ClickyController.csproj", "{9FE2B35B-D1A8-4E1F-94B0-5DC7D3A68EDA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{2194E385-A0F0-4263-916A-05B424C70327}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "Test\Test.csproj", "{2194E385-A0F0-4263-916A-05B424C70327}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClickyControllerGUI", "ClickyControllerGUI\ClickyControllerGUI.csproj", "{C01FC3CF-EF4F-4FAA-BB10-7DFE1FA85CED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{2194E385-A0F0-4263-916A-05B424C70327}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2194E385-A0F0-4263-916A-05B424C70327}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2194E385-A0F0-4263-916A-05B424C70327}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C01FC3CF-EF4F-4FAA-BB10-7DFE1FA85CED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C01FC3CF-EF4F-4FAA-BB10-7DFE1FA85CED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C01FC3CF-EF4F-4FAA-BB10-7DFE1FA85CED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C01FC3CF-EF4F-4FAA-BB10-7DFE1FA85CED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
