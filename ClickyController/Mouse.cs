@@ -25,7 +25,7 @@ namespace ClickyController
 
         private static void MouseClick(uint buttonDownActionCode, uint buttonReleaseActionCode)
         {
-            // Performs a simple mouse click - the button is pressed and releasd almost instantly 
+            // Performs a simple mouse click - the button is pressed and released almost instantly 
             // (like when you click something with a normal mouse, crazy right?)
 
             INPUT buttonDown = new INPUT
@@ -77,18 +77,21 @@ namespace ClickyController
 
             INPUT buttonAction = new INPUT
             {
-                type = 0
+                type = 0,
+                union =
+                {
+                    mouseInput = new MOUSEINPUT
+                    {
+                        xPosition = 0,
+                        yPosition = 0,
+                        mouseData = mouseData,
+                        mouseAction = mouseActionCode,
+                        time = 0,
+                        extraInfo = GetMessageExtraInfo()
+                    }
+                }
             };
 
-            buttonAction.union.mouseInput = new MOUSEINPUT
-            {
-                xPosition = 0,
-                yPosition = 0,
-                mouseData = mouseData,
-                mouseAction = mouseActionCode,
-                time = 0,
-                extraInfo = GetMessageExtraInfo()
-            };
 
             INPUT[] inputs = new INPUT[] { buttonAction };
 
