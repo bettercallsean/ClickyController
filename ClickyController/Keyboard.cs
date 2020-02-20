@@ -7,9 +7,9 @@ namespace ClickyController
 {
     public class Keyboard : Controller
     {
-        private static readonly Dictionary<string, ushort> keyToVirtualKeyDictionary = JsonConvert.DeserializeObject<Dictionary<string, ushort>>(Properties.Resources.VirtualKeyCodes);
-        private static readonly Dictionary<string, string> keyToVirtualKeyShiftDictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(Properties.Resources.VirtualKeyCodesShift);
-        private static readonly Dictionary<string, ushort> keyToScanCodeDictionary = JsonConvert.DeserializeObject<Dictionary<string, ushort>>(Properties.Resources.ScanCodes);
+        private static readonly Dictionary<string, ushort> KeyToVirtualKeyDictionary = JsonConvert.DeserializeObject<Dictionary<string, ushort>>(Properties.Resources.VirtualKeyCodes);
+        private static readonly Dictionary<string, string> KeyToVirtualKeyShiftDictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(Properties.Resources.VirtualKeyCodesShift);
+        private static readonly Dictionary<string, ushort> KeyToScanCodeDictionary = JsonConvert.DeserializeObject<Dictionary<string, ushort>>(Properties.Resources.ScanCodes);
 
         public static void KeyPress(string character)
         {
@@ -20,11 +20,11 @@ namespace ClickyController
              e.g. "!" is on the "1" key, "~" is on the "#" key 
              */
 
-            if (!keyToVirtualKeyDictionary.ContainsKey(character.ToString()))
+            if (!KeyToVirtualKeyDictionary.ContainsKey(character.ToString()))
             {
                 try
                 {
-                    character = keyToVirtualKeyShiftDictionary[character];
+                    character = KeyToVirtualKeyShiftDictionary[character];
                     holdShift = true;
                 }
                 catch(KeyNotFoundException e)
@@ -35,31 +35,37 @@ namespace ClickyController
 
             INPUT keyPress = new INPUT
             {
-                type = 1
+                type = 1,
+                union =
+                {
+                    keyboardInput = new KEYBDINPUT
+                    {
+                        virtualKeyCode = KeyToVirtualKeyDictionary[character],
+                        time = 0,
+                        extraInfo = GetMessageExtraInfo(),
+                        hardwareScanCode = 0,
+                        keystrokeFlags = 0
+                    }
+                }
             };
 
-            keyPress.union.keyboardInput = new KEYBDINPUT
-            {
-                virtualKeyCode = keyToVirtualKeyDictionary[character],
-                time = 0,
-                extraInfo = GetMessageExtraInfo(),
-                hardwareScanCode = 0,
-                keystrokeFlags = 0
-            };
 
             INPUT keyRelease = new INPUT
             {
-                type = 1
+                type = 1,
+                union =
+                {
+                    keyboardInput = new KEYBDINPUT
+                    {
+                        virtualKeyCode = KeyToVirtualKeyDictionary[character],
+                        time = 0,
+                        extraInfo = GetMessageExtraInfo(),
+                        hardwareScanCode = 0,
+                        keystrokeFlags = 2
+                    }
+                }
             };
 
-            keyRelease.union.keyboardInput = new KEYBDINPUT
-            {
-                virtualKeyCode = keyToVirtualKeyDictionary[character],
-                time = 0,
-                extraInfo = GetMessageExtraInfo(),
-                hardwareScanCode = 0,
-                keystrokeFlags = 2
-            };
 
             INPUT[] inputs = new INPUT[] { keyPress, keyRelease };
 
@@ -101,17 +107,20 @@ namespace ClickyController
         {
             INPUT keyPress = new INPUT
             {
-                type = 1
+                type = 1,
+                union =
+                {
+                    keyboardInput = new KEYBDINPUT
+                    {
+                        virtualKeyCode = KeyToVirtualKeyDictionary[character],
+                        time = 0,
+                        extraInfo = GetMessageExtraInfo(),
+                        hardwareScanCode = 0,
+                        keystrokeFlags = 0
+                    }
+                }
             };
 
-            keyPress.union.keyboardInput = new KEYBDINPUT
-            {
-                virtualKeyCode = keyToVirtualKeyDictionary[character],
-                time = 0,
-                extraInfo = GetMessageExtraInfo(),
-                hardwareScanCode = 0,
-                keystrokeFlags = 0
-            };
 
             INPUT[] inputs = new INPUT[] { keyPress };
 
@@ -122,17 +131,20 @@ namespace ClickyController
         {
             INPUT keyPress = new INPUT
             {
-                type = 1
+                type = 1,
+                union =
+                {
+                    keyboardInput = new KEYBDINPUT
+                    {
+                        virtualKeyCode = KeyToVirtualKeyDictionary[character],
+                        time = 0,
+                        extraInfo = GetMessageExtraInfo(),
+                        hardwareScanCode = 0,
+                        keystrokeFlags = 2
+                    }
+                }
             };
 
-            keyPress.union.keyboardInput = new KEYBDINPUT
-            {
-                virtualKeyCode = keyToVirtualKeyDictionary[character],
-                time = 0,
-                extraInfo = GetMessageExtraInfo(),
-                hardwareScanCode = 0,
-                keystrokeFlags = 2
-            };
 
             INPUT[] inputs = new INPUT[] { keyPress };
 
@@ -141,35 +153,41 @@ namespace ClickyController
 
         public static void KeyPressScanCode(string character)
         {
-            ushort scanCode = keyToScanCodeDictionary[character];
+            ushort scanCode = KeyToScanCodeDictionary[character];
 
             INPUT keyDown = new INPUT
             {
-                type = 1
+                type = 1,
+                union =
+                {
+                    keyboardInput = new KEYBDINPUT
+                    {
+                        virtualKeyCode = 0,
+                        time = 0,
+                        extraInfo = GetMessageExtraInfo(),
+                        hardwareScanCode = scanCode,
+                        keystrokeFlags = 0x0008
+                    }
+                }
             };
 
-            keyDown.union.keyboardInput = new KEYBDINPUT
-            {
-                virtualKeyCode = 0,
-                time = 0,
-                extraInfo = GetMessageExtraInfo(),
-                hardwareScanCode = scanCode,
-                keystrokeFlags = 0x0008
-            };
 
             INPUT keyRelease = new INPUT
             {
-                type = 1
+                type = 1,
+                union =
+                {
+                    keyboardInput = new KEYBDINPUT
+                    {
+                        virtualKeyCode = 0,
+                        time = 0,
+                        extraInfo = GetMessageExtraInfo(),
+                        hardwareScanCode = scanCode,
+                        keystrokeFlags = 0x0008 | 0x0002
+                    }
+                }
             };
 
-            keyRelease.union.keyboardInput = new KEYBDINPUT
-            {
-                virtualKeyCode = 0,
-                time = 0,
-                extraInfo = GetMessageExtraInfo(),
-                hardwareScanCode = scanCode,
-                keystrokeFlags = 0x0008 | 0x0002
-            };
 
             INPUT[] inputs = new INPUT[] { keyDown, keyRelease };
 
@@ -181,17 +199,20 @@ namespace ClickyController
         {
             INPUT keyPress = new INPUT
             {
-                type = 1
+                type = 1,
+                union =
+                {
+                    keyboardInput = new KEYBDINPUT
+                    {
+                        virtualKeyCode = 0,
+                        time = 0,
+                        extraInfo = GetMessageExtraInfo(),
+                        hardwareScanCode = KeyToScanCodeDictionary[character],
+                        keystrokeFlags = 0x0008
+                    }
+                }
             };
 
-            keyPress.union.keyboardInput = new KEYBDINPUT
-            {
-                virtualKeyCode = 0,
-                time = 0,
-                extraInfo = GetMessageExtraInfo(),
-                hardwareScanCode = keyToScanCodeDictionary[character],
-                keystrokeFlags = 0x0008
-            };
 
             INPUT[] inputs = new INPUT[] { keyPress };
 
@@ -203,17 +224,20 @@ namespace ClickyController
 
             INPUT keyPress = new INPUT
             {
-                type = 1
+                type = 1,
+                union =
+                {
+                    keyboardInput = new KEYBDINPUT
+                    {
+                        virtualKeyCode = 0,
+                        time = 0,
+                        extraInfo = GetMessageExtraInfo(),
+                        hardwareScanCode = KeyToScanCodeDictionary[character],
+                        keystrokeFlags = 0x0008 | 0x0002
+                    }
+                }
             };
 
-            keyPress.union.keyboardInput = new KEYBDINPUT
-            {
-                virtualKeyCode = 0,
-                time = 0,
-                extraInfo = GetMessageExtraInfo(),
-                hardwareScanCode = keyToScanCodeDictionary[character],
-                keystrokeFlags = 0x0008 | 0x0002
-            };
 
             INPUT[] inputs = new INPUT[] { keyPress };
 

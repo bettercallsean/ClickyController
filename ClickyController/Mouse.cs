@@ -30,33 +30,39 @@ namespace ClickyController
 
             INPUT buttonDown = new INPUT
             {
-                type = 0
+                type = 0,
+                union =
+                {
+                    mouseInput = new MOUSEINPUT
+                    {
+                        xPosition = 0,
+                        yPosition = 0,
+                        mouseData = 0,
+                        mouseAction = buttonDownActionCode,
+                        time = 0,
+                        extraInfo = GetMessageExtraInfo()
+                    }
+                }
             };
 
-            buttonDown.union.mouseInput = new MOUSEINPUT
-            {
-                xPosition = 0,
-                yPosition = 0,
-                mouseData = 0,
-                mouseAction = buttonDownActionCode,
-                time = 0,
-                extraInfo = GetMessageExtraInfo()
-            };
 
             INPUT buttonRelease = new INPUT
             {
-                type = 0
+                type = 0,
+                union =
+                {
+                    mouseInput = new MOUSEINPUT
+                    {
+                        xPosition = 0,
+                        yPosition = 0,
+                        mouseData = 0,
+                        mouseAction = buttonReleaseActionCode,
+                        time = 0,
+                        extraInfo = GetMessageExtraInfo()
+                    }
+                }
             };
 
-            buttonRelease.union.mouseInput = new MOUSEINPUT
-            {
-                xPosition = 0,
-                yPosition = 0,
-                mouseData = 0,
-                mouseAction = buttonReleaseActionCode,
-                time = 0,
-                extraInfo = GetMessageExtraInfo()
-            };
 
             INPUT[] inputs = new INPUT[] { buttonDown, buttonRelease };
 
@@ -152,8 +158,8 @@ namespace ClickyController
         public static void WheelDown()
         {
             /* A single 'wheel click' is represented as the value 120. A positive value represents scrolling up (moving the wheel away from the user)
-             * Whereas a negative value represents a scrolling down (moving the wheel towards the uesr). However, the DWORD equivalent in C# is uint,
-             * which can't store negative values (as it's unsigned). To counter this, the unchecked operator is used to supress overflow checking.
+             * Whereas a negative value represents a scrolling down (moving the wheel towards the user). However, the DWORD equivalent in C# is uint,
+             * which can't store negative values (as it's unsigned). To counter this, the unchecked operator is used to suppress overflow checking.
              * https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/unchecked
              */
 
