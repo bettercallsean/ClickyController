@@ -68,7 +68,7 @@ namespace ClickyControllerGUI.Models
 
         public void ScriptWriter()
         {
-            // TODO: Create logic for writing script files in a way that can be easily read by the ScriptReader method
+            // TODO: Create logic for writing script files in a way that can be easily read by the ScriptReader method, this will be easier when the interface is designed
         }
 
             
