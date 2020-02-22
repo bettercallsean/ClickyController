@@ -39,8 +39,10 @@ namespace ClickyControllerGUI.Models
 
         }
 
-        public void ScriptRunner(string[] commandArray)
+        public void ScriptRunner(string scriptFilepath)
         {
+            string[] commandArray = ScriptReader(scriptFilepath);
+
             foreach (string line in commandArray)
             {
                 /*
