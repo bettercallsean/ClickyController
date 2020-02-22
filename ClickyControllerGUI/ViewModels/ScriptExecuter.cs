@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Text;
 using ClickyController;
 using ClickyControllerGUI.ViewModels;
@@ -10,7 +11,9 @@ namespace ClickyControllerGUI.Models
 {
     public class ScriptExecuter : BaseViewModel
     {
-
+        private static readonly Dictionary<string, string> CommandToNamespaceDictionary = new Dictionary<string, string> { { "mouse", "MouseViewModel" }, { "keybd", "KeyboardViewModel" } };
+        private static readonly Dictionary<string, Dictionary<string, string>> CommandToMethodDictionary = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>> (Resources.CommandsToMethods);
+        
         public ScriptExecuter()
         {
 
@@ -38,7 +41,24 @@ namespace ClickyControllerGUI.Models
 
         public void ScriptRunner(string[] commandArray)
         {
-            Dictionary<string, Action<string>> commandDictionary = new Dictionary<string, Action<string>>();
+            foreach (string line in commandArray)
+            {
+                /*
+                 * inputType - This will either be 'mouse' or 'keybd' and is found at the start of each script line
+                 * command - Contains the command key that will map to a method found in the corresponding ViewModel
+                 * parameters - The rest of the string that is passed to the respective method, where the input is cleaned up for processing
+                 * 
+                 */
+
+                string inputType = line.Substring(0, 5);
+                string command = line.Substring(6, 2);
+                string parameters = line.Substring(9);
+                string namespaceString = CommandToNamespaceDictionary[inputType];
+                
+                Type type = Type.GetType("ClickyControllerGUI.ViewModels." + namespaceString);
+                MethodInfo method = type.GetMethod(CommandToMethodDictionary[inputType][command]);
+                method.Invoke(null, new object[] { parameters });
+            }
         }
 
 
