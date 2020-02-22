@@ -1,0 +1,7 @@
+{
+	"mouse": {
+		"mc": "MouseClick",
+		"mv": "MoveMouse",
+		"sw": "ScrollWheel"
+	}
+}
