@@ -62,11 +62,22 @@ namespace ClickyControllerGUI {
         
         /// <summary>
         ///   Looks up a localized string similar to {
-        ///	&quot;mouse&quot;: {
-        ///		&quot;mc&quot;: &quot;MouseClick&quot;,
-        ///		&quot;mv&quot;: &quot;MoveMouse&quot;,
-        ///		&quot;sw&quot;: &quot;ScrollWheel&quot;
-        ///	}
+        ///&quot;Mouse Click&quot;:&quot;mc&quot;,
+        ///&quot;Move Mouse&quot;: &quot;mv&quot;,
+        ///&quot;Scroll Wheel&quot;: &quot;sw&quot;
+        ///}.
+        /// </summary>
+        internal static string CommandsToListDisplayName {
+            get {
+                return ResourceManager.GetString("CommandsToListDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///	&quot;mc&quot;: [&quot;MouseViewModel&quot;, &quot;MouseClick&quot;],
+        ///	&quot;mv&quot;: [&quot;MouseViewModel&quot;, &quot;MoveMouse&quot;],
+        ///	&quot;sw&quot;: [&quot;MouseViewModel&quot;, &quot;ScrollWheel&quot;]
         ///}.
         /// </summary>
         internal static string CommandsToMethods {
