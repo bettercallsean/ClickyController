@@ -6,22 +6,46 @@
         xmlns:local="clr-namespace:ClickyControllerGUI"
         xmlns:viewmodel="clr-namespace:ClickyControllerGUI.ViewModels"
         mc:Ignorable="d"
-        Title="Clicky Controller" Height="450" Width="800">
+        Title="Clicky Controller" Height="350" Width="500">
 
+    <Window.DataContext>
+        <viewmodel:ScriptExecutor />
+    </Window.DataContext>
     <Window.Resources>
         <viewmodel:ScriptExecutor x:Key="ScriptExecutor"/>
     </Window.Resources>
+
     
-    <Grid Margin="15">
+
+    <Grid x:Name="LayoutBase" Margin="15" DataContext="{Binding Source={StaticResource ScriptExecutor}}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0" DataContext="{Binding Source={StaticResource ScriptExecutor}}">
+        <StackPanel Grid.Column="0">
             <Label>Command List</Label>
-            <ListView ItemsSource="{Binding CommandList}" BorderBrush="Black"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <ListView Grid.Column="0" x:Name="Commands" ItemsSource="{Binding CommandListItems}" SelectedValue="{Binding SelectedCommand}" SelectedValuePath="Value" DisplayMemberPath="Key"/>
+                <Button Grid.Column="1" Command="{Binding AddItemToCommandListCommand}" Content="+"/>
+            </Grid>
+            
+
+        </StackPanel>
+
+        <StackPanel Grid.Column="2">
+            <ListView ItemsSource="{Binding CommandList}" Height="{Binding ElementName=LayoutBase, Path=ActualHeight}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="5">
+            <Button Height="20" Content="Run" Command="{Binding RunScriptCommand}"/>
         </StackPanel>
     </Grid>
 
