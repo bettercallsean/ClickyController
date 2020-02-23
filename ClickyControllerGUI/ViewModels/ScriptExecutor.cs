@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Windows;
+using System.Windows.Input;
 using ClickyController;
 using ClickyControllerGUI.ViewModels;
 using Newtonsoft.Json;
@@ -11,26 +15,38 @@ namespace ClickyControllerGUI.ViewModels
 {
     public class ScriptExecutor : BaseViewModel
     {
-        private static readonly Dictionary<string, string> CommandToNamespaceDictionary = new Dictionary<string, string> { { "mouse", "MouseViewModel" }, { "keybd", "KeyboardViewModel" } };
-        private static readonly Dictionary<string, Dictionary<string, string>> CommandToMethodDictionary = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>> (Resources.CommandsToMethods);
+        private static readonly Dictionary<string, string[]> CommandToMethodDictionary = JsonConvert.DeserializeObject<Dictionary<string, string[]>> (Resources.CommandsToMethods);
 
         public ScriptExecutor()
         {
-            CommandList = new List<string>
-            {
-                "This",
-                "is",
-                "a",
-                "test"
-            };
+            CommandListItems = JsonConvert.DeserializeObject<Dictionary<string, string>>(Resources.CommandsToListDisplayName);
+
+            CommandList = new ObservableCollection<string>();
         }
 
-        private List<string> _commandList;
-        public List<string> CommandList
+        private Dictionary<string, string> _commandListItems;
+        public Dictionary<string, string> CommandListItems
+        {
+            get => _commandListItems;
+            set { _commandListItems = value; OnPropertyChanged(); }
+        }
+
+        private ObservableCollection<string> _commandList;
+        public ObservableCollection<string> CommandList
         {
             get => _commandList;
             set { _commandList = value; OnPropertyChanged(); }
         }
+
+        private string _selectedCommand;
+        public string SelectedCommand
+        {
+            get => _selectedCommand;
+            set { _selectedCommand = value; OnPropertyChanged(); }
+        }
+
+        public ICommand AddItemToCommandListCommand { get => new RelayCommand(o => CommandList.Add(SelectedCommand)); }
+        public ICommand RunScriptCommand { get => new RelayCommand(o => ScriptRunner()); }
 
         public static string[] ScriptReader(string scriptFilepath)
         {
@@ -50,26 +66,22 @@ namespace ClickyControllerGUI.ViewModels
 
         }
 
-        public static void ScriptRunner(string scriptFilepath)
+        public void ScriptRunner()
         {
-            string[] commandArray = ScriptReader(scriptFilepath);
-
-            foreach (string line in commandArray)
+            foreach (string line in CommandList)
             {
                 /*
                  * inputType - This will either be 'mouse' or 'keybd' and is found at the start of each script line
                  * command - Contains the command key that will map to a method found in the corresponding ViewModel
                  * parameters - The rest of the string that is passed to the respective method, where the input is cleaned up for processing
-                 * 
                  */
 
-                string inputType = line.Substring(0, 5);
-                string command = line.Substring(6, 2);
-                string parameters = line.Substring(9);
-                string namespaceString = CommandToNamespaceDictionary[inputType];
+                string command = line.Substring(0, 2);
+                string parameters = line.Substring(3);
+                string namespaceString = CommandToMethodDictionary[command][0];
                 
                 Type type = Type.GetType("ClickyControllerGUI.ViewModels." + namespaceString);
-                MethodInfo method = type.GetMethod(CommandToMethodDictionary[inputType][command]);
+                MethodInfo method = type.GetMethod(CommandToMethodDictionary[command][1]);
                 method.Invoke(null, new object[] { parameters });
             }
         }
