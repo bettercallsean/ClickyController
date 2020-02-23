@@ -19,7 +19,7 @@
 
     <Grid x:Name="LayoutBase" Margin="15" DataContext="{Binding Source={StaticResource ScriptExecutor}}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="10"/>
@@ -30,10 +30,11 @@
             <Label>Command List</Label>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="5*" />
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <ListView Grid.Column="0" x:Name="Commands" ItemsSource="{Binding CommandListItems}" SelectedValue="{Binding SelectedCommand}" SelectedValuePath="Value" DisplayMemberPath="Key"/>
+                <ListView Grid.Column="0" x:Name="Commands" ItemsSource="{Binding CommandListItems}" 
+                          SelectedValue="{Binding SelectedCommand}" SelectedValuePath="Value" DisplayMemberPath="Key"/>
                 <Button Grid.Column="1" Command="{Binding AddItemToCommandListCommand}" Content="+"/>
             </Grid>
             
