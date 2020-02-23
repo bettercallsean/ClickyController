@@ -45,8 +45,20 @@ namespace ClickyControllerGUI.ViewModels
             set { _selectedCommand = value; OnPropertyChanged(); }
         }
 
+        private int _selectedCommandIndex;
+        public int SelectedCommandIndex
+        {
+            get => _selectedCommandIndex;
+            set { _selectedCommandIndex = value; OnPropertyChanged(); }
+        }
+
         public ICommand AddItemToCommandListCommand { get => new RelayCommand(o => CommandList.Add(SelectedCommand)); }
+
+        public ICommand RemoveItemFromCommandListCommand { get => new RelayCommand(o => CommandList.RemoveAt(SelectedCommandIndex)); }
         public ICommand RunScriptCommand { get => new RelayCommand(o => ScriptRunner()); }
+
+
+
 
         public static string[] ScriptReader(string scriptFilepath)
         {
