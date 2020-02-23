@@ -1,7 +1,5 @@
 {
-	"mouse": {
-		"mc": "MouseClick",
-		"mv": "MoveMouse",
-		"sw": "ScrollWheel"
-	}
+	"mc": ["MouseViewModel", "MouseClick"],
+	"mv": ["MouseViewModel", "MoveMouse"],
+	"sw": ["MouseViewModel", "ScrollWheel"]
 }
