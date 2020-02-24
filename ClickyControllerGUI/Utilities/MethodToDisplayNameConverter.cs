@@ -12,7 +12,7 @@ namespace ClickyControllerGUI.Utilities
 {
     public class MethodToDisplayNameConverter : IValueConverter
     {
-        private readonly static Dictionary<string, Dictionary<string, string>> MethodToDisplayNameDictionary = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(Resources.MethodsToListDisplayName);
+        private readonly static Dictionary<string, Dictionary<string, string>> MethodToDisplayNameDictionary = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(Resources.MethodToListDisplayName);
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return MethodToDisplayNameDictionary["displayname"][value.ToString()];
