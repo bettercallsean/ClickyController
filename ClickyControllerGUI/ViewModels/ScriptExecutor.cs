@@ -10,6 +10,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using ClickyController;
 using ClickyControllerGUI.ViewModels;
+using GongSolutions.Wpf.DragDrop;
+using Microsoft.Win32;
 using Newtonsoft.Json;
 
 namespace ClickyControllerGUI.ViewModels
@@ -57,6 +59,8 @@ namespace ClickyControllerGUI.ViewModels
         public ICommand RemoveItemFromCommandListCommand { get => new RelayCommand(o => RemoveItemFromCommandList()); }
         public ICommand RunScriptCommand { get => new RelayCommand(o => ScriptRunner()); }
 
+        public ICommand ImportScriptCommand { get => new RelayCommand(o => ScriptReader()); }
+
         private void RemoveItemFromCommandList()
         {
             if (CommandList.Count > 0)
@@ -77,12 +81,22 @@ namespace ClickyControllerGUI.ViewModels
         }
 
 
-        public static string[] ScriptReader(string scriptFilepath)
+        public void ScriptReader()
         {
             try
             {
-                var commandArray = File.ReadAllLines(scriptFilepath);
-                return commandArray;
+                OpenFileDialog openFileDialog = new OpenFileDialog
+                {
+                    Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*",
+                    Title = "Import a Clicky Controller script"
+                };
+
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    var commandList = File.ReadAllLines(openFileDialog.FileName).ToList();
+                    CommandList = new ObservableCollection<string>(commandList);
+                }
+                    
             }
 
             catch (IOException e)
@@ -90,7 +104,6 @@ namespace ClickyControllerGUI.ViewModels
                 Console.WriteLine("The file could not be read:");
                 Console.WriteLine(e.Message);
 
-                return null;
             }
 
         }
