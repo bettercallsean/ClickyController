@@ -64,7 +64,12 @@ namespace ClickyControllerGUI {
         ///   Looks up a localized string similar to {
         ///&quot;Mouse Click&quot;:&quot;mc&quot;,
         ///&quot;Move Mouse&quot;: &quot;mv&quot;,
-        ///&quot;Scroll Wheel&quot;: &quot;sw&quot;
+        ///&quot;Scroll Wheel&quot;: &quot;sw&quot;,
+        ///&quot;Enter Text&quot; : &quot;et&quot;,
+        ///&quot;Press Key&quot; : &quot;kp&quot;,
+        ///&quot;Key Down&quot; : &quot;kd&quot;,
+        ///&quot;Key Up&quot; : &quot;kr&quot;,
+        ///&quot;Wait&quot; : &quot;wt&quot;
         ///}.
         /// </summary>
         internal static string CommandsToListDisplayName {
@@ -77,7 +82,12 @@ namespace ClickyControllerGUI {
         ///   Looks up a localized string similar to {
         ///	&quot;mc&quot;: [&quot;MouseViewModel&quot;, &quot;MouseClick&quot;],
         ///	&quot;mv&quot;: [&quot;MouseViewModel&quot;, &quot;MoveMouse&quot;],
-        ///	&quot;sw&quot;: [&quot;MouseViewModel&quot;, &quot;ScrollWheel&quot;]
+        ///	&quot;sw&quot;: [&quot;MouseViewModel&quot;, &quot;ScrollWheel&quot;],
+        ///	&quot;et&quot; : [&quot;KeyboardViewModel&quot;, &quot;EnterText&quot;],
+        ///	&quot;kp&quot; : [&quot;KeyboardViewModel&quot;, &quot;KeyPress&quot;],
+        ///	&quot;kr&quot; : [&quot;KeyboardViewModel&quot;, &quot;KeyRelease&quot;],
+        ///	&quot;kd&quot; : [&quot;KeyboardViewModel&quot;, &quot;KeyDown&quot;],
+        ///	&quot;wt&quot; : [&quot;UtilityViewModel&quot;, &quot;Wait&quot;]
         ///}.
         /// </summary>
         internal static string CommandsToMethods {
