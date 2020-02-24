@@ -1,0 +1,10 @@
+{
+    "Mouse Click": {"Parameters":"","Method":"MouseClick","Namespace":"MouseViewModel"},
+    "Move Mouse":{"Parameters":"","Method":"MoveMouse","Namespace":"MouseViewModel"},
+    "Scroll Wheel":{"Parameters":"","Method":"ScrollWheel","Namespace":"MouseViewModel"},
+    "Enter Text":{"Parameters":"","Method":"EnterText","Namespace":"KeyboardViewModel"},
+    "Press Key":{"Parameters":"","Method":"PressKey","Namespace":"KeyboardViewModel"},
+    "Key Down":{"Parameters":"","Method":"Key Down","Namespace":"KeyboardViewModel"},
+    "Key Up":{"Parameters":"","Method":"Key Release","Namespace":"KeyboardViewModel"},
+    "Wait":{"Parameters":"","Method":"Wait","Namespace":"UtilityViewModel"}
+}
