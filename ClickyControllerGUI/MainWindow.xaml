@@ -5,15 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClickyControllerGUI"
         xmlns:viewmodel="clr-namespace:ClickyControllerGUI.ViewModels"
+        xmlns:converter="clr-namespace:ClickyControllerGUI.Utilities"
         xmlns:dd="urn:gong-wpf-dragdrop"
         mc:Ignorable="d"
         Title="Clicky Controller" Height="350" Width="500">
 
-    <Window.DataContext>
-        <viewmodel:ScriptExecutor />
-    </Window.DataContext>
     <Window.Resources>
         <viewmodel:ScriptExecutor x:Key="ScriptExecutor"/>
+        <converter:MethodToDisplayNameConverter x:Key="MethodToDisplayNameConverter"/>
     </Window.Resources>
 
     
@@ -50,9 +49,9 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding DisplayName}" />
+                            <TextBlock Text="{Binding Method, Converter={StaticResource MethodToDisplayNameConverter}}" />
                             <TextBlock Text="   "/>
-                            <TextBlock Text="{Binding Parameters}" />
+                            <TextBox Text="{Binding Parameters}" />
                         </StackPanel>
                         
                     </DataTemplate>
