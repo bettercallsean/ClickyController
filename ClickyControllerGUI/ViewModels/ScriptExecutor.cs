@@ -24,8 +24,18 @@ namespace ClickyControllerGUI.ViewModels
         public ScriptExecutor()
         {
             CommandListItems = JsonConvert.DeserializeObject<Dictionary<string, string>>(Resources.CommandsToListDisplayName);
-
-            CommandList = new ObservableCollection<Command>();
+            Command test = new Command
+            {
+                //DisplayName = "Hey",
+                Method = "MouseClick",
+                Namespace = "Now",
+                Parameters = "Brown Cow"
+            };
+            CommandList = new ObservableCollection<Command>
+            {
+                test,
+                test
+            };
         }
 
         private Dictionary<string, string> _commandListItems;
@@ -88,7 +98,7 @@ namespace ClickyControllerGUI.ViewModels
             {
                 OpenFileDialog openFileDialog = new OpenFileDialog
                 {
-                    Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*",
+                    Filter = "JSON Files (*.json)|*.json|All Files (*.*)|*.*",
                     Title = "Import a Clicky Controller script"
                 };
 
@@ -125,7 +135,7 @@ namespace ClickyControllerGUI.ViewModels
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
                 FileName = "script",
-                Filter = "Text file (*.txt)|*.txt|All Files(*.*)|*.*",
+                Filter = "JSON file (*.json)|*.json|All Files(*.*)|*.*",
                 Title = "Save a script"
             };
 
@@ -134,7 +144,6 @@ namespace ClickyControllerGUI.ViewModels
                 using StreamWriter file = new StreamWriter(saveFileDialog.FileName);
                 JsonSerializer serializer = new JsonSerializer();
                 serializer.Serialize(file, CommandList);
-
             }
         }
 
