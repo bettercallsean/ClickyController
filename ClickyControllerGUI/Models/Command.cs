@@ -11,8 +11,8 @@ namespace ClickyControllerGUI.Models
 
         }
 
-        public string CommandData { get; set; }
-        public string CommandMethod { get; set; }
-        public string CommandNamespace { get; set; }
+        public string Parameters { get; set; }
+        public string Method { get; set; }
+        public string Namespace { get; set; }
     }
 }
