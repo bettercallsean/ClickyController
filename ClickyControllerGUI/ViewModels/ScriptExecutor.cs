@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using ClickyController;
 using ClickyControllerGUI.ViewModels;
@@ -53,11 +54,24 @@ namespace ClickyControllerGUI.ViewModels
         }
 
         public ICommand AddItemToCommandListCommand { get => new RelayCommand(o => CommandList.Add(SelectedCommand)); }
-
-        public ICommand RemoveItemFromCommandListCommand { get => new RelayCommand(o => CommandList.RemoveAt(SelectedCommandIndex)); }
+        public ICommand RemoveItemFromCommandListCommand { get => new RelayCommand(o => RemoveItemFromCommandList()); }
         public ICommand RunScriptCommand { get => new RelayCommand(o => ScriptRunner()); }
 
+        private void RemoveItemFromCommandList()
+        {
+            if (CommandList.Count > 0)
+            {
+                // Used to set the selected item index back to where it was after the item has been deleted
+                int selectionIndex = SelectedCommandIndex;
 
+                CommandList.RemoveAt(SelectedCommandIndex);
+
+                if (selectionIndex > CommandList.Count)
+                    SelectedCommandIndex = CommandList.Count - 1;
+                else
+                    SelectedCommandIndex = selectionIndex;
+            }
+        }
 
 
         public static string[] ScriptReader(string scriptFilepath)
