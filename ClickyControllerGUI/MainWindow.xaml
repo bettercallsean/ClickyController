@@ -41,7 +41,7 @@
 
         </StackPanel>
 
-        <StackPanel Grid.Column="2" >
+        <StackPanel Grid.Column="2">
             <ListView Name="CommandList" ItemsSource="{Binding CommandList}" 
                       Height="{Binding ElementName=LayoutBase, Path=ActualHeight}"
                       SelectedIndex="{Binding SelectedCommandIndex, Mode=TwoWay}"
@@ -51,7 +51,7 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="{Binding Method, Converter={StaticResource MethodToDisplayNameConverter}}" />
                             <TextBlock Text="   "/>
-                            <TextBox Text="{Binding Parameters}" />
+                            <TextBox Text="{Binding Parameters, Mode=TwoWay}" />
                         </StackPanel>
                         
                     </DataTemplate>
