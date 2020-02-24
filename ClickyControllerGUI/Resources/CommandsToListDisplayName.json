@@ -1,5 +1,10 @@
 {
 "Mouse Click":"mc",
 "Move Mouse": "mv",
-"Scroll Wheel": "sw"
+"Scroll Wheel": "sw",
+"Enter Text" : "et",
+"Press Key" : "kp",
+"Key Down" : "kd",
+"Key Up" : "kr",
+"Wait" : "wt"
 }
