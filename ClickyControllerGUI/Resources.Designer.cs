@@ -66,7 +66,7 @@ namespace ClickyControllerGUI {
         ///    &quot;Move Mouse&quot;:{&quot;Parameters&quot;:&quot;&quot;,&quot;Method&quot;:&quot;MoveMouse&quot;,&quot;Namespace&quot;:&quot;MouseViewModel&quot;},
         ///    &quot;Scroll Wheel&quot;:{&quot;Parameters&quot;:&quot;&quot;,&quot;Method&quot;:&quot;ScrollWheel&quot;,&quot;Namespace&quot;:&quot;MouseViewModel&quot;},
         ///    &quot;Enter Text&quot;:{&quot;Parameters&quot;:&quot;&quot;,&quot;Method&quot;:&quot;EnterText&quot;,&quot;Namespace&quot;:&quot;KeyboardViewModel&quot;},
-        ///    &quot;Press Key&quot;:{&quot;Parameters&quot;:&quot;&quot;,&quot;Method&quot;:&quot;PressKey&quot;,&quot;Namespace&quot;:&quot;KeyboardViewModel&quot;},
+        ///    &quot;Press Key&quot;:{&quot;Parameters&quot;:&quot;&quot;,&quot;Method&quot;:&quot;KeyPress&quot;,&quot;Namespace&quot;:&quot;KeyboardViewModel&quot;},
         ///    &quot;Key Down&quot;:{&quot;Parameters&quot;:&quot;&quot;,&quot;Method&quot;:&quot;Key Down&quot;,&quot;Namespace&quot;:&quot;Keyb [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string MethodToCommand {
@@ -83,7 +83,7 @@ namespace ClickyControllerGUI {
         ///        &quot;MoveMouse&quot;:&quot;Move Mouse&quot;,
         ///        &quot;ScrollWheel&quot;:&quot;Scroll Wheel&quot;,
         ///        &quot;EnterText&quot;:&quot;Enter Text&quot;,
-        ///        &quot;PressKey&quot;:&quot;Press Key&quot;,
+        ///        &quot;KeyPress&quot;:&quot;Press Key&quot;,
         ///        &quot;KeyDown&quot;:&quot;Key Down&quot;,
         ///        &quot;KeyRelease&quot;:&quot;Key Up&quot;,
         ///        &quot;Wait&quot;:&quot;Wait&quot; 
@@ -94,7 +94,7 @@ namespace ClickyControllerGUI {
         ///        &quot;Move Mouse&quot;: &quot;MoveMouse&quot;, 
         ///        &quot;Scroll Wheel&quot;: &quot;ScrollWheel&quot;, 
         ///        &quot;Enter Text&quot;: &quot;EnterText&quot;, 
-        ///        &quot;Press Key&quot;: &quot;PressKey&quot;, 
+        ///        &quot;Press Key&quot;: &quot;KeyPress&quot;, 
         ///        [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string MethodToListDisplayName {
