@@ -23,7 +23,7 @@ namespace ClickyControllerGUI.ViewModels
 
         public ScriptExecutor()
         {
-            CommandListItems = JsonConvert.DeserializeObject<Dictionary<string, string>>(Resources.CommandsToListDisplayName);
+            CommandListItems = JsonConvert.DeserializeObject<Dictionary<string, Command>>(Resources.MethodToCommand);
             Command test = new Command
             {
                 //DisplayName = "Hey",
@@ -38,8 +38,8 @@ namespace ClickyControllerGUI.ViewModels
             };
         }
 
-        private Dictionary<string, string> _commandListItems;
-        public Dictionary<string, string> CommandListItems
+        private Dictionary<string, Command> _commandListItems;
+        public Dictionary<string, Command> CommandListItems
         {
             get => _commandListItems;
             set { _commandListItems = value; OnPropertyChanged(); }
