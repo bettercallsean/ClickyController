@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClickyControllerGUI"
         xmlns:viewmodel="clr-namespace:ClickyControllerGUI.ViewModels"
+        xmlns:dd="urn:gong-wpf-dragdrop"
         mc:Ignorable="d"
         Title="Clicky Controller" Height="350" Width="500">
 
@@ -34,7 +35,8 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <ListView Grid.Column="0" x:Name="Commands" ItemsSource="{Binding CommandListItems}" 
-                          SelectedValue="{Binding SelectedCommand}" SelectedValuePath="Value" DisplayMemberPath="Key"/>
+                          SelectedValue="{Binding SelectedCommand}" SelectedValuePath="Value" DisplayMemberPath="Key"
+                          dd:DragDrop.IsDragSource="True"/>
                 <Button Grid.Column="1" Command="{Binding AddItemToCommandListCommand}" Content="+"/>
             </Grid>
             
@@ -44,7 +46,8 @@
         <StackPanel Grid.Column="2" >
             <ListView Name="CommandList" ItemsSource="{Binding CommandList}" 
                       Height="{Binding ElementName=LayoutBase, Path=ActualHeight}"
-                      SelectedIndex="{Binding SelectedCommandIndex, Mode=TwoWay}"/>
+                      SelectedIndex="{Binding SelectedCommandIndex, Mode=TwoWay}"
+                      dd:DragDrop.IsDropTarget="True" dd:DragDrop.IsDragSource="True"/>
 
 
         </StackPanel>
