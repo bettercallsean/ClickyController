@@ -121,7 +121,7 @@
   <data name="CommandsToListDisplayName" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\CommandsToListDisplayName.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="CommandsToMethods" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\CommandsToMethods.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="MethodsToListDisplayName" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\MethodsToListDisplayName.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
 </root>

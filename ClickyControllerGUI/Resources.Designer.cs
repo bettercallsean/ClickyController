@@ -62,14 +62,14 @@ namespace ClickyControllerGUI {
         
         /// <summary>
         ///   Looks up a localized string similar to {
-        ///&quot;Mouse Click&quot;:&quot;mc&quot;,
-        ///&quot;Move Mouse&quot;: &quot;mv&quot;,
-        ///&quot;Scroll Wheel&quot;: &quot;sw&quot;,
-        ///&quot;Enter Text&quot; : &quot;et&quot;,
-        ///&quot;Press Key&quot; : &quot;kp&quot;,
-        ///&quot;Key Down&quot; : &quot;kd&quot;,
-        ///&quot;Key Up&quot; : &quot;kr&quot;,
-        ///&quot;Wait&quot; : &quot;wt&quot;
+        ///    &quot;MouseClick&quot;:&quot;Mouse Click&quot;,
+        ///    &quot;MoveMouse&quot;:&quot;Move Mouse&quot;,
+        ///    &quot;ScrollWheel&quot;:&quot;Scroll Wheel&quot;,
+        ///    &quot;EnterText&quot;:&quot;Enter Text&quot;,
+        ///    &quot;PressKey&quot;:&quot;Press Key&quot;,
+        ///    &quot;KeyDown&quot;:&quot;Key Down&quot;,
+        ///    &quot;KeyRelease&quot;:&quot;Key Up&quot;,
+        ///    &quot;Wait&quot;:&quot;Wait&quot;
         ///}.
         /// </summary>
         internal static string CommandsToListDisplayName {
@@ -80,19 +80,29 @@ namespace ClickyControllerGUI {
         
         /// <summary>
         ///   Looks up a localized string similar to {
-        ///	&quot;mc&quot;: [&quot;MouseViewModel&quot;, &quot;MouseClick&quot;],
-        ///	&quot;mv&quot;: [&quot;MouseViewModel&quot;, &quot;MoveMouse&quot;],
-        ///	&quot;sw&quot;: [&quot;MouseViewModel&quot;, &quot;ScrollWheel&quot;],
-        ///	&quot;et&quot; : [&quot;KeyboardViewModel&quot;, &quot;EnterText&quot;],
-        ///	&quot;kp&quot; : [&quot;KeyboardViewModel&quot;, &quot;KeyPress&quot;],
-        ///	&quot;kr&quot; : [&quot;KeyboardViewModel&quot;, &quot;KeyRelease&quot;],
-        ///	&quot;kd&quot; : [&quot;KeyboardViewModel&quot;, &quot;KeyDown&quot;],
-        ///	&quot;wt&quot; : [&quot;UtilityViewModel&quot;, &quot;Wait&quot;]
-        ///}.
+        ///    &quot;displayname&quot; : 
+        ///    {
+        ///        &quot;MouseClick&quot;:&quot;Mouse Click&quot;,
+        ///        &quot;MoveMouse&quot;:&quot;Move Mouse&quot;,
+        ///        &quot;ScrollWheel&quot;:&quot;Scroll Wheel&quot;,
+        ///        &quot;EnterText&quot;:&quot;Enter Text&quot;,
+        ///        &quot;PressKey&quot;:&quot;Press Key&quot;,
+        ///        &quot;KeyDown&quot;:&quot;Key Down&quot;,
+        ///        &quot;KeyRelease&quot;:&quot;Key Up&quot;,
+        ///        &quot;Wait&quot;:&quot;Wait&quot; 
+        ///    }, 
+        ///    &quot;methodname&quot; : 
+        ///    {
+        ///        &quot;Mouse Click&quot;: &quot;MouseClick&quot;, 
+        ///        &quot;Move Mouse&quot;: &quot;MoveMouse&quot;, 
+        ///        &quot;Scroll Wheel&quot;: &quot;ScrollWheel&quot;, 
+        ///        &quot;Enter Text&quot;: &quot;EnterText&quot;, 
+        ///        &quot;Press Key&quot;: &quot;PressKey&quot;, 
+        ///        [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string CommandsToMethods {
+        internal static string MethodsToListDisplayName {
             get {
-                return ResourceManager.GetString("CommandsToMethods", resourceCulture);
+                return ResourceManager.GetString("MethodsToListDisplayName", resourceCulture);
             }
         }
     }
