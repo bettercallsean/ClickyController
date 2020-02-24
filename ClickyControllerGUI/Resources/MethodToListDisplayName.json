@@ -5,7 +5,7 @@
         "MoveMouse":"Move Mouse",
         "ScrollWheel":"Scroll Wheel",
         "EnterText":"Enter Text",
-        "PressKey":"Press Key",
+        "KeyPress":"Press Key",
         "KeyDown":"Key Down",
         "KeyRelease":"Key Up",
         "Wait":"Wait" 
@@ -16,7 +16,7 @@
         "Move Mouse": "MoveMouse", 
         "Scroll Wheel": "ScrollWheel", 
         "Enter Text": "EnterText", 
-        "Press Key": "PressKey", 
+        "Press Key": "KeyPress", 
         "Key Down": "KeyDown", 
         "Key Up": "KeyRelease", 
         "Wait": "Wait"
