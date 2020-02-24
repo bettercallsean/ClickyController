@@ -1,4 +1,4 @@
-# ClickController
+# ClickyController
 
 ## A C# library for controlling mouse and keyboard input on Windows through code.
 
