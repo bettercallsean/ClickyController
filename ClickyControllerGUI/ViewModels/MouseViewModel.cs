@@ -34,7 +34,7 @@ namespace ClickyControllerGUI.ViewModels
         {
             List<int> coordinates = coordinateString.Split(' ').Select(int.Parse).ToList();
 
-            Mouse.MoveMouse(coordinates[0], coordinates[1]);
+            Mouse.MoveMouse(coordinates[0], coordinates[1], true);
         }
 
         public static void ScrollWheel(string direction)
