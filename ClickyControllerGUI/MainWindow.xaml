@@ -41,12 +41,17 @@
 
         </StackPanel>
 
-        <StackPanel Grid.Column="2">
-            <ListView ItemsSource="{Binding CommandList}" Height="{Binding ElementName=LayoutBase, Path=ActualHeight}"/>
+        <StackPanel Grid.Column="2" >
+            <ListView Name="CommandList" ItemsSource="{Binding CommandList}" 
+                      Height="{Binding ElementName=LayoutBase, Path=ActualHeight}"
+                      SelectedIndex="{Binding SelectedCommandIndex, Mode=TwoWay}"/>
+
+
         </StackPanel>
 
         <StackPanel Grid.Column="5">
             <Button Height="20" Content="Run" Command="{Binding RunScriptCommand}"/>
+            <Button Height="20" Content="-" Command="{Binding RemoveItemFromCommandListCommand}"/>
         </StackPanel>
     </Grid>
 
