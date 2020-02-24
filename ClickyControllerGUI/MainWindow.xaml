@@ -39,7 +39,6 @@
                           dd:DragDrop.IsDragSource="True"/>
                 <Button Grid.Column="1" Command="{Binding AddItemToCommandListCommand}" Content="+"/>
             </Grid>
-            
 
         </StackPanel>
 
@@ -54,9 +53,10 @@
 
         <StackPanel Grid.Column="5">
             <Button Height="20" Content="Run" Command="{Binding RunScriptCommand}"/>
+            <Button Height="20" Content="Import" Command="{Binding ImportScriptCommand}"/>
             <Button Height="20" Content="-" Command="{Binding RemoveItemFromCommandListCommand}"/>
+            
         </StackPanel>
     </Grid>
 
-    
 </Window>
