@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using ClickyController;
+using ClickyControllerGUI.Models;
 using ClickyControllerGUI.ViewModels;
 using GongSolutions.Wpf.DragDrop;
 using Microsoft.Win32;
@@ -18,13 +19,13 @@ namespace ClickyControllerGUI.ViewModels
 {
     public class ScriptExecutor : BaseViewModel
     {
-        private static readonly Dictionary<string, string[]> CommandToMethodDictionary = JsonConvert.DeserializeObject<Dictionary<string, string[]>> (Resources.CommandsToMethods);
+        //private static readonly Dictionary<string, string[]> CommandToMethodDictionary = JsonConvert.DeserializeObject<Dictionary<string, string[]>> (Resources.CommandsToMethods);
 
         public ScriptExecutor()
         {
             CommandListItems = JsonConvert.DeserializeObject<Dictionary<string, string>>(Resources.CommandsToListDisplayName);
 
-            CommandList = new ObservableCollection<string>();
+            CommandList = new ObservableCollection<Command>();
         }
 
         private Dictionary<string, string> _commandListItems;
@@ -34,15 +35,15 @@ namespace ClickyControllerGUI.ViewModels
             set { _commandListItems = value; OnPropertyChanged(); }
         }
 
-        private ObservableCollection<string> _commandList;
-        public ObservableCollection<string> CommandList
+        private ObservableCollection<Command> _commandList;
+        public ObservableCollection<Command> CommandList
         {
             get => _commandList;
             set { _commandList = value; OnPropertyChanged(); }
         }
 
-        private string _selectedCommand;
-        public string SelectedCommand
+        private Command _selectedCommand;
+        public Command SelectedCommand
         {
             get => _selectedCommand;
             set { _selectedCommand = value; OnPropertyChanged(); }
@@ -93,8 +94,8 @@ namespace ClickyControllerGUI.ViewModels
 
                 if (openFileDialog.ShowDialog() == true)
                 {
-                    List<string> commandList = File.ReadAllLines(openFileDialog.FileName).ToList();
-                    CommandList = new ObservableCollection<string>(commandList);
+                    List<Command> commandList = JsonConvert.DeserializeObject<List<Command>>(File.ReadAllText(openFileDialog.FileName));
+                    CommandList = new ObservableCollection<Command>(commandList);
                 }
                     
             }
@@ -110,25 +111,13 @@ namespace ClickyControllerGUI.ViewModels
 
         public void ScriptRunner()
         {
-            foreach (string line in CommandList)
+            foreach (Command command in CommandList)
             {
-                /*
-                 * inputType - This will either be 'mouse' or 'keybd' and is found at the start of each script line
-                 * command - Contains the command key that will map to a method found in the corresponding ViewModel
-                 * parameters - The rest of the string that is passed to the respective method, where the input is cleaned up for processing
-                 */
-
-                string command = line.Substring(0, 2);
-                string parameters = line.Substring(3);
-                string namespaceString = CommandToMethodDictionary[command][0];
-                
-                Type type = Type.GetType("ClickyControllerGUI.ViewModels." + namespaceString);
-                MethodInfo method = type.GetMethod(CommandToMethodDictionary[command][1]);
-                method.Invoke(null, new object[] { parameters });
+                Type type = Type.GetType("ClickyControllerGUI.ViewModels." + command.Namespace); ;
+                MethodInfo method = type.GetMethod(command.Method);
+                method.Invoke(null, new object[] { command.Parameters });
             }
         }
-
-
 
 
         public void ScriptWriter()
@@ -143,8 +132,9 @@ namespace ClickyControllerGUI.ViewModels
             if (saveFileDialog.ShowDialog() == true && saveFileDialog.FileName != "")
             {
                 using StreamWriter file = new StreamWriter(saveFileDialog.FileName);
-                foreach (string line in CommandList)
-                    file.WriteLine(line);
+                JsonSerializer serializer = new JsonSerializer();
+                serializer.Serialize(file, CommandList);
+
             }
         }
 
