@@ -46,7 +46,13 @@
             <ListView Name="CommandList" ItemsSource="{Binding CommandList}" 
                       Height="{Binding ElementName=LayoutBase, Path=ActualHeight}"
                       SelectedIndex="{Binding SelectedCommandIndex, Mode=TwoWay}"
-                      dd:DragDrop.IsDropTarget="True" dd:DragDrop.IsDragSource="True"/>
+                      dd:DragDrop.IsDropTarget="True" dd:DragDrop.IsDragSource="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Method}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
 
 
         </StackPanel>
