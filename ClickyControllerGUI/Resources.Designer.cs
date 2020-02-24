@@ -62,19 +62,16 @@ namespace ClickyControllerGUI {
         
         /// <summary>
         ///   Looks up a localized string similar to {
-        ///    &quot;MouseClick&quot;:&quot;Mouse Click&quot;,
-        ///    &quot;MoveMouse&quot;:&quot;Move Mouse&quot;,
-        ///    &quot;ScrollWheel&quot;:&quot;Scroll Wheel&quot;,
-        ///    &quot;EnterText&quot;:&quot;Enter Text&quot;,
-        ///    &quot;PressKey&quot;:&quot;Press Key&quot;,
-        ///    &quot;KeyDown&quot;:&quot;Key Down&quot;,
-        ///    &quot;KeyRelease&quot;:&quot;Key Up&quot;,
-        ///    &quot;Wait&quot;:&quot;Wait&quot;
-        ///}.
+        ///    &quot;Mouse Click&quot;: {&quot;Parameters&quot;:&quot;&quot;,&quot;Method&quot;:&quot;MouseClick&quot;,&quot;Namespace&quot;:&quot;MouseViewModel&quot;},
+        ///    &quot;Move Mouse&quot;:{&quot;Parameters&quot;:&quot;&quot;,&quot;Method&quot;:&quot;MoveMouse&quot;,&quot;Namespace&quot;:&quot;MouseViewModel&quot;},
+        ///    &quot;Scroll Wheel&quot;:{&quot;Parameters&quot;:&quot;&quot;,&quot;Method&quot;:&quot;ScrollWheel&quot;,&quot;Namespace&quot;:&quot;MouseViewModel&quot;},
+        ///    &quot;Enter Text&quot;:{&quot;Parameters&quot;:&quot;&quot;,&quot;Method&quot;:&quot;EnterText&quot;,&quot;Namespace&quot;:&quot;KeyboardViewModel&quot;},
+        ///    &quot;Press Key&quot;:{&quot;Parameters&quot;:&quot;&quot;,&quot;Method&quot;:&quot;PressKey&quot;,&quot;Namespace&quot;:&quot;KeyboardViewModel&quot;},
+        ///    &quot;Key Down&quot;:{&quot;Parameters&quot;:&quot;&quot;,&quot;Method&quot;:&quot;Key Down&quot;,&quot;Namespace&quot;:&quot;Keyb [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string CommandsToListDisplayName {
+        internal static string MethodToCommand {
             get {
-                return ResourceManager.GetString("CommandsToListDisplayName", resourceCulture);
+                return ResourceManager.GetString("MethodToCommand", resourceCulture);
             }
         }
         
@@ -100,9 +97,9 @@ namespace ClickyControllerGUI {
         ///        &quot;Press Key&quot;: &quot;PressKey&quot;, 
         ///        [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string MethodsToListDisplayName {
+        internal static string MethodToListDisplayName {
             get {
-                return ResourceManager.GetString("MethodsToListDisplayName", resourceCulture);
+                return ResourceManager.GetString("MethodToListDisplayName", resourceCulture);
             }
         }
     }
