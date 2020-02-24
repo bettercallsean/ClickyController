@@ -49,7 +49,12 @@
                       dd:DragDrop.IsDropTarget="True" dd:DragDrop.IsDragSource="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Method}" />
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding DisplayName}" />
+                            <TextBlock Text="   "/>
+                            <TextBlock Text="{Binding Parameters}" />
+                        </StackPanel>
+                        
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
