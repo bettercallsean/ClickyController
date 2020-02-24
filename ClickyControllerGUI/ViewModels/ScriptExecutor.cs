@@ -58,8 +58,8 @@ namespace ClickyControllerGUI.ViewModels
         public ICommand AddItemToCommandListCommand { get => new RelayCommand(o => CommandList.Add(SelectedCommand)); }
         public ICommand RemoveItemFromCommandListCommand { get => new RelayCommand(o => RemoveItemFromCommandList()); }
         public ICommand RunScriptCommand { get => new RelayCommand(o => ScriptRunner()); }
-
         public ICommand ImportScriptCommand { get => new RelayCommand(o => ScriptReader()); }
+        public ICommand SaveScriptCommand { get => new RelayCommand(o => ScriptWriter()); }
 
         private void RemoveItemFromCommandList()
         {
@@ -93,7 +93,7 @@ namespace ClickyControllerGUI.ViewModels
 
                 if (openFileDialog.ShowDialog() == true)
                 {
-                    var commandList = File.ReadAllLines(openFileDialog.FileName).ToList();
+                    List<string> commandList = File.ReadAllLines(openFileDialog.FileName).ToList();
                     CommandList = new ObservableCollection<string>(commandList);
                 }
                     
@@ -133,7 +133,19 @@ namespace ClickyControllerGUI.ViewModels
 
         public void ScriptWriter()
         {
-            // TODO: Create logic for writing script files in a way that can be easily read by the ScriptReader method, this will be easier when the interface is designed
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                FileName = "script",
+                Filter = "Text file (*.txt)|*.txt|All Files(*.*)|*.*",
+                Title = "Save a script"
+            };
+
+            if (saveFileDialog.ShowDialog() == true && saveFileDialog.FileName != "")
+            {
+                using StreamWriter file = new StreamWriter(saveFileDialog.FileName);
+                foreach (string line in CommandList)
+                    file.WriteLine(line);
+            }
         }
 
             
