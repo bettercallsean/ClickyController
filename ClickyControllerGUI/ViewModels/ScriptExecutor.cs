@@ -24,18 +24,7 @@ namespace ClickyControllerGUI.ViewModels
         public ScriptExecutor()
         {
             CommandListItems = JsonConvert.DeserializeObject<Dictionary<string, Command>>(Resources.MethodToCommand);
-            Command test = new Command
-            {
-                //DisplayName = "Hey",
-                Method = "MouseClick",
-                Namespace = "Now",
-                Parameters = "Brown Cow"
-            };
-            CommandList = new ObservableCollection<Command>
-            {
-                test,
-                test
-            };
+            CommandList = new ObservableCollection<Command>();
         }
 
         private Dictionary<string, Command> _commandListItems;
