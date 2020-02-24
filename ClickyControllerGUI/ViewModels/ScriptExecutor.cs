@@ -66,8 +66,11 @@ namespace ClickyControllerGUI.ViewModels
 
                 CommandList.RemoveAt(SelectedCommandIndex);
 
-                if (selectionIndex > CommandList.Count)
-                    SelectedCommandIndex = CommandList.Count - 1;
+                // If the last item in the list is deleted and sets SelectedCommandIndex to the one below,
+                // otherwise, it can be set to the same position again.
+                // selectionIndex is used because SelectionCommandIndex is set to -1 after removing the element
+                if (selectionIndex >= CommandList.Count && CommandList.Count != 0)
+                    SelectedCommandIndex = selectionIndex - 1;
                 else
                     SelectedCommandIndex = selectionIndex;
             }
