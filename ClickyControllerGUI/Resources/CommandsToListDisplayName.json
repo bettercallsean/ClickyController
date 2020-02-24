@@ -1,10 +1,10 @@
 {
-"Mouse Click":"mc",
-"Move Mouse": "mv",
-"Scroll Wheel": "sw",
-"Enter Text" : "et",
-"Press Key" : "kp",
-"Key Down" : "kd",
-"Key Up" : "kr",
-"Wait" : "wt"
+    "MouseClick":"Mouse Click",
+    "MoveMouse":"Move Mouse",
+    "ScrollWheel":"Scroll Wheel",
+    "EnterText":"Enter Text",
+    "PressKey":"Press Key",
+    "KeyDown":"Key Down",
+    "KeyRelease":"Key Up",
+    "Wait":"Wait"
 }
