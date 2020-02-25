@@ -11,7 +11,6 @@
         Title="Clicky Controller" Height="350" Width="500">
 
     <Window.Resources>
-        <viewmodel:ScriptExecutorViewModel x:Key="ScriptExecutorViewModel"/>
         <viewmodel:CommandViewModel x:Key="CommandViewModel"/>
         <converter:MethodToDisplayNameConverter x:Key="MethodToDisplayNameConverter"/>
         <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
