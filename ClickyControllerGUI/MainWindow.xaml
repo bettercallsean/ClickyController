@@ -52,6 +52,9 @@
                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                     </Style>
                 </ListView.ItemContainerStyle>
+                <ListView.InputBindings>
+                    <KeyBinding Key="Backspace" Command="{Binding Path=RemoveItemFromCommandListCommand}" />
+                </ListView.InputBindings>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid HorizontalAlignment="Stretch">
@@ -62,8 +65,7 @@
                                 <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" Text="{Binding Method, Converter={StaticResource MethodToDisplayNameConverter}}" />
-                            <TextBlock Grid.Column="1" Text="   "/>
-                            <TextBox Grid.Column="2" Text="{Binding Parameters, Mode=TwoWay}" />
+                            <TextBox Grid.Column="2" Text="{Binding Parameters, Mode=TwoWay}" TextWrapping="Wrap"/>
                             <Button Grid.Column="3" Content="-" Command="{Binding RemoveItemFromCommandListCommand, Source={StaticResource ScriptExecutor}}"
                                     CommandParameter="{Binding}" Visibility="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}, Path=IsSelected, Converter={StaticResource BoolToVisibilityConverter}}"/>
 
