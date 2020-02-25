@@ -11,14 +11,15 @@
         Title="Clicky Controller" Height="350" Width="500">
 
     <Window.Resources>
-        <viewmodel:ScriptExecutor x:Key="ScriptExecutor"/>
+        <viewmodel:ScriptExecutorViewModel x:Key="ScriptExecutorViewModel"/>
+        <viewmodel:CommandViewModel x:Key="CommandViewModel"/>
         <converter:MethodToDisplayNameConverter x:Key="MethodToDisplayNameConverter"/>
         <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
     </Window.Resources>
 
-    
 
-    <Grid x:Name="LayoutBase" Margin="15" DataContext="{Binding Source={StaticResource ScriptExecutor}}">
+
+    <Grid x:Name="LayoutBase" Margin="15" DataContext="{Binding Source={StaticResource CommandViewModel}}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="10"/>
@@ -27,17 +28,17 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0">
+        <StackPanel Grid.Column="0" >
             <Label>Command List</Label>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="5*" />
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <ListView Grid.Column="0" x:Name="Commands" ItemsSource="{Binding CommandListItems}" 
-                          SelectedValue="{Binding SelectedCommand}" SelectedValuePath="Value" DisplayMemberPath="Key"
+                <ListView Grid.Column="0" x:Name="Commands" ItemsSource="{Binding CommandListOptions}" 
+                          SelectedValue="{Binding CommandStructure}" SelectedValuePath="Value" DisplayMemberPath="Key"
                           dd:DragDrop.IsDragSource="True"/>
-                <Button Grid.Column="1" Command="{Binding AddItemToCommandListCommand}" Content="+"/>
+                <Button Grid.Column="1" Command="{Binding AddItemToListCommand}" Content="+"/>
             </Grid>
 
         </StackPanel>
@@ -65,8 +66,8 @@
                                 <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" Text="{Binding Method, Converter={StaticResource MethodToDisplayNameConverter}}" />
-                            <TextBox Grid.Column="2" Text="{Binding Parameters, Mode=TwoWay}" TextWrapping="Wrap"/>
-                            <Button Grid.Column="3" Content="-" Command="{Binding RemoveItemFromCommandListCommand, Source={StaticResource ScriptExecutor}}"
+                            <TextBox Grid.Column="2" Text="{Binding Parameters}" TextWrapping="Wrap"/>
+                            <Button Grid.Column="3" Content="-" Command="{Binding RemoveItemFromCommandListCommand, Mode=OneWay, Source={StaticResource CommandViewModel}}"
                                     CommandParameter="{Binding}" Visibility="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}, Path=IsSelected, Converter={StaticResource BoolToVisibilityConverter}}"/>
 
                         </Grid>
