@@ -50,7 +50,7 @@ namespace ClickyControllerGUI.ViewModels
         }
 
         public ICommand AddItemToListCommand { get => new RelayCommand(o => AddItemToCommandList()); }
-        public ICommand RemoveItemFromCommandListCommand { get => new RelayCommand(o => RemoveItemFromCommandList()); }
+        public ICommand RemoveItemFromCommandListCommand { get => new RelayCommand(o => RemoveItemFromCommandList(o)); }
 
         private void AddItemToCommandList()
         {
@@ -63,14 +63,14 @@ namespace ClickyControllerGUI.ViewModels
             CommandList.Add(_command);
         }
 
-        private void RemoveItemFromCommandList()
+        private void RemoveItemFromCommandList(object parameter)
         {
             if (CommandList.Count > 0)
             {
                 // Used to set the selected item index back to where it was after the item has been deleted
                 int selectionIndex = SelectedCommandIndex;
         
-                CommandList.RemoveAt(SelectedCommandIndex);
+                CommandList.Remove((Command)parameter);
         
                 // If the last item in the list is deleted and sets SelectedCommandIndex to the one below,
                 // otherwise, it can be set to the same position again.
