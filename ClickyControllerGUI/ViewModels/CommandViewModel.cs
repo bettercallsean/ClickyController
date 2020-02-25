@@ -9,17 +9,17 @@ namespace ClickyControllerGUI.ViewModels
     {
         private Command _command = new Command();
 
-        public string GetCommandMethod
+        public string CommandMethod
         {
             get => _command.Method;
             set { _command.Method = value;  OnPropertyChanged(); }
         }
-        public string GetCommandNamespace
+        public string CommandNamespace
         {
             get => _command.Namespace;
             set { _command.Namespace = value; OnPropertyChanged(); }
         }
-        public string GetCommandParameters
+        public string CommandParameters
         {
             get => _command.Parameters;
             set { _command.Parameters = value; OnPropertyChanged(); }
