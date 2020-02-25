@@ -13,6 +13,7 @@
     <Window.Resources>
         <viewmodel:ScriptExecutor x:Key="ScriptExecutor"/>
         <converter:MethodToDisplayNameConverter x:Key="MethodToDisplayNameConverter"/>
+        <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
     </Window.Resources>
 
     
@@ -49,11 +50,13 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding CommandId}"/>
                             <TextBlock Text="{Binding Method, Converter={StaticResource MethodToDisplayNameConverter}}" />
                             <TextBlock Text="   "/>
                             <TextBox Text="{Binding Parameters, Mode=TwoWay}" />
+                            <Button Content="-" Command="{Binding RemoveItemFromCommandListCommand, Source={StaticResource ScriptExecutor}}"
+                                    CommandParameter="{Binding}" Visibility="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}, Path=IsSelected, Converter={StaticResource BoolToVisibilityConverter}}"/>
                         </StackPanel>
-                        
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
@@ -65,8 +68,6 @@
             <Button Height="20" Content="Run" Command="{Binding RunScriptCommand}"/>
             <Button Height="20" Content="Import" Command="{Binding ImportScriptCommand}"/>
             <Button Height="20" Content="Save" Command="{Binding SaveScriptCommand}"/>
-            <Button Height="20" Content="-" Command="{Binding RemoveItemFromCommandListCommand}"/>
-            
         </StackPanel>
     </Grid>
 
