@@ -62,16 +62,18 @@ namespace ClickyControllerGUI {
         
         /// <summary>
         ///   Looks up a localized string similar to {
-        ///    &quot;Mouse Click&quot;: {&quot;Parameters&quot;:&quot;&quot;,&quot;Method&quot;:&quot;MouseClick&quot;,&quot;Namespace&quot;:&quot;MouseViewModel&quot;},
-        ///    &quot;Move Mouse&quot;:{&quot;Parameters&quot;:&quot;&quot;,&quot;Method&quot;:&quot;MoveMouse&quot;,&quot;Namespace&quot;:&quot;MouseViewModel&quot;},
-        ///    &quot;Scroll Wheel&quot;:{&quot;Parameters&quot;:&quot;&quot;,&quot;Method&quot;:&quot;ScrollWheel&quot;,&quot;Namespace&quot;:&quot;MouseViewModel&quot;},
-        ///    &quot;Enter Text&quot;:{&quot;Parameters&quot;:&quot;&quot;,&quot;Method&quot;:&quot;EnterText&quot;,&quot;Namespace&quot;:&quot;KeyboardViewModel&quot;},
-        ///    &quot;Press Key&quot;:{&quot;Parameters&quot;:&quot;&quot;,&quot;Method&quot;:&quot;KeyPress&quot;,&quot;Namespace&quot;:&quot;KeyboardViewModel&quot;},
-        ///    &quot;Key Down&quot;:{&quot;Parameters&quot;:&quot;&quot;,&quot;Method&quot;:&quot;KeyDown&quot;,&quot;Namespace&quot;:&quot;Keybo [rest of string was truncated]&quot;;.
+        ///    &quot;Mouse Click&quot;: {&quot;Method&quot;:&quot;MouseClick&quot;,&quot;Namespace&quot;:&quot;MouseViewModel&quot;},
+        ///    &quot;Move Mouse&quot;:{&quot;Method&quot;:&quot;MoveMouse&quot;,&quot;Namespace&quot;:&quot;MouseViewModel&quot;},
+        ///    &quot;Scroll Wheel&quot;:{&quot;Method&quot;:&quot;ScrollWheel&quot;,&quot;Namespace&quot;:&quot;MouseViewModel&quot;},
+        ///    &quot;Enter Text&quot;:{&quot;Method&quot;:&quot;EnterText&quot;,&quot;Namespace&quot;:&quot;KeyboardViewModel&quot;},
+        ///    &quot;Press Key&quot;:{&quot;Method&quot;:&quot;KeyPress&quot;,&quot;Namespace&quot;:&quot;KeyboardViewModel&quot;},
+        ///    &quot;Key Down&quot;:{&quot;Method&quot;:&quot;KeyDown&quot;,&quot;Namespace&quot;:&quot;KeyboardViewModel&quot;},
+        ///    &quot;Key Up&quot;:{&quot;Method&quot;:&quot;KeyRelease&quot;,&quot;Namespace&quot;:&quot;KeyboardViewModel&quot;},
+        ///    &quot;Wait&quot; [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string MethodToCommand {
+        internal static string MethodToCommandInfo {
             get {
-                return ResourceManager.GetString("MethodToCommand", resourceCulture);
+                return ResourceManager.GetString("MethodToCommandInfo", resourceCulture);
             }
         }
         
