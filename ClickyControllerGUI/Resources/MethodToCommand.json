@@ -4,7 +4,7 @@
     "Scroll Wheel":{"Parameters":"","Method":"ScrollWheel","Namespace":"MouseViewModel"},
     "Enter Text":{"Parameters":"","Method":"EnterText","Namespace":"KeyboardViewModel"},
     "Press Key":{"Parameters":"","Method":"KeyPress","Namespace":"KeyboardViewModel"},
-    "Key Down":{"Parameters":"","Method":"Key Down","Namespace":"KeyboardViewModel"},
-    "Key Up":{"Parameters":"","Method":"Key Release","Namespace":"KeyboardViewModel"},
+    "Key Down":{"Parameters":"","Method":"KeyDown","Namespace":"KeyboardViewModel"},
+    "Key Up":{"Parameters":"","Method":"KeyRelease","Namespace":"KeyboardViewModel"},
     "Wait":{"Parameters":"","Method":"Wait","Namespace":"UtilityViewModel"}
 }

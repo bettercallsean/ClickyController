@@ -67,7 +67,7 @@ namespace ClickyControllerGUI {
         ///    &quot;Scroll Wheel&quot;:{&quot;Parameters&quot;:&quot;&quot;,&quot;Method&quot;:&quot;ScrollWheel&quot;,&quot;Namespace&quot;:&quot;MouseViewModel&quot;},
         ///    &quot;Enter Text&quot;:{&quot;Parameters&quot;:&quot;&quot;,&quot;Method&quot;:&quot;EnterText&quot;,&quot;Namespace&quot;:&quot;KeyboardViewModel&quot;},
         ///    &quot;Press Key&quot;:{&quot;Parameters&quot;:&quot;&quot;,&quot;Method&quot;:&quot;KeyPress&quot;,&quot;Namespace&quot;:&quot;KeyboardViewModel&quot;},
-        ///    &quot;Key Down&quot;:{&quot;Parameters&quot;:&quot;&quot;,&quot;Method&quot;:&quot;Key Down&quot;,&quot;Namespace&quot;:&quot;Keyb [rest of string was truncated]&quot;;.
+        ///    &quot;Key Down&quot;:{&quot;Parameters&quot;:&quot;&quot;,&quot;Method&quot;:&quot;KeyDown&quot;,&quot;Namespace&quot;:&quot;Keybo [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string MethodToCommand {
             get {
