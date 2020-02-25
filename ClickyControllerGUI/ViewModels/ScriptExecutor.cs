@@ -55,13 +55,19 @@ namespace ClickyControllerGUI.ViewModels
             set { _selectedCommandIndex = value; OnPropertyChanged(); }
         }
 
-        public ICommand AddItemToCommandListCommand { get => new RelayCommand(o => CommandList.Add(SelectedCommand)); }
-        public ICommand RemoveItemFromCommandListCommand { get => new RelayCommand(o => RemoveItemFromCommandList()); }
+        public ICommand AddItemToCommandListCommand { get => new RelayCommand(o => AddItemToCommandList()); }
+        public ICommand RemoveItemFromCommandListCommand { get => new RelayCommand(o => RemoveItemFromCommandList(o)); }
         public ICommand RunScriptCommand { get => new RelayCommand(o => ScriptRunner()); }
         public ICommand ImportScriptCommand { get => new RelayCommand(o => ScriptReader()); }
         public ICommand SaveScriptCommand { get => new RelayCommand(o => ScriptWriter()); }
 
-        private void RemoveItemFromCommandList()
+        private void AddItemToCommandList()
+        {
+            if (SelectedCommand != null)
+                CommandList.Add(SelectedCommand);
+        }
+
+        private void RemoveItemFromCommandList(object command)
         {
             if (CommandList.Count > 0)
             {
@@ -79,7 +85,6 @@ namespace ClickyControllerGUI.ViewModels
                     SelectedCommandIndex = selectionIndex;
             }
         }
-
 
         public void ScriptReader()
         {
