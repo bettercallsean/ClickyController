@@ -1,0 +1,19 @@
+{
+    "Mouse":
+    [
+        "LeftClick",
+        "RightClick",
+        "MiddleClick"
+    ],
+    "Keyboard":
+    [
+        "EnterText",
+        "PressKey",
+        "KeyDown",
+        "KeyUp"
+    ],
+    "Misc":
+    [
+        "Wait"
+    ]
+}
