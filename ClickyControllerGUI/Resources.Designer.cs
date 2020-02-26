@@ -62,6 +62,33 @@ namespace ClickyControllerGUI {
         
         /// <summary>
         ///   Looks up a localized string similar to {
+        ///    &quot;Mouse&quot;:
+        ///    [
+        ///        &quot;LeftClick&quot;,
+        ///        &quot;RightClick&quot;,
+        ///        &quot;MiddleClick&quot;
+        ///    ],
+        ///    &quot;Keyboard&quot;:
+        ///    [
+        ///        &quot;EnterText&quot;,
+        ///        &quot;PressKey&quot;,
+        ///        &quot;KeyDown&quot;,
+        ///        &quot;KeyUp&quot;
+        ///    ],
+        ///    &quot;Misc&quot;:
+        ///    [
+        ///        &quot;Wait&quot;
+        ///    ]
+        ///}.
+        /// </summary>
+        internal static string DisplayNameToMethod {
+            get {
+                return ResourceManager.GetString("DisplayNameToMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
         ///    &quot;displayname&quot; : 
         ///    {
         ///        &quot;LeftClick&quot;:  &quot;Left Click&quot;,
