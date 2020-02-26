@@ -13,6 +13,5 @@ namespace ClickyControllerGUI.Models
 
         public string Parameters { get; set; }
         public string Method { get; set; }
-        public string Namespace { get; set; }
     }
 }
