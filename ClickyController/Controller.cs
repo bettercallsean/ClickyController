@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Threading;
 using Newtonsoft.Json;
 
 namespace ClickyController
@@ -58,6 +59,11 @@ namespace ClickyController
             internal MOUSEINPUT mouseInput;
             [FieldOffset(0)]
             internal KEYBDINPUT keyboardInput;
+        }
+
+        public static void Wait(int seconds)
+        {
+            Thread.Sleep(seconds * 1000);
         }
     }
 }
