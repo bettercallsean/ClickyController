@@ -1,19 +1,19 @@
 {
     "Mouse":
     [
-        "LeftClick",
-        "RightClick",
-        "MiddleClick"
+        {"Method":"LeftClick", "Parameters":null},
+        {"Method":"RightClick", "Parameters":null},
+        {"Method":"MiddleClick", "Parameters":null}
     ],
     "Keyboard":
     [
-        "EnterText",
-        "PressKey",
-        "KeyDown",
-        "KeyUp"
+        {"Method":"EnterText", "Parameters":""},
+        {"Method":"PressKey", "Parameters":""},
+        {"Method":"KeyDown", "Parameters":""},
+        {"Method":"KeyUp", "Parameters":""}
     ],
     "Misc":
     [
-        "Wait"
+        {"Method":"Wait", "Parameters":""}
     ]
 }
