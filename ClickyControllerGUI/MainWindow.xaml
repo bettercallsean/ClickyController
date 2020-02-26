@@ -30,13 +30,18 @@
         <StackPanel Grid.Column="0" x:Name="CommandListOptions">
             <Label>Command List</Label>
 
-            <TreeView Grid.Column="0" ItemsSource="{Binding CommandListOptions}">
+            <TreeView ItemsSource="{Binding CommandListOptions}" Height="Auto">
+                <TreeView.ItemContainerStyle>
+                    <Style TargetType="{x:Type TreeViewItem}">
+                        <Setter Property="IsExpanded" Value="True"/>
+                    </Style>
+                </TreeView.ItemContainerStyle>
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate ItemsSource="{Binding Path=Value}">
                         <TextBlock Text="{Binding Path=Key}" />
                         <HierarchicalDataTemplate.ItemTemplate>
                             <DataTemplate>
-                                <Grid HorizontalAlignment="Stretch">
+                                <Grid HorizontalAlignment="Stretch" Width="100">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="3*"/>
                                         <ColumnDefinition Width="1*"/>
