@@ -18,12 +18,12 @@ namespace ClickyControllerGUI.ViewModels
 
         public CommandViewModel()
         {
-            CommandListOptions = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(Resources.DisplayNameToMethod);
+            CommandListOptions = JsonConvert.DeserializeObject<Dictionary<string, ObservableCollection<Command>>>(Resources.DisplayNameToMethod);
             CommandList = new ObservableCollection<Command>();
         }
 
-        private Dictionary<string, List<string>> _commandListOptions;
-        public Dictionary<string, List<string>> CommandListOptions
+        private Dictionary<string, ObservableCollection<Command>> _commandListOptions;
+        public Dictionary<string, ObservableCollection<Command>> CommandListOptions
         {
             get => _commandListOptions;
             set { _commandListOptions = value; OnPropertyChanged(); }
@@ -51,7 +51,8 @@ namespace ClickyControllerGUI.ViewModels
 
             _command = new Command
             {
-                Method = (string)command
+                Method = ((Command)command).Method,
+                Parameters = ((Command)command).Parameters
             };
             
             CommandList.Add(_command);
