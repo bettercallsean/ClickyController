@@ -36,9 +36,14 @@ namespace ClickyControllerGUI.Models
         {
             foreach (Command command in commandList)
             {
-                Type type = Type.GetType("ClickyControllerGUI.ViewModels." + command.Namespace); ;
+                Type type = Type.GetType("ClickyControllerGUI.Models.Controller"); ;
                 MethodInfo method = type.GetMethod(command.Method);
-                method.Invoke(null, new object[] { command.Parameters });
+                object classObject = Activator.CreateInstance(type);
+
+                if (method.GetParameters().Length > 0)
+                    method.Invoke(classObject, new object[] { command.Parameters });
+                else
+                    method.Invoke(classObject, null);
             }
         }
 
