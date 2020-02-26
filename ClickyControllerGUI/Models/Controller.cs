@@ -33,12 +33,29 @@ namespace ClickyControllerGUI.Models
 
         public void MoveMouse(string coordinates)
         {
-            // This whole Model needs cleaning because its prone to errors 
-            int[] mouseCoordinates = coordinates.Split(',').Select(int.Parse).ToArray();
-            Mouse.MoveMouse(mouseCoordinates[0], mouseCoordinates[1]);
+            try
+            {
+                int[] mouseCoordinates = coordinates.Split(',').Select(int.Parse).ToArray();
+                Mouse.MoveMouse(mouseCoordinates[0], mouseCoordinates[1]);
+            }
+            catch(FormatException)
+            {
+
+            }
         }
 
-        public void Wait(string seconds) => ClickyController.Controller.Wait(int.Parse(seconds));
+        public void Wait(string seconds)
+        {
+            try
+            {
+                ClickyController.Controller.Wait(int.Parse(seconds));
+            }
+            catch(FormatException)
+            {
+
+            }
+            
+        }
 
         public void EnterText(string text) => Keyboard.EnterText(text);
 
