@@ -66,7 +66,9 @@ namespace ClickyControllerGUI {
         ///    [
         ///        {&quot;Method&quot;:&quot;LeftClick&quot;, &quot;Parameters&quot;:null},
         ///        {&quot;Method&quot;:&quot;RightClick&quot;, &quot;Parameters&quot;:null},
-        ///        {&quot;Method&quot;:&quot;MiddleClick&quot;, &quot;Parameters&quot;:null}
+        ///        {&quot;Method&quot;:&quot;MiddleClick&quot;, &quot;Parameters&quot;:null},
+        ///        {&quot;Method&quot;: &quot;MoveMouse&quot;, &quot;Parameters&quot;:&quot;&quot;}
+        ///
         ///    ],
         ///    &quot;Keyboard&quot;:
         ///    [
@@ -77,9 +79,7 @@ namespace ClickyControllerGUI {
         ///    ],
         ///    &quot;Misc&quot;:
         ///    [
-        ///        {&quot;Method&quot;:&quot;Wait&quot;, &quot;Parameters&quot;:&quot;&quot;}
-        ///    ]
-        ///}.
+        ///        {&quot;Method&quot;:&quot;Wait&quot;, [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string DisplayNameToMethod {
             get {
@@ -89,8 +89,6 @@ namespace ClickyControllerGUI {
         
         /// <summary>
         ///   Looks up a localized string similar to {
-        ///    &quot;displayname&quot; : 
-        ///    {
         ///        &quot;LeftClick&quot;:  &quot;Left Click&quot;,
         ///        &quot;LeftDown&quot; : &quot;Left Down&quot;,
         ///        &quot;LeftUp&quot; : &quot;Left Up&quot;,
@@ -100,13 +98,13 @@ namespace ClickyControllerGUI {
         ///        &quot;MiddleClick&quot;: &quot;Middle Click&quot;,
         ///        &quot;MiddleDown&quot; : &quot;Middle Down&quot;,
         ///        &quot;MiddleUp&quot; : &quot;Middle Up&quot;,
+        ///        &quot;MoveMouse&quot; : &quot;Move Mouse&quot;,
         ///        &quot;Wait&quot;: &quot;Wait&quot;,
         ///        &quot;EnterText&quot; : &quot;Enter Text&quot;,
         ///        &quot;PressKey&quot; : &quot;Press Key&quot;,
         ///        &quot;KeyDown&quot; : &quot;Key Down&quot;,
         ///        &quot;KeyUp&quot; : &quot;Key Up&quot;
-        ///    }, 
-        ///    &quot;m [rest of string was truncated]&quot;;.
+        ///}.
         /// </summary>
         internal static string MethodToListDisplayName {
             get {

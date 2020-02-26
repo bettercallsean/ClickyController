@@ -3,7 +3,9 @@
     [
         {"Method":"LeftClick", "Parameters":null},
         {"Method":"RightClick", "Parameters":null},
-        {"Method":"MiddleClick", "Parameters":null}
+        {"Method":"MiddleClick", "Parameters":null},
+        {"Method": "MoveMouse", "Parameters":""}
+
     ],
     "Keyboard":
     [

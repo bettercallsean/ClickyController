@@ -1,6 +1,7 @@
 ﻿using ClickyController;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ClickyControllerGUI.Models
@@ -29,6 +30,13 @@ namespace ClickyControllerGUI.Models
         public void MiddleDown() => Mouse.MiddleDown();
 
         public void MiddleUp() => Mouse.MiddleRelease();
+
+        public void MoveMouse(string coordinates)
+        {
+            // This whole Model needs cleaning because its prone to errors 
+            int[] mouseCoordinates = coordinates.Split(',').Select(int.Parse).ToArray();
+            Mouse.MoveMouse(mouseCoordinates[0], mouseCoordinates[1]);
+        }
 
         public void Wait(string seconds) => ClickyController.Controller.Wait(int.Parse(seconds));
 
