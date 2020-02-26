@@ -62,42 +62,24 @@ namespace ClickyControllerGUI {
         
         /// <summary>
         ///   Looks up a localized string similar to {
-        ///    &quot;Mouse Click&quot;: {&quot;Method&quot;:&quot;MouseClick&quot;,&quot;Namespace&quot;:&quot;MouseViewModel&quot;},
-        ///    &quot;Move Mouse&quot;:{&quot;Method&quot;:&quot;MoveMouse&quot;,&quot;Namespace&quot;:&quot;MouseViewModel&quot;},
-        ///    &quot;Scroll Wheel&quot;:{&quot;Method&quot;:&quot;ScrollWheel&quot;,&quot;Namespace&quot;:&quot;MouseViewModel&quot;},
-        ///    &quot;Enter Text&quot;:{&quot;Method&quot;:&quot;EnterText&quot;,&quot;Namespace&quot;:&quot;KeyboardViewModel&quot;},
-        ///    &quot;Press Key&quot;:{&quot;Method&quot;:&quot;KeyPress&quot;,&quot;Namespace&quot;:&quot;KeyboardViewModel&quot;},
-        ///    &quot;Key Down&quot;:{&quot;Method&quot;:&quot;KeyDown&quot;,&quot;Namespace&quot;:&quot;KeyboardViewModel&quot;},
-        ///    &quot;Key Up&quot;:{&quot;Method&quot;:&quot;KeyRelease&quot;,&quot;Namespace&quot;:&quot;KeyboardViewModel&quot;},
-        ///    &quot;Wait&quot; [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string MethodToCommandInfo {
-            get {
-                return ResourceManager.GetString("MethodToCommandInfo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {
         ///    &quot;displayname&quot; : 
         ///    {
-        ///        &quot;MouseClick&quot;:&quot;Mouse Click&quot;,
-        ///        &quot;MoveMouse&quot;:&quot;Move Mouse&quot;,
-        ///        &quot;ScrollWheel&quot;:&quot;Scroll Wheel&quot;,
-        ///        &quot;EnterText&quot;:&quot;Enter Text&quot;,
-        ///        &quot;KeyPress&quot;:&quot;Press Key&quot;,
-        ///        &quot;KeyDown&quot;:&quot;Key Down&quot;,
-        ///        &quot;KeyRelease&quot;:&quot;Key Up&quot;,
-        ///        &quot;Wait&quot;:&quot;Wait&quot; 
+        ///        &quot;LeftClick&quot;:  &quot;Left Click&quot;,
+        ///        &quot;LeftDown&quot; : &quot;Left Down&quot;,
+        ///        &quot;LeftUp&quot; : &quot;Left Up&quot;,
+        ///        &quot;RightClick&quot;: &quot;Right Click&quot;,
+        ///        &quot;RightDown&quot; : &quot;Right Down&quot;,
+        ///        &quot;RightUp&quot; : &quot;Right Up&quot;,
+        ///        &quot;MiddleClick&quot;: &quot;Middle Click&quot;,
+        ///        &quot;MiddleDown&quot; : &quot;Middle Down&quot;,
+        ///        &quot;MiddleUp&quot; : &quot;Middle Up&quot;,
+        ///        &quot;Wait&quot;: &quot;Wait&quot;,
+        ///        &quot;EnterText&quot; : &quot;Enter Text&quot;,
+        ///        &quot;PressKey&quot; : &quot;Press Key&quot;,
+        ///        &quot;KeyDown&quot; : &quot;Key Down&quot;,
+        ///        &quot;KeyUp&quot; : &quot;Key Up&quot;
         ///    }, 
-        ///    &quot;methodname&quot; : 
-        ///    {
-        ///        &quot;Mouse Click&quot;: &quot;MouseClick&quot;, 
-        ///        &quot;Move Mouse&quot;: &quot;MoveMouse&quot;, 
-        ///        &quot;Scroll Wheel&quot;: &quot;ScrollWheel&quot;, 
-        ///        &quot;Enter Text&quot;: &quot;EnterText&quot;, 
-        ///        &quot;Press Key&quot;: &quot;KeyPress&quot;, 
-        ///        [rest of string was truncated]&quot;;.
+        ///    &quot;m [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string MethodToListDisplayName {
             get {
