@@ -35,7 +35,7 @@ namespace ClickyControllerGUI.Models
         {
             try
             {
-                int[] mouseCoordinates = coordinates.Split(',').Select(int.Parse).ToArray();
+                int[] mouseCoordinates = coordinates.Split(' ').Select(int.Parse).ToArray();
                 Mouse.MoveMouse(mouseCoordinates[0], mouseCoordinates[1]);
             }
             catch(FormatException)
