@@ -64,20 +64,20 @@ namespace ClickyControllerGUI {
         ///   Looks up a localized string similar to {
         ///    &quot;Mouse&quot;:
         ///    [
-        ///        &quot;LeftClick&quot;,
-        ///        &quot;RightClick&quot;,
-        ///        &quot;MiddleClick&quot;
+        ///        {&quot;Method&quot;:&quot;LeftClick&quot;, &quot;Parameters&quot;:null},
+        ///        {&quot;Method&quot;:&quot;RightClick&quot;, &quot;Parameters&quot;:null},
+        ///        {&quot;Method&quot;:&quot;MiddleClick&quot;, &quot;Parameters&quot;:null}
         ///    ],
         ///    &quot;Keyboard&quot;:
         ///    [
-        ///        &quot;EnterText&quot;,
-        ///        &quot;PressKey&quot;,
-        ///        &quot;KeyDown&quot;,
-        ///        &quot;KeyUp&quot;
+        ///        {&quot;Method&quot;:&quot;EnterText&quot;, &quot;Parameters&quot;:&quot;&quot;},
+        ///        {&quot;Method&quot;:&quot;PressKey&quot;, &quot;Parameters&quot;:&quot;&quot;},
+        ///        {&quot;Method&quot;:&quot;KeyDown&quot;, &quot;Parameters&quot;:&quot;&quot;},
+        ///        {&quot;Method&quot;:&quot;KeyUp&quot;, &quot;Parameters&quot;:&quot;&quot;}
         ///    ],
         ///    &quot;Misc&quot;:
         ///    [
-        ///        &quot;Wait&quot;
+        ///        {&quot;Method&quot;:&quot;Wait&quot;, &quot;Parameters&quot;:&quot;&quot;}
         ///    ]
         ///}.
         /// </summary>
