@@ -8,7 +8,7 @@
         xmlns:converter="clr-namespace:ClickyControllerGUI.Utilities"
         xmlns:dd="urn:gong-wpf-dragdrop"
         mc:Ignorable="d"
-        Title="Clicky Controller" Height="350" Width="500">
+        Title="Clicky Controller" Height="350" Width="500" MinHeight="350" MinWidth="500">
 
     <Window.Resources>
         <viewmodel:CommandViewModel x:Key="CommandViewModel"/>
@@ -30,7 +30,7 @@
         <StackPanel Grid.Column="0" x:Name="CommandListOptions">
             <Label>Command List</Label>
 
-            <TreeView ItemsSource="{Binding CommandListOptions}" Height="Auto">
+            <TreeView x:Name="CommandOptionsList" ItemsSource="{Binding CommandListOptions}">
                 <TreeView.ItemContainerStyle>
                     <Style TargetType="{x:Type TreeViewItem}">
                         <Setter Property="IsExpanded" Value="True"/>
@@ -41,7 +41,7 @@
                         <TextBlock Text="{Binding Path=Key}" />
                         <HierarchicalDataTemplate.ItemTemplate>
                             <DataTemplate>
-                                <Grid HorizontalAlignment="Stretch" Width="100">
+                                <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="3*"/>
                                         <ColumnDefinition Width="1*"/>
@@ -84,9 +84,7 @@
                 </ListView.InputBindings>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        
                         <Grid HorizontalAlignment="Stretch">
-                            
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
@@ -112,8 +110,6 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-
-
         </StackPanel>
 
         <StackPanel Grid.Column="4">
