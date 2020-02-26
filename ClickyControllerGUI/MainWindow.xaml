@@ -82,11 +82,13 @@
                     </Style>
                 </ListView.ItemContainerStyle>
                 <ListView.InputBindings>
-                    <KeyBinding Key="Back" Command="{Binding Path=RemoveItemFromCommandListCommand}" />
+                    <KeyBinding Key="Backspace" Command="{Binding RemoveItemFromCommandListCommand, Source={StaticResource CommandViewModel}}" CommandParameter="{Binding ElementName=CommandList, Path=SelectedItem}"/>
                 </ListView.InputBindings>
                 <ListView.ItemTemplate>
                     <DataTemplate>
+                        
                         <Grid HorizontalAlignment="Stretch">
+                            
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
@@ -95,20 +97,19 @@
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" Text="{Binding Method, Converter={StaticResource MethodToDisplayNameConverter}}" />
                             <TextBox Grid.Column="2" Text="{Binding Parameters}" TextWrapping="Wrap"/>
-                            <Button Grid.Column="3" Content="-" Command="{Binding RemoveItemFromCommandListCommand, Mode=OneWay, Source={StaticResource CommandViewModel}}"
+                            <Button Grid.Column="3" Content="-" Command="{Binding RemoveItemFromCommandListCommand, Source={StaticResource CommandViewModel}}"
                                     CommandParameter="{Binding}">
                                 <Button.Style>
                                     <Style TargetType="{x:Type Button}">
                                         <Setter Property="Visibility" Value="Hidden"/>
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type ListViewItem}},Path=IsMouseOver}" Value="True">
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}}, Path=IsMouseOver}" Value="True">
                                                 <Setter Property="Visibility" Value="Visible"/>
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
                                 </Button.Style>
                             </Button>
-
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
