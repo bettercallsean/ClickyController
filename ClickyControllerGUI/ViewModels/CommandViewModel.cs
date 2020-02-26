@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using System.Windows.Input;
 
 namespace ClickyControllerGUI.ViewModels
@@ -35,13 +36,6 @@ namespace ClickyControllerGUI.ViewModels
             set { _commandList = value; OnPropertyChanged(); }
         }
 
-        private Command _commandStructure;
-        public Command CommandStructure
-        {
-            get => _commandStructure;
-            set { _commandStructure = value; OnPropertyChanged(); }
-        }
-
         private int _selectedCommandIndex;
         public int SelectedCommandIndex
         {
@@ -49,28 +43,29 @@ namespace ClickyControllerGUI.ViewModels
             set { _selectedCommandIndex = value; OnPropertyChanged(); }
         }
 
-        public ICommand AddItemToListCommand { get => new RelayCommand(o => AddItemToCommandList()); }
+        public ICommand AddItemToListCommand { get => new RelayCommand(o => AddItemToCommandList(o)); }
         public ICommand RemoveItemFromCommandListCommand { get => new RelayCommand(o => RemoveItemFromCommandList(o)); }
 
-        private void AddItemToCommandList()
+        private void AddItemToCommandList(object command)
         {
+
             _command = new Command
             {
-                Method = CommandStructure.Method,
-                Namespace = CommandStructure.Namespace
+                Method = ((Command)command).Method,
+                Namespace = ((Command)command).Namespace
             };
-
+            
             CommandList.Add(_command);
         }
 
-        private void RemoveItemFromCommandList(object parameter)
+        private void RemoveItemFromCommandList(object command)
         {
             if (CommandList.Count > 0)
             {
                 // Used to set the selected item index back to where it was after the item has been deleted
                 int selectionIndex = SelectedCommandIndex;
-        
-                CommandList.Remove((Command)parameter);
+
+                CommandList.Remove((Command)command);
         
                 // If the last item in the list is deleted and sets SelectedCommandIndex to the one below,
                 // otherwise, it can be set to the same position again.
