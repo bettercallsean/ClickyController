@@ -14,7 +14,7 @@ namespace ClickyControllerGUI.ViewModels
     public class CommandViewModel : BaseViewModel
     {
         private Command _command;
-        private ScriptViewModel _script = new ScriptViewModel();
+        private readonly ScriptViewModel _script = new ScriptViewModel();
 
         public CommandViewModel()
         {
@@ -43,8 +43,8 @@ namespace ClickyControllerGUI.ViewModels
             set { _selectedCommandIndex = value; OnPropertyChanged(); }
         }
 
-        public ICommand AddItemToListCommand { get => new RelayCommand(o => AddItemToCommandList(o)); }
-        public ICommand RemoveItemFromCommandListCommand { get => new RelayCommand(o => RemoveItemFromCommandList(o)); }
+        public ICommand AddItemToListCommand => new RelayCommand(o => AddItemToCommandList(o));
+        public ICommand RemoveItemFromCommandListCommand => new RelayCommand(o => RemoveItemFromCommandList(o));
 
         private void AddItemToCommandList(object command)
         {
@@ -60,26 +60,24 @@ namespace ClickyControllerGUI.ViewModels
 
         private void RemoveItemFromCommandList(object command)
         {
-            if (CommandList.Count > 0)
-            {
-                // Used to set the selected item index back to where it was after the item has been deleted
-                int selectionIndex = SelectedCommandIndex;
+            if (CommandList.Count <= 0) return;
+            // Used to set the selected item index back to where it was after the item has been deleted
+            int selectionIndex = SelectedCommandIndex;
 
-                CommandList.Remove((Command)command);
+            CommandList.Remove((Command)command);
         
-                // If the last item in the list is deleted and sets SelectedCommandIndex to the one below,
-                // otherwise, it can be set to the same position again.
-                // selectionIndex is used because SelectionCommandIndex is set to -1 after removing the element
-                if (selectionIndex >= CommandList.Count && CommandList.Count != 0)
-                    SelectedCommandIndex = selectionIndex - 1;
-                else
-                    SelectedCommandIndex = selectionIndex;
-            }
+            // If the last item in the list is deleted and sets SelectedCommandIndex to the one below,
+            // otherwise, it can be set to the same position again.
+            // selectionIndex is used because SelectionCommandIndex is set to -1 after removing the element
+            if (selectionIndex >= CommandList.Count && CommandList.Count != 0)
+                SelectedCommandIndex = selectionIndex - 1;
+            else
+                SelectedCommandIndex = selectionIndex;
         }
 
-        public ICommand RunScriptCommand { get => new RelayCommand(o => ScriptRunner()); }
-        public ICommand ImportScriptCommand { get => new RelayCommand(o => ScriptReader()); }
-        public ICommand SaveScriptCommand { get => new RelayCommand(o => ScriptWriter()); }
+        public ICommand RunScriptCommand => new RelayCommand(o => ScriptRunner());
+        public ICommand ImportScriptCommand => new RelayCommand(o => ScriptReader());
+        public ICommand SaveScriptCommand => new RelayCommand(o => ScriptWriter());
 
         private void ScriptReader()
         {
@@ -89,11 +87,10 @@ namespace ClickyControllerGUI.ViewModels
                 Title = "Import a Clicky Controller script"
             };
 
-            if (openFileDialog.ShowDialog() == true)
-            {
-                List<Command> commandList = _script.ScriptReader(openFileDialog.FileName);
-                CommandList = new ObservableCollection<Command>(commandList);
-            }
+            if (openFileDialog.ShowDialog() != true) return;
+            
+            List<Command> commandList = _script.ScriptReader(openFileDialog.FileName);
+            CommandList = new ObservableCollection<Command>(commandList);
         }
 
         private void ScriptRunner()
