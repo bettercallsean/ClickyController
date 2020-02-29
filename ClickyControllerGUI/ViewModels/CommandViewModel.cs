@@ -14,7 +14,7 @@ namespace ClickyControllerGUI.ViewModels
     public class CommandViewModel : BaseViewModel
     {
         private Command _command;
-        private ScriptReadWriter _scriptExecutor = new ScriptReadWriter();
+        private ScriptViewModel _script = new ScriptViewModel();
 
         public CommandViewModel()
         {
@@ -91,15 +91,14 @@ namespace ClickyControllerGUI.ViewModels
 
             if (openFileDialog.ShowDialog() == true)
             {
-                List<Command> commandList = _scriptExecutor.ScriptReader(openFileDialog.FileName);
+                List<Command> commandList = _script.ScriptReader(openFileDialog.FileName);
                 CommandList = new ObservableCollection<Command>(commandList);
             }
         }
 
         private void ScriptRunner()
         {
-            foreach (Command command in CommandList)
-                command.Run();
+            _script.Run(CommandList.ToList());
         }
 
 
@@ -114,7 +113,7 @@ namespace ClickyControllerGUI.ViewModels
 
             if (saveFileDialog.ShowDialog() == true && saveFileDialog.FileName != "")
             {
-                _scriptExecutor.ScriptWriter(CommandList.ToList(), saveFileDialog.FileName);
+                _script.ScriptWriter(CommandList.ToList(), saveFileDialog.FileName);
             }
         }
 
