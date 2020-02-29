@@ -67,16 +67,6 @@ namespace ClickyControllerGUI.ViewModels
 
         public void KeyUp(string key) => Keyboard.KeyRelease(key);
 
-        public void Run(Command command)
-        {
-            Type type = Type.GetType("ClickyControllerGUI.Models.Controller"); ;
-            MethodInfo method = type.GetMethod(command.Method);
-            object classObject = Activator.CreateInstance(type);
 
-            if (method.GetParameters().Length > 0)
-                method.Invoke(classObject, new object[] { command.Parameters });
-            else
-                method.Invoke(classObject, null);
-        }
     }
 }
