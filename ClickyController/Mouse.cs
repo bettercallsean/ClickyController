@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ClickyController
 {
-    public struct POINT
+    internal struct POINT
     {
         internal int xPosition;
         internal int yPosition;
@@ -176,7 +176,7 @@ namespace ClickyController
             MouseAction(0x0800, wheelClickData);
         }
 
-        public static POINT MousePosition
+        private static POINT MousePosition
         {
             get
             {
@@ -184,7 +184,7 @@ namespace ClickyController
                 return _mousePosition;
             }
 
-            private set => _mousePosition = value;
+            set => _mousePosition = value;
         }
 
         public static int XPosition
