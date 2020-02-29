@@ -8,7 +8,7 @@
         xmlns:converter="clr-namespace:ClickyControllerGUI.Utilities"
         xmlns:dd="urn:gong-wpf-dragdrop"
         mc:Ignorable="d"
-        Title="Clicky Controller" Height="350" Width="500" MinHeight="350" MinWidth="500">
+        Title="Clicky Controller" Height="350" Width="500" MinHeight="250" MinWidth="300">
 
     <Window.Resources>
         <viewmodel:CommandViewModel x:Key="CommandViewModel"/>
@@ -17,21 +17,17 @@
         <converter:ParameterToVisibilityConverter x:Key="ParameterToVisibilityConverter"/>
     </Window.Resources>
 
-
-
-    <Grid x:Name="LayoutBase" Margin="15" DataContext="{Binding Source={StaticResource CommandViewModel}}">
+    <Grid x:Name="LayoutBase" Margin="15" DataContext="{Binding Source={StaticResource CommandViewModel}}" VerticalAlignment="Stretch">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="10"/>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0" x:Name="CommandListOptions">
-            <Label>Command List</Label>
-
-            <TreeView x:Name="CommandOptionsList" ItemsSource="{Binding CommandListOptions}">
+            <TreeView x:Name="CommandOptionsList" ItemsSource="{Binding CommandListOptions}" Height="{Binding ElementName=LayoutBase, Path=ActualHeight}">
                 <TreeView.ItemContainerStyle>
                     <Style TargetType="{x:Type TreeViewItem}">
                         <Setter Property="IsExpanded" Value="True"/>
