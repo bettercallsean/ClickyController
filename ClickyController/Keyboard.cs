@@ -20,7 +20,9 @@ namespace ClickyController
              e.g. "!" is on the "1" key, "~" is on the "#" key 
              */
 
-            if (!KeyToVirtualKeyDictionary.ContainsKey(character.ToString()))
+            character = character.ToString().ToLower();
+
+            if (!KeyToVirtualKeyDictionary.ContainsKey(character))
             {
                 try
                 {
@@ -89,7 +91,7 @@ namespace ClickyController
                     {
                         // Simulates holding 'SHIFT' in order to create a capitalised version of a character 
                         KeyDown("SHIFT");
-                        KeyPress(letter.ToString().ToLower());
+                        KeyPress(letter.ToString());
                         KeyRelease("SHIFT");
                     }
                     else
@@ -105,6 +107,8 @@ namespace ClickyController
 
         public static void KeyDown(string character)
         {
+            character = character.ToString().ToLower();
+
             INPUT keyPress = new INPUT
             {
                 type = 1,
@@ -129,6 +133,8 @@ namespace ClickyController
 
         public static void KeyRelease(string character)
         {
+            character = character.ToString().ToLower();
+
             INPUT keyPress = new INPUT
             {
                 type = 1,
@@ -153,6 +159,8 @@ namespace ClickyController
 
         public static void KeyPressScanCode(string character)
         {
+            character = character.ToString().ToLower();
+
             ushort scanCode = KeyToScanCodeDictionary[character];
 
             INPUT keyDown = new INPUT
@@ -197,6 +205,8 @@ namespace ClickyController
 
         public static void KeyDownScanCode(string character)
         {
+            character = character.ToString().ToLower();
+
             INPUT keyPress = new INPUT
             {
                 type = 1,
@@ -221,6 +231,7 @@ namespace ClickyController
 
         public static void KeyReleaseScanCode(string character)
         {
+            character = character.ToString().ToLower();
 
             INPUT keyPress = new INPUT
             {
