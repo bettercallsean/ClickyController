@@ -20,7 +20,7 @@ namespace ClickyController
              e.g. "!" is on the "1" key, "~" is on the "#" key 
              */
 
-            character = character.ToString().ToLower();
+            character = character.ToLower();
 
             if (!KeyToVirtualKeyDictionary.ContainsKey(character))
             {
@@ -107,7 +107,7 @@ namespace ClickyController
 
         public static void KeyDown(string character)
         {
-            character = character.ToString().ToLower();
+            character = character.ToLower();
 
             INPUT keyPress = new INPUT
             {
@@ -133,7 +133,7 @@ namespace ClickyController
 
         public static void KeyRelease(string character)
         {
-            character = character.ToString().ToLower();
+            character = character.ToLower();
 
             INPUT keyPress = new INPUT
             {
@@ -159,7 +159,7 @@ namespace ClickyController
 
         public static void KeyPressScanCode(string character)
         {
-            character = character.ToString().ToLower();
+            character = character.ToLower();
 
             ushort scanCode = KeyToScanCodeDictionary[character];
 
@@ -205,7 +205,7 @@ namespace ClickyController
 
         public static void KeyDownScanCode(string character)
         {
-            character = character.ToString().ToLower();
+            character = character.ToLower();
 
             INPUT keyPress = new INPUT
             {
@@ -231,7 +231,7 @@ namespace ClickyController
 
         public static void KeyReleaseScanCode(string character)
         {
-            character = character.ToString().ToLower();
+            character = character.ToLower();
 
             INPUT keyPress = new INPUT
             {
