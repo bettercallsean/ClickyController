@@ -12,19 +12,12 @@ namespace ClickyControllerGUI.Utilities
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-
-            if (((Command)value).Parameters != null)
-                return Visibility.Visible;
-            else
-                return Visibility.Hidden;
+            return ((Command)value).Parameters != null ? Visibility.Visible : Visibility.Hidden;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (((Command)value).Parameters == null)
-                return Visibility.Hidden;
-            else
-                return Visibility.Visible;
+            return ((Command)value).Parameters == null ? Visibility.Hidden : (object)Visibility.Visible;
         }
     }
 }
