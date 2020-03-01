@@ -79,7 +79,7 @@ namespace ClickyController.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {&quot;)&quot;: &quot;0&quot;, &quot;!&quot;: &quot;1&quot;, &quot;\&quot;&quot;: &quot;&apos;&quot;, &quot;£&quot;: &quot;3&quot;, &quot;$&quot;: &quot;4&quot;, &quot;%&quot;: &quot;5&quot;, &quot;^&quot;: &quot;6&quot;, &quot;&amp;&quot;: &quot;7&quot;, &quot;*&quot;: &quot;8&quot;, &quot;(&quot;: &quot;9&quot;, &quot;:&quot;: &quot;;&quot;, &quot;+&quot;: &quot;=&quot;, &quot;&lt;&quot;: &quot;,&quot;, &quot;_&quot;: &quot;-&quot;, &quot;&gt;&quot;: &quot;.&quot;, &quot;?&quot;: &quot;/&quot;, &quot;~&quot;: &quot;#&quot;, &quot;{&quot;: &quot;[&quot;, &quot;|&quot;: &quot;\\&quot;, &quot;}&quot;: &quot;]&quot;, &quot;@&quot;: &quot;&apos;&quot;}.
+        ///   Looks up a localized string similar to {&quot;)&quot;: &quot;0&quot;, &quot;!&quot;: &quot;1&quot;, &quot;\&quot;&quot;: &quot;&apos;&quot;, &quot;£&quot;: &quot;3&quot;, &quot;$&quot;: &quot;4&quot;, &quot;%&quot;: &quot;5&quot;, &quot;^&quot;: &quot;6&quot;, &quot;&amp;&quot;: &quot;7&quot;, &quot;*&quot;: &quot;8&quot;, &quot;(&quot;: &quot;9&quot;, &quot;:&quot;: &quot;;&quot;, &quot;+&quot;: &quot;=&quot;, &quot;&lt;&quot;: &quot;,&quot;, &quot;_&quot;: &quot;-&quot;, &quot;&gt;&quot;: &quot;.&quot;, &quot;?&quot;: &quot;/&quot;, &quot;@&quot;: &quot;&apos;&quot;, &quot;{&quot;: &quot;[&quot;, &quot;|&quot;: &quot;\\&quot;, &quot;}&quot;: &quot;]&quot;, &quot;~&quot;: &quot;#&quot;}.
         /// </summary>
         public static string VirtualKeyCodesShift {
             get {
