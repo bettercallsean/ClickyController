@@ -13,7 +13,7 @@ namespace ClickyControllerGUI.Utilities
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
 
-            if (((Command)value).Parameters == "")
+            if (((Command)value).Parameters != null)
                 return Visibility.Visible;
             else
                 return Visibility.Hidden;
@@ -21,7 +21,7 @@ namespace ClickyControllerGUI.Utilities
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (((Command)value).Parameters != "")
+            if (((Command)value).Parameters == null)
                 return Visibility.Hidden;
             else
                 return Visibility.Visible;
