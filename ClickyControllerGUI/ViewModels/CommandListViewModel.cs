@@ -11,23 +11,17 @@ using System.Windows.Input;
 
 namespace ClickyControllerGUI.ViewModels
 {
-    public class CommandViewModel : BaseViewModel
+    public class CommandListViewModel : BaseViewModel
     {
         private Command _command;
         private readonly ScriptViewModel _script = new ScriptViewModel();
 
-        public CommandViewModel()
+        public CommandListViewModel()
         {
-            CommandListOptions = JsonConvert.DeserializeObject<Dictionary<string, ObservableCollection<Command>>>(Resources.DisplayNameToMethod);
             CommandList = new ObservableCollection<Command>();
         }
 
-        private Dictionary<string, ObservableCollection<Command>> _commandListOptions;
-        public Dictionary<string, ObservableCollection<Command>> CommandListOptions
-        {
-            get => _commandListOptions;
-            set { _commandListOptions = value; OnPropertyChanged(); }
-        }
+
 
         private ObservableCollection<Command> _commandList;
         public  ObservableCollection<Command> CommandList
