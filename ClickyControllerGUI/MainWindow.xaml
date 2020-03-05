@@ -71,7 +71,8 @@
                       Height="{Binding ElementName=LayoutBase, Path=ActualHeight}"
                       SelectedIndex="{Binding SelectedCommandIndex, Mode=TwoWay}"
                       dd:DragDrop.IsDropTarget="True" dd:DragDrop.IsDragSource="True"
-                      DataContext="{Binding Source={StaticResource CommandListViewModel}}">
+                      DataContext="{Binding Source={StaticResource CommandListViewModel}}"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -87,11 +88,11 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" Text="{Binding Method, Converter={StaticResource MethodToDisplayNameConverter}}" />
-                            <TextBox Grid.Column="2" Text="{Binding Parameters}" TextWrapping="Wrap" Visibility="{Binding Converter={StaticResource ParameterToVisibilityConverter}}"/>
+                            <TextBox Grid.Column="2" Text="{Binding Parameters}" Visibility="{Binding Converter={StaticResource ParameterToVisibilityConverter}}"/>
                             <Button Grid.Column="3" Content="-" Command="{Binding RemoveItemFromCommandListCommand, Source={StaticResource CommandListViewModel}}"
                                     CommandParameter="{Binding}">
                                 <Button.Style>
