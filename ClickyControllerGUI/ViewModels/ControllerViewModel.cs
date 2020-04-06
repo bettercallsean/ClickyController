@@ -8,7 +8,7 @@ using System.Text;
 
 namespace ClickyControllerGUI.ViewModels
 {
-    internal class ControllerViewModel
+    internal class ControllerViewModel : BaseViewModel
     {
         public ControllerViewModel()
         {
@@ -50,7 +50,7 @@ namespace ClickyControllerGUI.ViewModels
         {
             try
             {
-                ClickyController.Controller.Wait(int.Parse(seconds));
+                Controller.Wait(int.Parse(seconds));
             }
             catch(FormatException)
             {
@@ -67,6 +67,12 @@ namespace ClickyControllerGUI.ViewModels
 
         public void KeyUp(string key) => Keyboard.KeyRelease(key);
 
+        private bool _validParamterFormat;
+        public bool ValidParameterFormat
+        {
+            get => _validParamterFormat;
+            set { _validParamterFormat = value; OnPropertyChanged(); }
+        }
 
     }
 }
