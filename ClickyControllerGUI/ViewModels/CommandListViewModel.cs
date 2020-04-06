@@ -19,6 +19,14 @@ namespace ClickyControllerGUI.ViewModels
         public CommandListViewModel()
         {
             CommandList = new ObservableCollection<Command>();
+            CommandListOptions = JsonConvert.DeserializeObject<Dictionary<string, ObservableCollection<Command>>>(Resources.DisplayNameToMethod);
+        }
+
+        private Dictionary<string, ObservableCollection<Command>> _commandListOptions;
+        public Dictionary<string, ObservableCollection<Command>> CommandListOptions
+        {
+            get => _commandListOptions;
+            set { _commandListOptions = value; OnPropertyChanged(); }
         }
 
 
