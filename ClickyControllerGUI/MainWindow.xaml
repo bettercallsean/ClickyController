@@ -13,7 +13,6 @@
 
     <Window.Resources>
         <viewmodel:CommandListViewModel x:Key="CommandListViewModel"/>
-        <viewmodel:CommandOptionsViewModel x:Key="CommandOptionsViewModel"/>
         <converter:MethodToDisplayNameConverter x:Key="MethodToDisplayNameConverter"/>
         <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         <converter:ParameterToVisibilityConverter x:Key="ParameterToVisibilityConverter"/>
