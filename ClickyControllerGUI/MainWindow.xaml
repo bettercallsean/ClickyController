@@ -112,10 +112,31 @@
             </ListView>
         </StackPanel>
 
-        <StackPanel Grid.Column="4">
-            <Button Height="20" Content="Run" Command="{Binding RunScriptCommand}"/>
-            <Button Height="20" Content="Import" Command="{Binding ImportScriptCommand}"/>
-            <Button Height="20" Content="Save" Command="{Binding SaveScriptCommand}"/>
+        <StackPanel Grid.Column="4" >
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Margin" Value="0,0,0,10"/>
+                </Style>
+            </StackPanel.Resources>
+
+            <Button Height="40" Command="{Binding RunScriptCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Resources/Icons/Play.png"/>
+                    <TextBlock Text="Run" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+            <Button Height="25" Command="{Binding ImportScriptCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Resources/Icons/Box.png" Margin="0, 0, 5, 0"/>
+                    <TextBlock Text="Import" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+            <Button Height="25" Command="{Binding SaveScriptCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Resources/Icons/Floppy.png" Margin="0, 0, 5, 0"/>
+                    <TextBlock Text="Save" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
         </StackPanel>
     </Grid>
 
