@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using System.Windows;
 
 namespace ClickyControllerGUI.ViewModels
 {
@@ -23,13 +24,12 @@ namespace ClickyControllerGUI.ViewModels
                 return commandList;
             }
 
-            catch (IOException e)
+            catch (JsonSerializationException)
             {
-                Console.WriteLine("The file could not be read:");
-                Console.WriteLine(e.Message);
+                MessageBox.Show("Error reading script!");
                 return null;
-
             }
+            
 
         }
 
