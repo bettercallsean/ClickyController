@@ -29,8 +29,6 @@ namespace ClickyControllerGUI.ViewModels
             set { _commandListOptions = value; OnPropertyChanged(); }
         }
 
-
-
         private ObservableCollection<Command> _commandList;
         public  ObservableCollection<Command> CommandList
         {
@@ -90,8 +88,11 @@ namespace ClickyControllerGUI.ViewModels
             };
 
             if (openFileDialog.ShowDialog() != true) return;
-            
+
             List<Command> commandList = _script.ScriptReader(openFileDialog.FileName);
+
+            if (commandList == null) return;
+
             CommandList = new ObservableCollection<Command>(commandList);
         }
 
