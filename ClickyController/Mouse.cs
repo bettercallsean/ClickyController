@@ -111,20 +111,6 @@ namespace ClickyController
             SetCursorPos(xPosition, yPosition);
         }
 
-        // Returns the current mouse coordinates as an int[].
-        // int[0] is the X coordinate
-        // int[1] is the Y coordinate
-        public int[] GetCursorCoordinates()
-        {
-            int[] cursorCoordinates = new int[2];
-
-            GetCursorPos(out _mousePosition);
-            cursorCoordinates[0] = _mousePosition.xPosition;
-            cursorCoordinates[1] = _mousePosition.yPosition;
-
-            return cursorCoordinates;
-        }
-
         // Like a ready-meal, these methods perform most of the actions you would normally do with a mouse without the 
         // hassle of making it yourself
         public static void LeftClick()
