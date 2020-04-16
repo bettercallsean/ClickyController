@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CalcBinding" Version="2.5.2" />
     <PackageReference Include="gong-wpf-dragdrop" Version="2.2.0" />
   </ItemGroup>
 
