@@ -6,11 +6,16 @@ using ClickyControllerGUI.Models;
 
 namespace ClickyControllerGUI.ViewModels
 {
-    public class CommandViewModel : BaseViewModel
+    public abstract class CommandViewModel : BaseViewModel
     {
-        Command _command;
+        private string _type;
+        public string Type 
+        { 
+            get => _type;
+            set { _type = value; OnPropertyChanged(); }
+        }
 
-        public string Type { get => _command.Type; }
+        public abstract void Execute();
     }
 
     public class MouseClickViewModel : CommandViewModel
@@ -39,6 +44,11 @@ namespace ClickyControllerGUI.ViewModels
         {
             get => _buttonSelection;
             set { _buttonSelection = value; OnPropertyChanged(); }
+        }
+
+        public override void Execute()
+        {
+            _mouseClick.Execute();
         }
     }
 
@@ -97,6 +107,11 @@ namespace ClickyControllerGUI.ViewModels
             set { _validYCoordinates = value; OnPropertyChanged(); }
         }
 
+        public override void Execute()
+        {
+            _mouseMove.Execute();
+        }
+
     }
 
     public class KeyboardCharacterInputViewModel : CommandViewModel
@@ -152,6 +167,11 @@ namespace ClickyControllerGUI.ViewModels
             set { _validCharacter = value; OnPropertyChanged(); }
         }
 
+        public override void Execute()
+        {
+            _keyboardCharacterInput.Execute();
+        }
+
     }
 
     public class KeyboardTextInputViewModel : CommandViewModel
@@ -167,6 +187,11 @@ namespace ClickyControllerGUI.ViewModels
         { 
             get => _keyboardTextInput.Text;
             set { _keyboardTextInput.Text = value; OnPropertyChanged(); } 
+        }
+
+        public override void Execute()
+        {
+            _keyboardTextInput.Execute();
         }
     }
 
@@ -201,6 +226,11 @@ namespace ClickyControllerGUI.ViewModels
         {
             get => _validSeconds;
             set { _validSeconds = value; OnPropertyChanged(); }
+        }
+
+        public override void Execute()
+        {
+            _wait.Execute();
         }
     }
 }
