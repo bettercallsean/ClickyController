@@ -15,6 +15,13 @@ namespace ClickyControllerGUI.ViewModels
             set { _type = value; OnPropertyChanged(); }
         }
 
+        private string _parameters;
+        public string Parameters
+        {
+            get => _parameters;
+            set { _parameters = value; OnPropertyChanged(); }
+        }
+
         public abstract void Execute();
     }
 
@@ -58,7 +65,7 @@ namespace ClickyControllerGUI.ViewModels
 
         public MouseMoveViewModel()
         {
-
+            Parameters = string.Format("{0}, {1}", XCoordinates, YCoordinates);
         }
 
         public int XCoordinates
@@ -125,6 +132,8 @@ namespace ClickyControllerGUI.ViewModels
                 { "Key Down", 'D' },
                 { "Key Up", 'U' }
             };
+
+            Parameters = string.Format("");
         }
 
 
@@ -180,7 +189,7 @@ namespace ClickyControllerGUI.ViewModels
         KeyboardTextInput _keyboardTextInput = new KeyboardTextInput();
         public KeyboardTextInputViewModel()
         {
-
+            Parameters = Text;
         }
 
         public string Text 
@@ -201,7 +210,7 @@ namespace ClickyControllerGUI.ViewModels
         Wait _wait = new Wait();
         public WaitViewModel()
         {
-
+            Parameters = string.Format("{0} seconds", Seconds);
         }
 
         public int Seconds 
