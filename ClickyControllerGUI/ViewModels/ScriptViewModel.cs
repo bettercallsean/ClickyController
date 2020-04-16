@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
 using System.Text;
 using System.Windows;
 
@@ -45,14 +44,7 @@ namespace ClickyControllerGUI.ViewModels
         {
             foreach(Command command in commandList)
             {
-                Type type = Type.GetType("ClickyControllerGUI.ViewModels.ControllerViewModel"); ;
-                MethodInfo method = type.GetMethod(command.Method);
-                object classObject = Activator.CreateInstance(type);
-
-                if (method.GetParameters().Length > 0)
-                    method.Invoke(classObject, new object[] { command.Parameters });
-                else
-                    method.Invoke(classObject, null);
+                command.Execute();
             }
 
         }
