@@ -18,7 +18,7 @@ namespace ClickyControllerGUI.ViewModels
 
         public CommandListViewModel()
         {
-            CommandList = new ObservableCollection<Command>();
+            CommandList = new ObservableCollection<CommandViewModel>();
             CommandListOptions = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(Resources.DisplayNameToMethod);
         }
 
@@ -29,8 +29,8 @@ namespace ClickyControllerGUI.ViewModels
             set { _commandListOptions = value; OnPropertyChanged(); }
         }
 
-        private ObservableCollection<Command> _commandList;
-        public  ObservableCollection<Command> CommandList
+        private ObservableCollection<CommandViewModel> _commandList;
+        public  ObservableCollection<CommandViewModel> CommandList
         {
             get => _commandList;
             set { _commandList = value; OnPropertyChanged(); }
@@ -48,10 +48,12 @@ namespace ClickyControllerGUI.ViewModels
 
         private void AddItemToCommandList(object commandType)
         {
-            Type objectType = Type.GetType("ClickyControllerGUI.Models." + commandType.ToString() + ", ClickyControllerGUI");
-            Command command = (Command)Activator.CreateInstance(objectType);
+            Type objectType = Type.GetType("ClickyControllerGUI.ViewModels." + commandType.ToString() + "ViewModel, ClickyControllerGUI");
+            CommandViewModel command = (CommandViewModel)Activator.CreateInstance(objectType);
             command.Type = commandType.ToString();
+            
             CommandList.Add(command);
+            MessageBox.Show(command.Type);
         }
 
         private void RemoveItemFromCommandList(object command)
@@ -60,7 +62,7 @@ namespace ClickyControllerGUI.ViewModels
             // Used to set the selected item index back to where it was after the item has been deleted
             int selectionIndex = SelectedCommandIndex;
 
-            CommandList.Remove((Command)command);
+            CommandList.Remove((CommandViewModel)command);
         
             // If the last item in the list is deleted and sets SelectedCommandIndex to the one below,
             // otherwise, it can be set to the same position again.
@@ -85,11 +87,11 @@ namespace ClickyControllerGUI.ViewModels
 
             if (openFileDialog.ShowDialog() != true) return;
 
-            List<Command> commandList = _script.ScriptReader(openFileDialog.FileName);
+            List<CommandViewModel> commandList = _script.ScriptReader(openFileDialog.FileName);
 
             if (commandList == null) return;
 
-            CommandList = new ObservableCollection<Command>(commandList);
+            CommandList = new ObservableCollection<CommandViewModel>(commandList);
         }
 
         private void ScriptRunner()
