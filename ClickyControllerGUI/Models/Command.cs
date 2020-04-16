@@ -8,14 +8,6 @@ namespace ClickyControllerGUI.Models
 {
     public abstract class Command
     {
-        public Command()
-        {
-
-        }
-        
-
-        public string Method { get; set; }
-
         public abstract void Execute();
 
     }
