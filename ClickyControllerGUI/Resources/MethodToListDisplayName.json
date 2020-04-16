@@ -1,17 +1,7 @@
 {
-        "LeftClick":  "Left Click",
-        "LeftDown" : "Left Down",
-        "LeftUp" : "Left Up",
-        "RightClick": "Right Click",
-        "RightDown" : "Right Down",
-        "RightUp" : "Right Up",
-        "MiddleClick": "Middle Click",
-        "MiddleDown" : "Middle Down",
-        "MiddleUp" : "Middle Up",
-        "MoveMouse" : "Move Mouse",
-        "Wait": "Wait",
-        "EnterText" : "Enter Text",
-        "PressKey" : "Press Key",
-        "KeyDown" : "Key Down",
-        "KeyUp" : "Key Up"
+        "MouseClick":  "Mouse Click",
+        "MouseMove": "Move Mouse",
+        "KeyboardCharacterInput" : "Press Key",
+        "KeyboardTextInput": "Enter Text",
+        "Wait": "Wait"
 }
