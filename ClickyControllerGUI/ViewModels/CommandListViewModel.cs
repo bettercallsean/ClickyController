@@ -8,22 +8,22 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Input;
+using System.Reflection;
 
 namespace ClickyControllerGUI.ViewModels
 {
     public class CommandListViewModel : BaseViewModel
     {
-        private Command _command;
         private readonly ScriptViewModel _script = new ScriptViewModel();
 
         public CommandListViewModel()
         {
             CommandList = new ObservableCollection<Command>();
-            CommandListOptions = JsonConvert.DeserializeObject<Dictionary<string, ObservableCollection<Command>>>(Resources.DisplayNameToMethod);
+            CommandListOptions = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(Resources.DisplayNameToMethod);
         }
 
-        private Dictionary<string, ObservableCollection<Command>> _commandListOptions;
-        public Dictionary<string, ObservableCollection<Command>> CommandListOptions
+        private Dictionary<string, Dictionary<string, string>> _commandListOptions;
+        public Dictionary<string, Dictionary<string, string>> CommandListOptions
         {
             get => _commandListOptions;
             set { _commandListOptions = value; OnPropertyChanged(); }
@@ -46,16 +46,12 @@ namespace ClickyControllerGUI.ViewModels
         public ICommand AddItemToListCommand => new RelayCommand(o => AddItemToCommandList(o));
         public ICommand RemoveItemFromCommandListCommand => new RelayCommand(o => RemoveItemFromCommandList(o));
 
-        private void AddItemToCommandList(object command)
+        private void AddItemToCommandList(object commandType)
         {
-
-            _command = new Command
-            {
-                Method = ((Command)command).Method,
-                Parameters = ((Command)command).Parameters
-            };
-            
-            CommandList.Add(_command);
+            Type objectType = Type.GetType("ClickyControllerGUI.Models." + commandType.ToString() + ", ClickyControllerGUI");
+            Command command = (Command)Activator.CreateInstance(objectType);
+            command.Type = commandType.ToString();
+            CommandList.Add(command);
         }
 
         private void RemoveItemFromCommandList(object command)
