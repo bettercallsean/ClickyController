@@ -22,7 +22,7 @@
 
     <Grid x:Name="LayoutBase" Margin="15" VerticalAlignment="Stretch" DataContext="{Binding Source={StaticResource CommandListViewModel}}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1.6*"/>
+            <ColumnDefinition Width="1.4*"/>
             <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="10"/>
