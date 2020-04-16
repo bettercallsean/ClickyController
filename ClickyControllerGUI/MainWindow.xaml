@@ -17,7 +17,6 @@
         <converter:MethodToDisplayNameConverter x:Key="MethodToDisplayNameConverter"/>
         <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         <converter:ParameterToVisibilityConverter x:Key="ParameterToVisibilityConverter"/>
-        <converter:ColumnWidthConverter x:Key="ColumnWidthConverter"/>
     </Window.Resources>
 
     <Grid x:Name="LayoutBase" Margin="15" VerticalAlignment="Stretch" DataContext="{Binding Source={StaticResource CommandListViewModel}}">
@@ -92,7 +91,7 @@
                         <GridViewColumn Header="Parameters" Width="{c:Binding ElementName=CommandList, Path=ActualWidth * 0.5}">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Grid.Column="2" Text="{Binding Parameters}" Visibility="{Binding Converter={StaticResource ParameterToVisibilityConverter}}"/>
+                                    <TextBlock Grid.Column="2" Text="{Binding Parameters}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
