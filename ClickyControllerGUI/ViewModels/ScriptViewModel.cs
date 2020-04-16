@@ -15,11 +15,11 @@ namespace ClickyControllerGUI.ViewModels
 
         }
 
-        public List<Command> ScriptReader(string filepath)
+        public List<CommandViewModel> ScriptReader(string filepath)
         {
             try
             {
-                List<Command> commandList = JsonConvert.DeserializeObject<List<Command>>(File.ReadAllText(filepath));
+                List<CommandViewModel> commandList = JsonConvert.DeserializeObject<List<CommandViewModel>>(File.ReadAllText(filepath));
                 return commandList;
             }
 
@@ -32,7 +32,7 @@ namespace ClickyControllerGUI.ViewModels
 
         }
 
-        public void ScriptWriter(List<Command> commandList, string filepath)
+        public void ScriptWriter(List<CommandViewModel> commandList, string filepath)
         {
             using StreamWriter file = new StreamWriter(filepath);
             JsonSerializer serializer = new JsonSerializer();
@@ -40,9 +40,9 @@ namespace ClickyControllerGUI.ViewModels
             
         }
 
-        public void Run(List<Command> commandList)
+        public void Run(List<CommandViewModel> commandList)
         {
-            foreach(Command command in commandList)
+            foreach(CommandViewModel command in commandList)
             {
                 command.Execute();
             }
