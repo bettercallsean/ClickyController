@@ -47,8 +47,8 @@ namespace ClickyControllerGUI.Models
 
         }
 
-        // Stores whether the buttons is pressed normally, down or up
-        public string ButtonAction { get; set; }
+        // Stores whether the buttons is pressed normally ('P'), down ('D') or up ('U')
+        public char ButtonAction { get; set; }
 
         public string Character { get; set; }
     }
