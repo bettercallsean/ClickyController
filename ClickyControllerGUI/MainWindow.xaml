@@ -7,15 +7,17 @@
         xmlns:viewmodel="clr-namespace:ClickyControllerGUI.ViewModels"
         xmlns:converter="clr-namespace:ClickyControllerGUI.Utilities"
         xmlns:dd="urn:gong-wpf-dragdrop"
+        xmlns:c="clr-namespace:CalcBinding;assembly=CalcBinding"
         mc:Ignorable="d"
         Background="White"
-        Title="Clicky Controller" Height="350" Width="500" MinHeight="250" MinWidth="300">
+        Title="Clicky Controller" Height="350" Width="540" MinHeight="250" MinWidth="300">
 
     <Window.Resources>
         <viewmodel:CommandListViewModel x:Key="CommandListViewModel"/>
         <converter:MethodToDisplayNameConverter x:Key="MethodToDisplayNameConverter"/>
         <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         <converter:ParameterToVisibilityConverter x:Key="ParameterToVisibilityConverter"/>
+        <converter:ColumnWidthConverter x:Key="ColumnWidthConverter"/>
     </Window.Resources>
 
     <Grid x:Name="LayoutBase" Margin="15" VerticalAlignment="Stretch" DataContext="{Binding Source={StaticResource CommandListViewModel}}">
@@ -66,7 +68,7 @@
             </TreeView>
         </StackPanel>
 
-        <StackPanel Grid.Column="2">
+        <StackPanel Grid.Column="2" x:Name="CommandListPanel">
             <ListView Name="CommandList" ItemsSource="{Binding CommandList}" 
                       Height="{Binding ElementName=LayoutBase, Path=ActualHeight}"
                       SelectedIndex="{Binding SelectedCommandIndex, Mode=TwoWay}"
@@ -82,33 +84,40 @@
                     <KeyBinding Key="Backspace" Command="{Binding RemoveItemFromCommandListCommand, Source={StaticResource CommandListViewModel}}" 
                                 CommandParameter="{Binding ElementName=CommandList, Path=SelectedItem}"/>
                 </ListView.InputBindings>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid HorizontalAlignment="Stretch">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="3*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="3*"/>
-                                <ColumnDefinition Width="1*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="{Binding Method, Converter={StaticResource MethodToDisplayNameConverter}}" />
-                            <TextBox Grid.Column="2" Text="{Binding Parameters}" Visibility="{Binding Converter={StaticResource ParameterToVisibilityConverter}}"/>
-                            <Button Grid.Column="3" Content="-" Command="{Binding RemoveItemFromCommandListCommand, Source={StaticResource CommandListViewModel}}"
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Command" DisplayMemberBinding="{Binding Method, Converter={StaticResource MethodToDisplayNameConverter}}"
+                                        Width="{c:Binding ElementName=CommandList, Path=ActualWidth * 0.3}"/>
+
+                        <GridViewColumn Header="Parameters" Width="{c:Binding ElementName=CommandList, Path=ActualWidth * 0.5}">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Grid.Column="2" Text="{Binding Parameters}" Visibility="{Binding Converter={StaticResource ParameterToVisibilityConverter}}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Width="{c:Binding ElementName=CommandList, Path=ActualWidth * 0.2 - 2}">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Grid.Column="3" Content="-" Command="{Binding RemoveItemFromCommandListCommand, Source={StaticResource CommandListViewModel}}"
                                     CommandParameter="{Binding}">
-                                <Button.Style>
-                                    <Style TargetType="{x:Type Button}">
-                                        <Setter Property="Visibility" Value="Hidden"/>
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}}, Path=IsMouseOver}" Value="True">
-                                                <Setter Property="Visibility" Value="Visible"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Button.Style>
-                            </Button>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
+                                        <Button.Style>
+                                            <Style TargetType="{x:Type Button}">
+                                                <Setter Property="Visibility" Value="Hidden"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}}, Path=IsMouseOver}" Value="True">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
             </ListView>
         </StackPanel>
 
