@@ -16,7 +16,6 @@
         <viewmodel:CommandListViewModel x:Key="CommandListViewModel"/>
         <converter:MethodToDisplayNameConverter x:Key="MethodToDisplayNameConverter"/>
         <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-        <converter:ParameterToVisibilityConverter x:Key="ParameterToVisibilityConverter"/>
     </Window.Resources>
 
     <Grid x:Name="LayoutBase" Margin="15" VerticalAlignment="Stretch" DataContext="{Binding Source={StaticResource CommandListViewModel}}">
