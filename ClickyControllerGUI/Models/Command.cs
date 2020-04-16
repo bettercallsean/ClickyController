@@ -6,7 +6,7 @@ using ClickyController;
 
 namespace ClickyControllerGUI.Models
 {
-    public class Command
+    public abstract class Command
     {
         public Command()
         {
@@ -15,6 +15,8 @@ namespace ClickyControllerGUI.Models
         
 
         public string Method { get; set; }
+
+        public abstract void Execute();
 
     }
 
@@ -25,7 +27,23 @@ namespace ClickyControllerGUI.Models
 
         }
 
-        public string Button { get; set; }
+        public char Button { get; set; }
+
+        public override void Execute()
+        {
+            switch(Button)
+            {
+                case 'L':
+                    Mouse.LeftClick();
+                    break;
+                case 'M':
+                    Mouse.MiddleClick();
+                    break;
+                case 'R':
+                    Mouse.RightClick();
+                    break;
+            }
+        }
     }
 
     public class MouseMove : Command
@@ -37,7 +55,13 @@ namespace ClickyControllerGUI.Models
 
         public int XCoords { get; set; }
         public int YCoords { get; set; }
-        public string Coordinates { get => string.Format("{0}, {1}", XCoords, YCoords); }
+        public bool Relative { get; set; }
+
+        public override void Execute()
+        {
+            Mouse.MoveMouse(XCoords, YCoords, Relative);
+        }
+
     }
 
     public class KeyboardCharacterInput : Command
@@ -51,6 +75,23 @@ namespace ClickyControllerGUI.Models
         public char ButtonAction { get; set; }
 
         public string Character { get; set; }
+
+        public override void Execute()
+        {
+            switch(ButtonAction)
+            {
+                case 'P':
+                    Keyboard.KeyPress(Character);
+                    break;
+                case 'D':
+                    Keyboard.KeyDown(Character);
+                    break;
+                case 'U':
+                    Keyboard.KeyRelease(Character);
+                    break;
+            }
+        }
+
     }
 
     public class KeyboardTextInput : Command
@@ -61,6 +102,11 @@ namespace ClickyControllerGUI.Models
         }
 
         public string Text { get; set; }
+
+        public override void Execute()
+        {
+            Keyboard.EnterText(Text);
+        }
     }
 
     public class Wait : Command
@@ -71,5 +117,10 @@ namespace ClickyControllerGUI.Models
         }
 
         public int Seconds { get; set; }
+
+        public override void Execute()
+        {
+            Controller.Wait(Seconds);
+        }
     }
 }
