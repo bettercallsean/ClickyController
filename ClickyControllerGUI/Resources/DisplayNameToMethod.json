@@ -1,21 +1,17 @@
 {
     "Mouse":
-    [
-        {"Method":"LeftClick", "Parameters":null},
-        {"Method":"RightClick", "Parameters":null},
-        {"Method":"MiddleClick", "Parameters":null},
-        {"Method": "MoveMouse", "Parameters":""}
+    {
+        "Mouse Click":  "MouseClick",
+        "Move Mouse": "MouseMove"
 
-    ],
+    },
     "Keyboard":
-    [
-        {"Method":"EnterText", "Parameters":""},
-        {"Method":"PressKey", "Parameters":""},
-        {"Method":"KeyDown", "Parameters":""},
-        {"Method":"KeyUp", "Parameters":""}
-    ],
+    {
+        "Press Key": "KeyboardCharacterInput",
+        "Enter Text": "KeyboardTextInput"
+    },
     "Misc":
-    [
-        {"Method":"Wait", "Parameters":""}
-    ]
+    {
+        "Wait": "Wait"
+    }
 }
