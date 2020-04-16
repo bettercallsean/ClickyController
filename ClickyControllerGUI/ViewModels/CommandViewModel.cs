@@ -27,7 +27,7 @@ namespace ClickyControllerGUI.ViewModels
 
     public class MouseClickViewModel : CommandViewModel
     {
-        MouseClick _mouseClick = new MouseClick();
+        readonly MouseClick _mouseClick = new MouseClick();
 
 
         public MouseClickViewModel()
@@ -61,7 +61,7 @@ namespace ClickyControllerGUI.ViewModels
 
     public class MouseMoveViewModel : CommandViewModel
     {
-        MouseMove _mouseMove = new MouseMove();
+        readonly MouseMove _mouseMove = new MouseMove();
 
         public MouseMoveViewModel()
         {
@@ -123,7 +123,7 @@ namespace ClickyControllerGUI.ViewModels
 
     public class KeyboardCharacterInputViewModel : CommandViewModel
     {
-        KeyboardCharacterInput _keyboardCharacterInput = new KeyboardCharacterInput();
+        readonly KeyboardCharacterInput _keyboardCharacterInput = new KeyboardCharacterInput();
         public KeyboardCharacterInputViewModel()
         {
             ButtonActionDictionary = new Dictionary<string, char>()
@@ -185,8 +185,7 @@ namespace ClickyControllerGUI.ViewModels
 
     public class KeyboardTextInputViewModel : CommandViewModel
     {
-
-        KeyboardTextInput _keyboardTextInput = new KeyboardTextInput();
+        readonly KeyboardTextInput _keyboardTextInput = new KeyboardTextInput();
         public KeyboardTextInputViewModel()
         {
             Parameters = Text;
@@ -206,8 +205,7 @@ namespace ClickyControllerGUI.ViewModels
 
     public class WaitViewModel : CommandViewModel
     {
-
-        Wait _wait = new Wait();
+        readonly Wait _wait = new Wait();
         public WaitViewModel()
         {
             Parameters = string.Format("{0} seconds", Seconds);
