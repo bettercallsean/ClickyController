@@ -255,5 +255,21 @@ namespace ClickyController
             SendInput(1, inputs, INPUT.Size);
         }
 
+        public static bool VirtualCodeKeyExists(string character)
+        {
+            if (KeyToVirtualKeyDictionary.ContainsKey(character))
+                return true;
+            else
+                return false;
+        }
+
+        public static bool ScanCodeKeyExists(string character)
+        {
+            if (KeyToScanCodeDictionary.ContainsKey(character))
+                return true;
+            else
+                return false;
+        }
+
     }
 }
