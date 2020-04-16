@@ -13,7 +13,6 @@ namespace ClickyControllerGUI.Models
 
         }
         
-        public bool TakesParameters { get; set; }
 
         public string Method { get; set; }
 
@@ -23,7 +22,7 @@ namespace ClickyControllerGUI.Models
     {
         public MouseClick()
         {
-            TakesParameters = false;
+
         }
 
         public string Button { get; set; }
@@ -33,7 +32,7 @@ namespace ClickyControllerGUI.Models
     {
         public MouseMove()
         {
-            TakesParameters = true;
+
         }
 
         public int XCoords { get; set; }
@@ -45,7 +44,7 @@ namespace ClickyControllerGUI.Models
     {
         public KeyboardCharacterInput()
         {
-            TakesParameters = true;
+
         }
 
         // Stores whether the buttons is pressed normally, down or up
@@ -58,7 +57,7 @@ namespace ClickyControllerGUI.Models
     {
         public KeyboardTextInput()
         {
-            TakesParameters = true;
+
         }
 
         public string Text { get; set; }
@@ -68,7 +67,7 @@ namespace ClickyControllerGUI.Models
     {
         public Wait()
         {
-            TakesParameters = true;
+
         }
 
         public int Seconds { get; set; }
