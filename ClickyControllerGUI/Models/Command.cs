@@ -10,6 +10,8 @@ namespace ClickyControllerGUI.Models
     {
         public abstract void Execute();
 
+        public string Type { get; set; }
+
     }
 
     public class MouseClick : Command
