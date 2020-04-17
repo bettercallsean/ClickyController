@@ -1,0 +1,7 @@
+{
+        "MouseClickViewModel":  "Mouse Click",
+        "MouseMoveViewModel": "Move Mouse",
+        "KeyboardCharacterInputViewModel" : "Press Key",
+        "KeyboardTextInputModel": "Enter Text",
+        "WaitViewModel": "Wait"
+}

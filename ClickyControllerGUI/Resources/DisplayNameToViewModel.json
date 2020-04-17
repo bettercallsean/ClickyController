@@ -1,0 +1,17 @@
+{
+    "Mouse":
+    {
+        "Mouse Click":  "MouseClickViewModel",
+        "Move Mouse": "MouseMoveViewModel"
+
+    },
+    "Keyboard":
+    {
+        "Press Key": "KeyboardCharacterInputViewModel",
+        "Enter Text": "KeyboardTextInputViewModel"
+    },
+    "Misc":
+    {
+        "Wait": "WaitViewModel"
+    }
+}

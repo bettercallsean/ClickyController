@@ -1,7 +1,0 @@
-{
-        "MouseClick":  "Mouse Click",
-        "MouseMove": "Move Mouse",
-        "KeyboardCharacterInput" : "Press Key",
-        "KeyboardTextInput": "Enter Text",
-        "Wait": "Wait"
-}

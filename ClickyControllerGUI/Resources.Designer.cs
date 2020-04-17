@@ -64,39 +64,39 @@ namespace ClickyControllerGUI {
         ///   Looks up a localized string similar to {
         ///    &quot;Mouse&quot;:
         ///    {
-        ///        &quot;Mouse Click&quot;:  &quot;MouseClick&quot;,
-        ///        &quot;Move Mouse&quot;: &quot;MouseMove&quot;
+        ///        &quot;Mouse Click&quot;:  &quot;MouseClickViewModel&quot;,
+        ///        &quot;Move Mouse&quot;: &quot;MouseMoveViewModel&quot;
         ///
         ///    },
         ///    &quot;Keyboard&quot;:
         ///    {
-        ///        &quot;Press Key&quot;: &quot;KeyboardCharacterInput&quot;,
-        ///        &quot;Enter Text&quot;: &quot;KeyboardTextInput&quot;
+        ///        &quot;Press Key&quot;: &quot;KeyboardCharacterInputViewModel&quot;,
+        ///        &quot;Enter Text&quot;: &quot;KeyboardTextInputViewModel&quot;
         ///    },
         ///    &quot;Misc&quot;:
         ///    {
-        ///        &quot;Wait&quot;: &quot;Wait&quot;
+        ///        &quot;Wait&quot;: &quot;WaitViewModel&quot;
         ///    }
         ///}.
         /// </summary>
-        internal static string DisplayNameToMethod {
+        internal static string DisplayNameToViewModel {
             get {
-                return ResourceManager.GetString("DisplayNameToMethod", resourceCulture);
+                return ResourceManager.GetString("DisplayNameToViewModel", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to {
-        ///        &quot;MouseClick&quot;:  &quot;Mouse Click&quot;,
-        ///        &quot;MouseMove&quot;: &quot;Move Mouse&quot;,
-        ///        &quot;KeyboardCharacterInput&quot; : &quot;Press Key&quot;,
-        ///        &quot;KeyboardTextInput&quot;: &quot;Enter Text&quot;,
-        ///        &quot;Wait&quot;: &quot;Wait&quot;
+        ///        &quot;MouseClickViewModel&quot;:  &quot;Mouse Click&quot;,
+        ///        &quot;MouseMoveViewModel&quot;: &quot;Move Mouse&quot;,
+        ///        &quot;KeyboardCharacterInputViewModel&quot; : &quot;Press Key&quot;,
+        ///        &quot;KeyboardTextInputModel&quot;: &quot;Enter Text&quot;,
+        ///        &quot;WaitViewModel&quot;: &quot;Wait&quot;
         ///}.
         /// </summary>
-        internal static string MethodToListDisplayName {
+        internal static string ViewModelToListDisplayName {
             get {
-                return ResourceManager.GetString("MethodToListDisplayName", resourceCulture);
+                return ResourceManager.GetString("ViewModelToListDisplayName", resourceCulture);
             }
         }
     }

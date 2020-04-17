@@ -10,9 +10,9 @@ using System.Windows.Data;
 
 namespace ClickyControllerGUI.Utilities
 {
-    public class MethodToDisplayNameConverter : IValueConverter
+    public class ViewModelToDisplayNameConverter : IValueConverter
     {
-        private readonly Dictionary<string, string> MethodToDisplayNameDictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(Resources.MethodToListDisplayName);
+        private readonly Dictionary<string, string> MethodToDisplayNameDictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(Resources.ViewModelToListDisplayName);
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return MethodToDisplayNameDictionary[value.ToString()];
