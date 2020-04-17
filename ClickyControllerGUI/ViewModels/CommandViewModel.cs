@@ -5,12 +5,17 @@ using System.Windows;
 using System.Windows.Input;
 using ClickyController;
 using ClickyControllerGUI.Models;
+using ClickyControllerGUI.Views.CommandViews;
 using ClickyControllerGUI.Utilities;
+using MvvmDialogs;
 
 namespace ClickyControllerGUI.ViewModels
 {
     public abstract class CommandViewModel : BaseViewModel
     {
+        // Stores thee ViewModel name, which is used when adding new commands to the CommandList
+        // and is also used when deserializing a script as the deserializer doesn't work with 
+        // abstract classes
         private string _viewModel;
         public string ViewModel 
         { 
@@ -18,39 +23,62 @@ namespace ClickyControllerGUI.ViewModels
             set { _viewModel = value; OnPropertyChanged(); }
         }
 
+        // I know this breaks MVVM compliance, but my head is aching and 
+        // I just want something that works :(
+        
+        // Stores the corresponding View for each command, which is then opened
+        // when the user edits the command
+        private string _view;
+        public string View
+        {
+            get => _view;
+            set { _view = value; OnPropertyChanged(); }
+        }
+
+        // Acts as a string representation of the saved parameters. This is what is displayed to the user on the MainWindow
         public abstract string Parameters
         {
             get;
         }
 
+
+        // Executes the ViewModels command
         public abstract void Execute();
+
     }
 
     public class MouseClickViewModel : CommandViewModel
     {
         readonly MouseClick _mouseClick = new MouseClick();
 
-
         public MouseClickViewModel()
         {
-            ButtonSelection = new Dictionary<string, char>()
+            View = "MouseClickView";
+            ButtonSelection = new List<string>()
             {
-                { "Left Click", 'L' },
-                { "Middle Click", 'M'},
-                { "Right Click", 'R'}
+                "Left",
+                "Middle",
+                "Right"
             };
         }
 
-        public override string Parameters => string.Format("{0}", Button);
 
-        public char Button
+
+        public override string Parameters => string.Format("{0} Click", Button);
+
+        public string Button
         {
             get => _mouseClick.Button;
-            set { _mouseClick.Button = value; OnPropertyChanged(); }
+            set 
+            { 
+                _mouseClick.Button = value; 
+                OnPropertyChanged();
+                OnPropertyChanged("Parameters");
+            }
         }
 
-        private Dictionary<string, char> _buttonSelection;
-        public Dictionary<string, char> ButtonSelection
+        private List<string> _buttonSelection;
+        public List<string> ButtonSelection
         {
             get => _buttonSelection;
             set { _buttonSelection = value; OnPropertyChanged(); }
@@ -64,11 +92,11 @@ namespace ClickyControllerGUI.ViewModels
 
     public class MouseMoveViewModel : CommandViewModel
     {
-        readonly MouseMove _mouseMove = new MouseMove();
+        MouseMove _mouseMove = new MouseMove();
 
         public MouseMoveViewModel()
         {
-
+            View = "MouseMoveView";
         }
 
         public override string Parameters => string.Format("{0}, {1}", XCoordinates, YCoordinates);
@@ -81,10 +109,14 @@ namespace ClickyControllerGUI.ViewModels
                 if (int.TryParse(value.ToString(), out int xCoord))
                 {
                     _mouseMove.XCoords = xCoord;
-                    OnPropertyChanged();
+                    ValidXCoordinates = true;
+                    
                 }
                 else
                     ValidXCoordinates = false;
+
+                OnPropertyChanged();
+                OnPropertyChanged("Parameters");
             }
         }
 
@@ -102,6 +134,7 @@ namespace ClickyControllerGUI.ViewModels
                     ValidYCoordinates = false;
 
                 OnPropertyChanged();
+                OnPropertyChanged("Parameters");
             }
         }
 
@@ -119,6 +152,13 @@ namespace ClickyControllerGUI.ViewModels
             set { _validYCoordinates = value; OnPropertyChanged(); }
         }
 
+        private bool _moveRelative;
+        public bool MoveRelative
+        {
+            get => _moveRelative;
+            set { _moveRelative = value; OnPropertyChanged(); }
+        }
+
         public override void Execute()
         {
             _mouseMove.Execute();
@@ -131,28 +171,34 @@ namespace ClickyControllerGUI.ViewModels
         readonly KeyboardCharacterInput _keyboardCharacterInput = new KeyboardCharacterInput();
         public KeyboardCharacterInputViewModel()
         {
-            ButtonActionDictionary = new Dictionary<string, char>()
+            View = "KeyboardCharacterInputView";
+            ButtonActionList = new List<string>()
             {
-                { "Key Press", 'P' },
-                { "Key Down", 'D' },
-                { "Key Up", 'U' }
+                "Press",
+                "Down",
+                "Up"
             };
         }
 
-        public override string Parameters => string.Format("{0} - {1}", ButtonAction, Character);
+        public override string Parameters => string.Format("Key {0} - {1}", ButtonAction, Character);
 
-        private Dictionary<string, char> _buttonActionDictionary;
-        public Dictionary<string, char> ButtonActionDictionary
+        private List<string> _buttonActionList;
+        public List<string> ButtonActionList
         {
-            get => _buttonActionDictionary;
-            set { _buttonActionDictionary = value; OnPropertyChanged(); }
+            get => _buttonActionList;
+            set { _buttonActionList = value; OnPropertyChanged(); }
         }
 
 
-        public char ButtonAction 
+        public string ButtonAction 
         { 
             get => _keyboardCharacterInput.ButtonAction; 
-            set { _keyboardCharacterInput.ButtonAction = value; OnPropertyChanged(); } 
+            set 
+            { 
+                _keyboardCharacterInput.ButtonAction = value; 
+                OnPropertyChanged();
+                OnPropertyChanged("Parameters");
+            } 
         }
 
         public string Character 
@@ -169,6 +215,7 @@ namespace ClickyControllerGUI.ViewModels
                     ValidCharacter = false;
 
                 OnPropertyChanged();
+                OnPropertyChanged("Parameters");
                 
             } 
         }
@@ -184,7 +231,6 @@ namespace ClickyControllerGUI.ViewModels
         {
             _keyboardCharacterInput.Execute();
         }
-
     }
 
     public class KeyboardTextInputViewModel : CommandViewModel
@@ -192,7 +238,7 @@ namespace ClickyControllerGUI.ViewModels
         readonly KeyboardTextInput _keyboardTextInput = new KeyboardTextInput();
         public KeyboardTextInputViewModel()
         {
-
+            View = "KeyboardTextInputView";
         }
 
         public override string Parameters => Text;
@@ -200,8 +246,14 @@ namespace ClickyControllerGUI.ViewModels
         public string Text 
         { 
             get => _keyboardTextInput.Text;
-            set { _keyboardTextInput.Text = value; OnPropertyChanged(); } 
+            set 
+            { 
+                _keyboardTextInput.Text = value; 
+                OnPropertyChanged();
+                OnPropertyChanged("Parameters");
+            } 
         }
+
 
         public override void Execute()
         {
@@ -214,7 +266,7 @@ namespace ClickyControllerGUI.ViewModels
         readonly Wait _wait = new Wait();
         public WaitViewModel()
         {
-
+            View = "WaitView";
         }
 
         public override string Parameters => string.Format("{0} seconds", Seconds);
@@ -228,11 +280,14 @@ namespace ClickyControllerGUI.ViewModels
                 {
                     _wait.Seconds = seconds;
                     ValidSeconds = true;
+                    OnPropertyChanged("Parameters");
                 }
                 else
                     ValidSeconds = false;
 
                 OnPropertyChanged();
+                
+
             } 
         }
 
@@ -247,5 +302,6 @@ namespace ClickyControllerGUI.ViewModels
         {
             _wait.Execute();
         }
+
     }
 }
