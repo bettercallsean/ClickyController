@@ -1,4 +1,5 @@
 ﻿using ClickyControllerGUI.Models;
+using ClickyControllerGUI.Utilities;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using System;
@@ -26,7 +27,16 @@ namespace ClickyControllerGUI.ViewModels
                     Title = "Import a Clicky Controller script"
                 };
 
-                List<CommandViewModel> commandList = JsonConvert.DeserializeObject<List<CommandViewModel>>(File.ReadAllText(openFileDialog.FileName));
+                if (openFileDialog.ShowDialog() != true) 
+                    return null;
+
+                // Implemented a custom converter because CommandViewModel is an abstract class and doesn't play nice with the Deserializer
+                JsonConverter[] converters = { new CommandViewModelConverter() };
+
+                List<CommandViewModel> commandList = JsonConvert.DeserializeObject<List<CommandViewModel>>(File.ReadAllText(openFileDialog.FileName), new JsonSerializerSettings
+                {
+                    Converters = converters
+                });
                 return commandList;
             }
 
