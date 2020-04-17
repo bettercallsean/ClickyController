@@ -41,7 +41,7 @@ namespace ClickyControllerGUI.ViewModels
             };
         }
 
-        public override string Parameters => string.Format("{0}", ButtonSelection);
+        public override string Parameters => string.Format("{0}", Button);
 
         public char Button
         {

@@ -90,7 +90,7 @@ namespace ClickyControllerGUI {
         ///        &quot;MouseClickViewModel&quot;:  &quot;Mouse Click&quot;,
         ///        &quot;MouseMoveViewModel&quot;: &quot;Move Mouse&quot;,
         ///        &quot;KeyboardCharacterInputViewModel&quot; : &quot;Press Key&quot;,
-        ///        &quot;KeyboardTextInputModel&quot;: &quot;Enter Text&quot;,
+        ///        &quot;KeyboardTextInputViewModel&quot;: &quot;Enter Text&quot;,
         ///        &quot;WaitViewModel&quot;: &quot;Wait&quot;
         ///}.
         /// </summary>
