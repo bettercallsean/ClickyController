@@ -7,7 +7,6 @@ using ClickyController;
 using ClickyControllerGUI.Models;
 using ClickyControllerGUI.Views.CommandViews;
 using ClickyControllerGUI.Utilities;
-using MvvmDialogs;
 
 namespace ClickyControllerGUI.ViewModels
 {
