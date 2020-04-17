@@ -1,25 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows;
+using System.Windows.Input;
 using ClickyController;
 using ClickyControllerGUI.Models;
+using ClickyControllerGUI.Utilities;
 
 namespace ClickyControllerGUI.ViewModels
 {
     public abstract class CommandViewModel : BaseViewModel
     {
-        private string _type;
-        public string Type 
+        private string _viewModel;
+        public string ViewModel 
         { 
-            get => _type;
-            set { _type = value; OnPropertyChanged(); }
+            get => _viewModel;
+            set { _viewModel = value; OnPropertyChanged(); }
         }
 
-        private string _parameters;
-        public string Parameters
+        public abstract string Parameters
         {
-            get => _parameters;
-            set { _parameters = value; OnPropertyChanged(); }
+            get;
         }
 
         public abstract void Execute();
@@ -39,6 +40,8 @@ namespace ClickyControllerGUI.ViewModels
                 { "Right Click", 'R'}
             };
         }
+
+        public override string Parameters => string.Format("{0}", ButtonSelection);
 
         public char Button
         {
@@ -65,8 +68,10 @@ namespace ClickyControllerGUI.ViewModels
 
         public MouseMoveViewModel()
         {
-            Parameters = string.Format("{0}, {1}", XCoordinates, YCoordinates);
+
         }
+
+        public override string Parameters => string.Format("{0}, {1}", XCoordinates, YCoordinates);
 
         public int XCoordinates
         {
@@ -132,10 +137,9 @@ namespace ClickyControllerGUI.ViewModels
                 { "Key Down", 'D' },
                 { "Key Up", 'U' }
             };
-
-            Parameters = string.Format("");
         }
 
+        public override string Parameters => string.Format("{0} - {1}", ButtonAction, Character);
 
         private Dictionary<string, char> _buttonActionDictionary;
         public Dictionary<string, char> ButtonActionDictionary
@@ -156,7 +160,7 @@ namespace ClickyControllerGUI.ViewModels
             get => _keyboardCharacterInput.Character; 
             set 
             {
-                if(Keyboard.VirtualCodeKeyExists(value.ToString()))
+                if(ClickyController.Keyboard.VirtualCodeKeyExists(value.ToString()))
                 {
                     _keyboardCharacterInput.Character = value;
                     ValidCharacter = true;
@@ -188,8 +192,10 @@ namespace ClickyControllerGUI.ViewModels
         readonly KeyboardTextInput _keyboardTextInput = new KeyboardTextInput();
         public KeyboardTextInputViewModel()
         {
-            Parameters = Text;
+
         }
+
+        public override string Parameters => Text;
 
         public string Text 
         { 
@@ -208,8 +214,10 @@ namespace ClickyControllerGUI.ViewModels
         readonly Wait _wait = new Wait();
         public WaitViewModel()
         {
-            Parameters = string.Format("{0} seconds", Seconds);
+
         }
+
+        public override string Parameters => string.Format("{0} seconds", Seconds);
 
         public int Seconds 
         { 
