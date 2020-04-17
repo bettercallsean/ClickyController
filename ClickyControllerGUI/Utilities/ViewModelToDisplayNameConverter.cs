@@ -12,10 +12,10 @@ namespace ClickyControllerGUI.Utilities
 {
     public class ViewModelToDisplayNameConverter : IValueConverter
     {
-        private readonly Dictionary<string, string> MethodToDisplayNameDictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(Resources.ViewModelToListDisplayName);
+        private readonly Dictionary<string, string> ViewModelToListDisplayNameDictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(Resources.ViewModelToListDisplayName);
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return MethodToDisplayNameDictionary[value.ToString()];
+            return ViewModelToListDisplayNameDictionary[value.ToString()];
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
