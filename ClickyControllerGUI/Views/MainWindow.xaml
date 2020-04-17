@@ -13,16 +13,13 @@
         Title="Clicky Controller" Height="350" Width="700" MinHeight="250" MinWidth="500">
 
     <Window.Resources>
-        <viewmodel:MainViewModel x:Key="CommandListViewModel"/>
+        <viewmodel:MainViewModel x:Key="MainViewModel"/>
         <converter:ViewModelToDisplayNameConverter x:Key="ViewModelToDisplayNameConverter"/>
         <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
 
-        <Style TargetType="{x:Type ListViewItem}" x:Key="listViewDoubleClick">
-            <EventSetter Event="MouseDoubleClick" Handler="ListViewItem_MouseDoubleClick"/>
-        </Style>
     </Window.Resources>
 
-    <Grid x:Name="LayoutBase" Margin="15" VerticalAlignment="Stretch" DataContext="{Binding Source={StaticResource CommandListViewModel}}">
+    <Grid x:Name="LayoutBase" Margin="15" VerticalAlignment="Stretch" DataContext="{Binding Source={StaticResource MainViewModel}}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="10"/>
@@ -49,7 +46,7 @@
                                         <ColumnDefinition Width="1*"/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Grid.Column="0" Text="{Binding Path=Key}" Margin="0, 0, 5, 0"/>
-                                    <Button Grid.Column="1" Content="+" Command="{Binding AddItemToListCommand, Mode=OneWay, Source={StaticResource CommandListViewModel}}"
+                                    <Button Grid.Column="1" Content="+" Command="{Binding AddItemToListCommand, Mode=OneWay, Source={StaticResource MainViewModel}}"
                                     CommandParameter="{Binding Path=Value}" Width="25">
                                         <Button.Style>
                                             <Style TargetType="{x:Type Button}">
@@ -75,7 +72,7 @@
                       Height="{Binding ElementName=LayoutBase, Path=ActualHeight}"
                       SelectedIndex="{Binding SelectedCommandIndex, Mode=TwoWay}"
                       dd:DragDrop.IsDropTarget="True" dd:DragDrop.IsDragSource="True"
-                      DataContext="{Binding Source={StaticResource CommandListViewModel}}"
+                      DataContext="{Binding Source={StaticResource MainViewModel}}"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
@@ -84,7 +81,7 @@
                 </ListView.ItemContainerStyle>
 
                 <ListView.InputBindings>
-                    <KeyBinding Key="Delete" Command="{Binding RemoveItemFromCommandListCommand, Source={StaticResource CommandListViewModel}}" 
+                    <KeyBinding Key="Delete" Command="{Binding RemoveItemFromCommandListCommand, Source={StaticResource MainViewModel}}" 
                                 CommandParameter="{Binding ElementName=CommandList, Path=SelectedItem}"/>
                 </ListView.InputBindings>
                 <ListView.View>
@@ -118,13 +115,12 @@
                                                 </Style.Triggers>
                                             </Style>
                                         </ComboBox.Style>
-                                        <Button Grid.Column="3" Content="Edit" Command="{Binding OpenDialogCommand, Source={StaticResource CommandListViewModel}}"
+                                        <Button Grid.Column="3" Content="Edit" Command="{Binding EditCommandInfoCommand, Mode=OneWay, Source={StaticResource MainViewModel}}"
                                     CommandParameter="{Binding}" Width="{c:Binding ElementName=ButtonColumn, Path=ActualWidth}"/>
 
 
-                                        <Button Grid.Column="3" Content="Delete" Command="{Binding RemoveItemFromCommandListCommand, Source={StaticResource CommandListViewModel}}"
+                                        <Button Grid.Column="3" Content="Delete" Command="{Binding RemoveItemFromCommandListCommand, Source={StaticResource MainViewModel}}"
                                     CommandParameter="{Binding}" Width="{c:Binding ElementName=ButtonColumn, Path=ActualWidth}" />
-
                                     </ComboBox>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
