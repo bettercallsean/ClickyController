@@ -9,6 +9,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using System.Reflection;
+using ClickyControllerGUI.Utilities;
 
 namespace ClickyControllerGUI.ViewModels
 {
@@ -19,7 +20,7 @@ namespace ClickyControllerGUI.ViewModels
         public MainViewModel()
         {
             CommandList = new ObservableCollection<CommandViewModel>();
-            CommandListOptions = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(Resources.DisplayNameToMethod);
+            CommandListOptions = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(Resources.DisplayNameToViewModel);
         }
 
         private Dictionary<string, Dictionary<string, string>> _commandListOptions;
@@ -48,9 +49,9 @@ namespace ClickyControllerGUI.ViewModels
 
         private void AddItemToCommandList(object commandType)
         {
-            Type objectType = Type.GetType("ClickyControllerGUI.ViewModels." + commandType.ToString() + "ViewModel, ClickyControllerGUI");
+            Type objectType = Type.GetType("ClickyControllerGUI.ViewModels." + commandType.ToString() + ", ClickyControllerGUI");
             CommandViewModel command = (CommandViewModel)Activator.CreateInstance(objectType);
-            command.Type = commandType.ToString();
+            command.ViewModel = commandType.ToString();
             CommandList.Add(command);
         }
 
@@ -71,47 +72,19 @@ namespace ClickyControllerGUI.ViewModels
                 SelectedCommandIndex = selectionIndex;
         }
 
-        public ICommand RunScriptCommand => new RelayCommand(o => ScriptRunner());
+        public ICommand RunScriptCommand => new RelayCommand(o => _script.Run(CommandList.ToList()));
         public ICommand ImportScriptCommand => new RelayCommand(o => ScriptReader());
-        public ICommand SaveScriptCommand => new RelayCommand(o => ScriptWriter());
+        public ICommand SaveScriptCommand => new RelayCommand(o => _script.ScriptWriter(CommandList.ToList()));
 
         private void ScriptReader()
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog
-            {
-                Filter = "JSON Files (*.json)|*.json|All Files (*.*)|*.*",
-                Title = "Import a Clicky Controller script"
-            };
-
-            if (openFileDialog.ShowDialog() != true) return;
-
-            List<CommandViewModel> commandList = _script.ScriptReader(openFileDialog.FileName);
+            List<CommandViewModel> commandList = _script.ScriptReader();
 
             if (commandList == null) return;
 
             CommandList = new ObservableCollection<CommandViewModel>(commandList);
         }
 
-        private void ScriptRunner()
-        {
-            _script.Run(CommandList.ToList());
-        }
-
-
-        private void ScriptWriter()
-        {
-            SaveFileDialog saveFileDialog = new SaveFileDialog
-            {
-                FileName = "script",
-                Filter = "JSON file (*.json)|*.json|All Files(*.*)|*.*",
-                Title = "Save a script"
-            };
-
-            if (saveFileDialog.ShowDialog() == true && saveFileDialog.FileName != "")
-            {
-                _script.ScriptWriter(CommandList.ToList(), saveFileDialog.FileName);
-            }
-        }
 
     }
 }
