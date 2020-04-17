@@ -13,7 +13,7 @@
         Title="Clicky Controller" Height="350" Width="540" MinHeight="250" MinWidth="300">
 
     <Window.Resources>
-        <viewmodel:CommandListViewModel x:Key="CommandListViewModel"/>
+        <viewmodel:MainViewModel x:Key="CommandListViewModel"/>
         <converter:MethodToDisplayNameConverter x:Key="MethodToDisplayNameConverter"/>
         <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
     </Window.Resources>

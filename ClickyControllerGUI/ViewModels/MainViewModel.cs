@@ -12,11 +12,11 @@ using System.Reflection;
 
 namespace ClickyControllerGUI.ViewModels
 {
-    public class CommandListViewModel : BaseViewModel
+    public class MainViewModel : BaseViewModel
     {
         private readonly ScriptViewModel _script = new ScriptViewModel();
 
-        public CommandListViewModel()
+        public MainViewModel()
         {
             CommandList = new ObservableCollection<CommandViewModel>();
             CommandListOptions = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(Resources.DisplayNameToMethod);
