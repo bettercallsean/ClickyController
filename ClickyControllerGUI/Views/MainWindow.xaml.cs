@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClickyControllerGUI.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,11 +24,6 @@ namespace ClickyControllerGUI
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-
         }
     }
 }
