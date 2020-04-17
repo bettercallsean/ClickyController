@@ -21,19 +21,19 @@ namespace ClickyControllerGUI.Models
 
         }
 
-        public char Button { get; set; }
+        public string Button { get; set; }
 
         public override void Execute()
         {
             switch(Button)
             {
-                case 'L':
+                case "Left":
                     Mouse.LeftClick();
                     break;
-                case 'M':
+                case "Middle":
                     Mouse.MiddleClick();
                     break;
-                case 'R':
+                case "Right":
                     Mouse.RightClick();
                     break;
             }
@@ -66,7 +66,7 @@ namespace ClickyControllerGUI.Models
         }
 
         // Stores whether the buttons is pressed normally ('P'), down ('D') or up ('U')
-        public char ButtonAction { get; set; }
+        public string ButtonAction { get; set; }
 
         public string Character { get; set; }
 
@@ -74,13 +74,13 @@ namespace ClickyControllerGUI.Models
         {
             switch(ButtonAction)
             {
-                case 'P':
+                case "Press":
                     Keyboard.KeyPress(Character);
                     break;
-                case 'D':
+                case "Down":
                     Keyboard.KeyDown(Character);
                     break;
-                case 'U':
+                case "Up":
                     Keyboard.KeyRelease(Character);
                     break;
             }
