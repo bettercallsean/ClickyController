@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Reflection;
 using ClickyControllerGUI.Utilities;
+using ClickyControllerGUI.Views.CommandViews;
 
 namespace ClickyControllerGUI.ViewModels
 {
@@ -70,6 +71,24 @@ namespace ClickyControllerGUI.ViewModels
                 SelectedCommandIndex = selectionIndex - 1;
             else
                 SelectedCommandIndex = selectionIndex;
+        }
+
+
+        // I absolutely know that the code I have done below is an absolute crime against MVVM,
+        // but I've spent about 8 hours trying to get dialog boxes to open and everything I've
+        // tried either doesn't work or requires code thats as long as the entire works of Shakespeare.
+        // Please forgive me
+        public ICommand EditCommandInfoCommand => new RelayCommand(o => EditCommandInfo(o));
+        public void EditCommandInfo(object commandToEdit)
+        {
+            CommandViewModel cvm = (CommandViewModel)commandToEdit;
+
+            Type objectType = Type.GetType("ClickyControllerGUI.Views.CommandViews." + cvm.View + ", ClickyControllerGUI");
+
+            Window view = (Window)Activator.CreateInstance(objectType);
+            view.DataContext = cvm;
+
+            view.ShowDialog();
         }
 
         public ICommand RunScriptCommand => new RelayCommand(o => _script.Run(CommandList.ToList()));
