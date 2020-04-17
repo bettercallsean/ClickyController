@@ -1,0 +1,31 @@
+﻿<Window x:Class="ClickyControllerGUI.Views.CommandViews.WaitView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClickyControllerGUI.Views.CommandViews"
+        xmlns:viewmodel="clr-namespace:ClickyControllerGUI.ViewModels"
+        mc:Ignorable="d"
+        Title="WaitView" Height="150" Width="200">
+
+    <Window.Resources>
+        <viewmodel:WaitViewModel x:Key="WaitViewModel"/>
+        <viewmodel:MainViewModel x:Key="MainViewModel"/>
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="1">
+            <TextBlock Text="Seconds:"/>
+        </StackPanel>
+        <StackPanel Grid.Column="2">
+            <TextBox Text="{Binding Seconds}"/>
+        </StackPanel>
+    </Grid>
+</Window>
