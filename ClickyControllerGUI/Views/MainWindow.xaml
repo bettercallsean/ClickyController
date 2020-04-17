@@ -78,6 +78,12 @@
                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                     </Style>
                 </ListView.ItemContainerStyle>
+                <ListView.Resources>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <!-- TODO: Create event handler that opens window for selected Command -->
+                        <EventSetter Event="MouseDoubleClick" Handler="ListViewItem_MouseDoubleClick" />
+                    </Style>
+                </ListView.Resources>
                 <ListView.InputBindings>
                     <KeyBinding Key="Backspace" Command="{Binding RemoveItemFromCommandListCommand, Source={StaticResource CommandListViewModel}}" 
                                 CommandParameter="{Binding ElementName=CommandList, Path=SelectedItem}"/>

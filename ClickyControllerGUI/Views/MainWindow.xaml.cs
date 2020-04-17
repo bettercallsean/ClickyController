@@ -24,5 +24,10 @@ namespace ClickyControllerGUI
         {
             InitializeComponent();
         }
+
+        private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }
