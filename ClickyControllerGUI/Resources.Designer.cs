@@ -99,5 +99,40 @@ namespace ClickyControllerGUI {
                 return ResourceManager.GetString("ViewModelToListDisplayName", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///    &quot;Apps&quot; : &quot;Menu&quot;,
+        ///    &quot;Back&quot; : &quot;Backspace&quot;,
+        ///    &quot;Capital&quot; : &quot;CapsLock&quot;,
+        ///    &quot;Control&quot; : &quot;Ctrl&quot;,
+        ///    &quot;ControlKey&quot; : &quot;Ctrl&quot;,
+        ///    &quot;D0&quot; : &quot;0&quot;,
+        ///    &quot;D1&quot; : &quot;1&quot;,
+        ///    &quot;D2&quot; : &quot;2&quot;,
+        ///    &quot;D3&quot; : &quot;3&quot;,
+        ///    &quot;D4&quot; : &quot;4&quot;,
+        ///    &quot;D5&quot; : &quot;5&quot;,
+        ///    &quot;D6&quot; : &quot;6&quot;,
+        ///    &quot;D7&quot; : &quot;7&quot;,
+        ///    &quot;D8&quot; : &quot;8&quot;,
+        ///    &quot;D9&quot; : &quot;9&quot;,
+        ///    &quot;Delete&quot; : &quot;Del&quot;,
+        ///    &quot;Down&quot; : &quot;Down&quot;,
+        ///    &quot;End&quot; : &quot;End&quot;,
+        ///    &quot;Enter&quot; : &quot;Enter&quot;,
+        ///    &quot;Escape&quot; : &quot;Esc&quot;,
+        ///    &quot;F1&quot; :&quot;F1&quot;   ,
+        ///    &quot;F10&quot;:&quot;F10&quot;,
+        ///    &quot;F11&quot;:&quot;F11&quot;,
+        ///    &quot;F12&quot;:&quot;F12&quot;,
+        ///    &quot;F13&quot;:&quot;F13&quot;,
+        ///     [rest of....
+        /// </summary>
+        internal static string WindowsKeysToButton {
+            get {
+                return ResourceManager.GetString("WindowsKeysToButton", resourceCulture);
+            }
+        }
     }
 }
