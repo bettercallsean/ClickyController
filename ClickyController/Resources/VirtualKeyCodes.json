@@ -3,6 +3,7 @@
     "tab" : 9,
     "clear" : 254,
     "enter" : 13,
+    "return" : 13,
     "shift" : 16,
     "ctrl" : 17,
     "alt" : 18,
