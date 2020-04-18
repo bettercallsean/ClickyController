@@ -21,10 +21,21 @@ namespace ClickyController
              e.g. "!" is on the "1" key, "~" is on the "#" key 
              */
 
+            // If the character isn't " ", then all the whitespace gets removed
+            // e.g. "Caps Lock " will turn to "CapsLock"
+
+            // This is only useful when someone calls this method directly from their program to press a certain key 
+            // Otherwise the EnterText method passes each character through one by one anyway, meaning there won't be any whitespace to remove
+            if (!string.IsNullOrWhiteSpace(character))
+                character = character.Replace(" ", string.Empty);
+
+            // The dictionary keys are all stored in lowercase, so any
             character = character.ToLower();
 
             if (!VirtualCodeKeyExists(character))
             {
+                // If the character entered requires 'Shift' to be held, this tries to find it in a dictionary containing those values
+                // e.g "!" or "@"
                 try
                 {
                     character = KeyToVirtualKeyShiftDictionary[character];
@@ -76,7 +87,7 @@ namespace ClickyController
             {
                 KeyDown("SHIFT");
                 SendInput(2, inputs, INPUT.Size);
-                KeyRelease("SHIFT");
+                KeyUp("SHIFT");
             }
             else
                 SendInput(2, inputs, INPUT.Size);
@@ -84,30 +95,25 @@ namespace ClickyController
 
         public static void EnterText(string textEntry)
         {
+
             foreach (char letter in textEntry)
             {
-                try
-                {
-                    if (char.IsUpper(letter))
+                if (char.IsUpper(letter))
                     {
                         // Simulates holding 'SHIFT' in order to create a capitalised version of a character 
                         KeyDown("SHIFT");
                         KeyPress(letter.ToString());
-                        KeyRelease("SHIFT");
+                        KeyUp("SHIFT");
                     }
-                    else
-                        KeyPress(letter.ToString());
-
-                }
-                catch (KeyNotFoundException e)
-                {
-                    Console.WriteLine(e);
-                }
+                else
+                    KeyPress(letter.ToString());
             }
         }
 
         public static void KeyDown(string character)
         {
+            // Simulates holding a key down
+
             character = character.ToLower();
 
             INPUT keyPress = new INPUT
@@ -132,8 +138,9 @@ namespace ClickyController
             SendInput(1, inputs, INPUT.Size);
         }
 
-        public static void KeyRelease(string character)
+        public static void KeyUp(string character)
         {
+            // Simulates releasing a key
             character = character.ToLower();
 
             INPUT keyPress = new INPUT
@@ -167,8 +174,8 @@ namespace ClickyController
                 KeyPress(character3);
             
 
-            KeyRelease(character1);
-            KeyRelease(character2);
+            KeyUp(character1);
+            KeyUp(character2);
         }
 
         public static void KeyboardShortcutScanCode(string character1, string character2, string character3 = "")
@@ -179,10 +186,12 @@ namespace ClickyController
             if(!string.IsNullOrWhiteSpace(character3))
                 KeyPressScanCode(character3);
 
-            KeyReleaseScanCode(character1);
-            KeyReleaseScanCode(character2);
+            KeyUpScanCode(character1);
+            KeyUpScanCode(character2);
         }
 
+        // ScanCodes are the codes sent directly by your keyboard hardware and can be useful in apps/games that take their input 
+        // directly from the keyboard directly.
         public static void KeyPressScanCode(string character)
         {
             character = character.ToLower();
@@ -255,7 +264,7 @@ namespace ClickyController
             SendInput(1, inputs, INPUT.Size);
         }
 
-        public static void KeyReleaseScanCode(string character)
+        public static void KeyUpScanCode(string character)
         {
             character = character.ToLower();
 

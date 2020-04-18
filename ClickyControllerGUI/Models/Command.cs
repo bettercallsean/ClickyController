@@ -21,6 +21,7 @@ namespace ClickyControllerGUI.Models
 
         }
 
+        // Stores which mouse button is being pressed, e.g. "Left", "Middle", "Right"
         public string Button { get; set; }
 
         public override void Execute()
@@ -65,7 +66,7 @@ namespace ClickyControllerGUI.Models
 
         }
 
-        // Stores whether the buttons is pressed normally ('P'), down ('D') or up ('U')
+        // Stores whether the buttons is pressed normally ("Press"), down ("Down") or up ("Up")
         public string ButtonAction { get; set; }
 
         public string Character { get; set; }
@@ -81,7 +82,7 @@ namespace ClickyControllerGUI.Models
                     Keyboard.KeyDown(Character);
                     break;
                 case "Up":
-                    Keyboard.KeyRelease(Character);
+                    Keyboard.KeyUp(Character);
                     break;
             }
         }
