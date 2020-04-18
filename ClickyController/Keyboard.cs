@@ -11,6 +11,7 @@ namespace ClickyController
         private static readonly Dictionary<string, string> KeyToVirtualKeyShiftDictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(Properties.Resources.VirtualKeyCodesShift);
         private static readonly Dictionary<string, ushort> KeyToScanCodeDictionary = JsonConvert.DeserializeObject<Dictionary<string, ushort>>(Properties.Resources.ScanCodes);
 
+
         public static void KeyPress(string character)
         {
             bool holdShift = false;
@@ -22,7 +23,7 @@ namespace ClickyController
 
             character = character.ToLower();
 
-            if (!KeyToVirtualKeyDictionary.ContainsKey(character))
+            if (!VirtualCodeKeyExists(character))
             {
                 try
                 {
@@ -155,6 +156,31 @@ namespace ClickyController
             INPUT[] inputs = new INPUT[] { keyPress };
 
             SendInput(1, inputs, INPUT.Size);
+        }
+
+        public static void KeyboardShortcut(string character1, string character2, string character3 = "")
+        {
+            KeyDown(character1);
+            KeyDown(character2);
+
+            if (!string.IsNullOrWhiteSpace(character3))
+                KeyPress(character3);
+            
+
+            KeyRelease(character1);
+            KeyRelease(character2);
+        }
+
+        public static void KeyboardShortcutScanCode(string character1, string character2, string character3 = "")
+        {
+            KeyDownScanCode(character1);
+            KeyDownScanCode(character2);
+
+            if(!string.IsNullOrWhiteSpace(character3))
+                KeyPressScanCode(character3);
+
+            KeyReleaseScanCode(character1);
+            KeyReleaseScanCode(character2);
         }
 
         public static void KeyPressScanCode(string character)
