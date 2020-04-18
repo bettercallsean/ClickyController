@@ -292,6 +292,8 @@ namespace ClickyController
 
         public static bool VirtualCodeKeyExists(string character)
         {
+            // Since the keys are stored in lowercase, we need to convert the input first
+            character = character.ToLower();
             if (KeyToVirtualKeyDictionary.ContainsKey(character))
                 return true;
             else
@@ -300,6 +302,8 @@ namespace ClickyController
 
         public static bool ScanCodeKeyExists(string character)
         {
+            // Since the keys are stored in lowercase, we need to convert the input first
+            character = character.ToLower();
             if (KeyToScanCodeDictionary.ContainsKey(character))
                 return true;
             else
