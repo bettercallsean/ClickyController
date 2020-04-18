@@ -24,23 +24,26 @@ namespace ClickyControllerGUI.Views.CommandViews
             InitializeComponent();
         }
 
-        private void KeyPress_KeyDown(object sender, KeyEventArgs e)
+        private void KeyPressedChecker(object sender, KeyEventArgs e)
         {
+            // Checks what key was pressed and binds it to the 'Button' property
 
             string character = "";
-            if (string.IsNullOrWhiteSpace(KeyPress.Text))
-                character = KeyPress.Text;
+
+            // Used to store the character if nothing has been entered yet, otherwise the textbox isn't cleared
+            // properly and ends up storing multiple values 
+            if (string.IsNullOrWhiteSpace(KeyToPress.Text))
+                character = KeyToPress.Text;
             
             
             if (e.Key.ToString().Length > 1)
             {
                 e.Handled = true;
-                KeyPress.Text = WindowsKeyToButtonDictionary[e.Key.ToString()];
+                KeyToPress.Text = WindowsKeyToButtonDictionary[e.Key.ToString()];
             }
             else
-            {
-                KeyPress.Text = character;
-            }
+                KeyToPress.Text = character;
+            
         }
     }
 }
