@@ -54,8 +54,8 @@ namespace ClickyControllerGUI.ViewModels
             Type objectType = Type.GetType("ClickyControllerGUI.ViewModels." + commandType.ToString() + ", ClickyControllerGUI");
             CommandViewModel command = (CommandViewModel)Activator.CreateInstance(objectType);
             command.ViewModel = commandType.ToString();
-            EditCommandInfo(command);
             CommandList.Add(command);
+            EditCommandInfo(command);
         }
 
         private void RemoveItemFromCommandList(object command)
