@@ -82,16 +82,14 @@ namespace ClickyControllerGUI.ViewModels
         // Please forgive me
         public ICommand EditCommandInfoCommand => new RelayCommand(o => EditCommandInfo(o));
         public void EditCommandInfo(object commandToEdit)
-        {
+        { 
             CommandViewModel cvm = (CommandViewModel)commandToEdit;
+            Type commandView = Type.GetType("ClickyControllerGUI.Views.CommandViews." + cvm.View + ", ClickyControllerGUI");
 
-            Type objectType = Type.GetType("ClickyControllerGUI.Views.CommandViews." + cvm.View + ", ClickyControllerGUI");
-
-            Window view = (Window)Activator.CreateInstance(objectType);
+            Window view = (Window)Activator.CreateInstance(commandView);
             view.DataContext = cvm;
 
             view.ShowDialog();
-
         }
 
         public ICommand RunScriptCommand => new RelayCommand(o => _script.Run(CommandList.ToList()));
