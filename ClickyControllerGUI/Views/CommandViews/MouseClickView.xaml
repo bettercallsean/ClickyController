@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ClickyControllerGUI.Views.CommandViews"
         xmlns:viewmodel="clr-namespace:ClickyControllerGUI.ViewModels"
         mc:Ignorable="d"
-        Title="MouseClickView" Height="150" Width="200">
+        Title="Mouse Click" Height="150" Width="200">
 
     <Window.Resources>
         <viewmodel:MouseClickViewModel x:Key="MouseClickViewModel"/>
@@ -20,11 +20,21 @@
             <ColumnDefinition Width="6*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
 
-        <StackPanel Grid.Column="1">
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <TextBlock Text="Mouse Action" Margin="0,10"/>
             <TextBlock Text="Mouse Button"/>
         </StackPanel>
-        <StackPanel Grid.Column="2">
+        <StackPanel Grid.Column="2" Grid.Row="1">
+            <ComboBox ItemsSource="{Binding ActionSelection}" SelectedValue="{Binding Action}" Margin="0, 8"
+                      ToolTip="Down : Simulates holding the button down. Press: Simulates pressing the button.
+                      Up: Simulates releasing the button"/>
             <ComboBox ItemsSource="{Binding ButtonSelection}" SelectedValue="{Binding Button}"/>
         </StackPanel>
     </Grid>

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ClickyControllerGUI.Views.CommandViews"
         xmlns:viewmodel="clr-namespace:ClickyControllerGUI.ViewModels"
         mc:Ignorable="d"
-        Title="WaitView" Height="150" Width="200">
+        Title="Wait" Height="150" Width="200">
 
     <Window.Resources>
         <viewmodel:WaitViewModel x:Key="WaitViewModel"/>
@@ -17,14 +17,17 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="6*"/>
-            <ColumnDefinition Width="6*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="1">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Column="1" Grid.Row="1">
             <TextBlock Text="Seconds:"/>
-        </StackPanel>
-        <StackPanel Grid.Column="2">
             <TextBox Text="{Binding Seconds}"/>
         </StackPanel>
     </Grid>

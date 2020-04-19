@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ClickyControllerGUI.Views.CommandViews"
         xmlns:viewmodel="clr-namespace:ClickyControllerGUI.ViewModels"
         mc:Ignorable="d"
-        Title="KeyboardCharacterInputView" Height="150" Width="200">
+        Title="Keyboard Character" Height="150" Width="200">
 
     <Window.Resources>
         <viewmodel:KeyboardTextInputViewModel x:Key="KeyboardTextInputViewModel"/>
@@ -22,12 +22,18 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="1">
-            <TextBlock Text="Key Action:"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <TextBlock Text="Key Action:" Margin="0, 10"/>
             <TextBlock Text="Key to Press:"/>
         </StackPanel>
-        <StackPanel Grid.Column="2">
-            <ComboBox ItemsSource="{Binding ButtonActionList}" SelectedValue="{Binding ButtonAction}"/>
+        <StackPanel Grid.Column="2" Grid.Row="1">
+            <ComboBox ItemsSource="{Binding ButtonActionList}" SelectedValue="{Binding ButtonAction}" Margin="0, 8"/>
             <TextBox Text="{Binding Character}" x:Name="KeyToPress" PreviewKeyDown="KeyPressedChecker"
                      CaretIndex="1"/>
         </StackPanel>
