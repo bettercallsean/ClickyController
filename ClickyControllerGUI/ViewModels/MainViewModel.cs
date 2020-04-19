@@ -45,6 +45,13 @@ namespace ClickyControllerGUI.ViewModels
             set { _selectedCommandIndex = value; OnPropertyChanged(); }
         }
 
+        private bool _changesMadeToScript;
+        public bool ChangesMadeToScript
+        {
+            get => _changesMadeToScript;
+            set { _changesMadeToScript = value; OnPropertyChanged(); }
+        }
+
         public ICommand AddItemToListCommand => new RelayCommand(o => AddItemToCommandList(o));
         
 
@@ -55,6 +62,8 @@ namespace ClickyControllerGUI.ViewModels
             command.ViewModel = commandType.ToString();
 
             CommandList.Add(command);
+            ChangesMadeToScript = true;
+
             EditCommandInfo(command);
         }
 
@@ -74,20 +83,26 @@ namespace ClickyControllerGUI.ViewModels
                 SelectedCommandIndex = selectionIndex - 1;
             else
                 SelectedCommandIndex = selectionIndex;
+
+            ChangesMadeToScript = true;
         }
 
         public ICommand NewCommandListCommand => new RelayCommand(o => NewCommandList());
         public void NewCommandList()
         {
-            MessageBoxResult result = MessageBox.Show("Do you want to save changes to your script?", "Save Changes?", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+            if(ChangesMadeToScript)
+            {
+                MessageBoxResult result = MessageBox.Show("Do you want to save changes to your script?", "Save Changes?", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
 
-            if (result == MessageBoxResult.Yes)
-                _script.ScriptWriter(CommandList.ToList());
+                if (result == MessageBoxResult.Yes)
+                    SaveScript();
 
-            else if (result == MessageBoxResult.Cancel)
-                return;
+                else if (result == MessageBoxResult.Cancel)
+                    return;
+            }
 
             CommandList = new ObservableCollection<CommandViewModel>();
+            ChangesMadeToScript = false;
         }
 
 
@@ -109,7 +124,7 @@ namespace ClickyControllerGUI.ViewModels
 
         public ICommand RunScriptCommand => new RelayCommand(o => _script.Run(CommandList.ToList()));
         public ICommand ImportScriptCommand => new RelayCommand(o => ScriptReader());
-        public ICommand SaveScriptCommand => new RelayCommand(o => _script.ScriptWriter(CommandList.ToList()));
+        public ICommand SaveScriptCommand => new RelayCommand(o => SaveScript());
 
         private void ScriptReader()
         {
@@ -118,6 +133,12 @@ namespace ClickyControllerGUI.ViewModels
             if (commandList == null) return;
 
             CommandList = new ObservableCollection<CommandViewModel>(commandList);
+        }
+
+        private void SaveScript()
+        {
+            _script.ScriptWriter(CommandList.ToList());
+            ChangesMadeToScript = false;
         }
 
 
