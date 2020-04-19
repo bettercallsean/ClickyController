@@ -61,11 +61,18 @@ namespace ClickyControllerGUI.ViewModels
                 "Middle",
                 "Right"
             };
+
+            ActionSelection = new List<string>()
+            {
+                "Down",
+                "Press",
+                "Up"
+            };
         }
 
 
 
-        public override string Parameters => string.Format("{0} Click", Button);
+        public override string Parameters => string.Format("{0} {1}", Button, Action);
 
         public string Button
         {
@@ -78,11 +85,29 @@ namespace ClickyControllerGUI.ViewModels
             }
         }
 
+        public string Action
+        {
+            get => _mouseClick.Action;
+            set
+            {
+                _mouseClick.Action = value;
+                OnPropertyChanged();
+                OnPropertyChanged("Parameters");
+            }
+        }
+
         private List<string> _buttonSelection;
         public List<string> ButtonSelection
         {
             get => _buttonSelection;
             set { _buttonSelection = value; OnPropertyChanged(); }
+        }
+
+        private List<string> _actionSelection;
+        public List<string> ActionSelection
+        {
+            get => _actionSelection;
+            set { _actionSelection = value; OnPropertyChanged(); }
         }
 
         public override void Execute()
