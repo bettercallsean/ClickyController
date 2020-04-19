@@ -50,9 +50,11 @@ namespace ClickyControllerGUI.ViewModels
 
         private void AddItemToCommandList(object commandType)
         {
+            
             Type objectType = Type.GetType("ClickyControllerGUI.ViewModels." + commandType.ToString() + ", ClickyControllerGUI");
             CommandViewModel command = (CommandViewModel)Activator.CreateInstance(objectType);
             command.ViewModel = commandType.ToString();
+            EditCommandInfo(command);
             CommandList.Add(command);
         }
 
@@ -89,6 +91,7 @@ namespace ClickyControllerGUI.ViewModels
             view.DataContext = cvm;
 
             view.ShowDialog();
+
         }
 
         public ICommand RunScriptCommand => new RelayCommand(o => _script.Run(CommandList.ToList()));
