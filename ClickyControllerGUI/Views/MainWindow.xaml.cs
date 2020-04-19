@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace ClickyControllerGUI
 {
@@ -24,6 +25,20 @@ namespace ClickyControllerGUI
         public MainWindow()
         {
             InitializeComponent();
+
+            DispatcherTimer timer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromMilliseconds(10)
+            };
+            timer.Tick += GetMouseCoordinates;
+            timer.Start();
+
+        }
+
+        public void GetMouseCoordinates(object sender, EventArgs e)
+        {
+            xCoordinates.Text = string.Format("{0}", ClickyController.Mouse.XPosition);
+            yCoordinates.Text = string.Format("{0}", ClickyController.Mouse.YPosition);
         }
     }
 }
