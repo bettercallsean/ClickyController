@@ -46,18 +46,19 @@ namespace ClickyControllerGUI.ViewModels
         }
 
         public ICommand AddItemToListCommand => new RelayCommand(o => AddItemToCommandList(o));
-        public ICommand RemoveItemFromCommandListCommand => new RelayCommand(o => RemoveItemFromCommandList(o));
+        
 
         private void AddItemToCommandList(object commandType)
         {
-            
             Type objectType = Type.GetType("ClickyControllerGUI.ViewModels." + commandType.ToString() + ", ClickyControllerGUI");
             CommandViewModel command = (CommandViewModel)Activator.CreateInstance(objectType);
             command.ViewModel = commandType.ToString();
+
             CommandList.Add(command);
             EditCommandInfo(command);
         }
 
+        public ICommand RemoveItemFromCommandListCommand => new RelayCommand(o => RemoveItemFromCommandList(o));
         private void RemoveItemFromCommandList(object command)
         {
             if (CommandList.Count <= 0) return;
@@ -73,6 +74,20 @@ namespace ClickyControllerGUI.ViewModels
                 SelectedCommandIndex = selectionIndex - 1;
             else
                 SelectedCommandIndex = selectionIndex;
+        }
+
+        public ICommand NewCommandListCommand => new RelayCommand(o => NewCommandList());
+        public void NewCommandList()
+        {
+            MessageBoxResult result = MessageBox.Show("Do you want to save changes to your script?", "Save Changes?", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+
+            if (result == MessageBoxResult.Yes)
+                _script.ScriptWriter(CommandList.ToList());
+
+            else if (result == MessageBoxResult.Cancel)
+                return;
+
+            CommandList = new ObservableCollection<CommandViewModel>();
         }
 
 
