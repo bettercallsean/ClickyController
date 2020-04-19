@@ -9,7 +9,7 @@
         Title="Keyboard Character" Height="150" Width="200">
 
     <Window.Resources>
-        <viewmodel:KeyboardTextInputViewModel x:Key="KeyboardTextInputViewModel"/>
+        <viewmodel:KeyboardCharacterInputViewModel x:Key="KeyboardCharacterInputViewModel"/>
         <viewmodel:MainViewModel x:Key="MainViewModel"/>
     </Window.Resources>
 
@@ -35,7 +35,7 @@
         <StackPanel Grid.Column="2" Grid.Row="1">
             <ComboBox ItemsSource="{Binding ButtonActionList}" SelectedValue="{Binding ButtonAction}" Margin="0, 8"/>
             <TextBox Text="{Binding Character}" x:Name="KeyToPress" PreviewKeyDown="KeyPressedChecker"
-                     CaretIndex="1"/>
+                     CaretIndex="1" />
         </StackPanel>
 
     </Grid>
