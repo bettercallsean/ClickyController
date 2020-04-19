@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ClickyControllerGUI.Views.CommandViews"
         xmlns:viewmodel="clr-namespace:ClickyControllerGUI.ViewModels"
         mc:Ignorable="d"
-        Title="KeyboardTextInputView" Height="150" Width="200">
+        Title="Text Input" Height="150" Width="200">
     <Window.Resources>
         <viewmodel:KeyboardTextInputViewModel x:Key="KeyboardTextInputViewModel"/>
         <viewmodel:MainViewModel x:Key="MainViewModel"/>
@@ -20,14 +20,14 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
             <RowDefinition Height="4*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         
         
-        <TextBlock Grid.Row="1" Grid.Column="1"  Text="Text:"/>
-        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Text}"
-                 TextWrapping="WrapWithOverflow"/>
+        <TextBlock Grid.Row="0" Grid.Column="1"  Text="Text:"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Text}"
+                 TextWrapping="Wrap"/>
+
     </Grid>
 </Window>
