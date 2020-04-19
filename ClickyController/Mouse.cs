@@ -118,12 +118,12 @@ namespace ClickyController
             MouseClick(0x0002, 0x0004);
         }
 
-        public static void LeftPress()
+        public static void LeftDown()
         {
             MouseAction(0x0002);
         }
 
-        public static void LeftRelease()
+        public static void LeftUp()
         {
             MouseAction(0x0004);
         }
@@ -133,12 +133,12 @@ namespace ClickyController
             MouseClick(0x0008, 0x0010);
         }
 
-        public static void RightPress()
+        public static void RightDown()
         {
             MouseAction(0x0008);
         }
 
-        public static void RightRelease()
+        public static void RightUp()
         {
             MouseAction(0x0010);
         }
@@ -153,12 +153,12 @@ namespace ClickyController
             MouseAction(0x0020);
         }
 
-        public static void MiddleRelease()
+        public static void MiddleUp()
         {
             MouseAction(0x0040);
         }
 
-        public static void WheelDown()
+        public static void ScrollDown()
         {
             /* A single 'wheel click' is represented as the value 120. A positive value represents scrolling up (moving the wheel away from the user)
              * Whereas a negative value represents a scrolling down (moving the wheel towards the user). However, the DWORD equivalent in C# is uint,
@@ -170,7 +170,7 @@ namespace ClickyController
             MouseAction(0x0800, wheelClickData);
         }
 
-        public static void WheelUp()
+        public static void ScrollUp()
         {
             uint wheelClickData = 120;
             MouseAction(0x0800, wheelClickData);
