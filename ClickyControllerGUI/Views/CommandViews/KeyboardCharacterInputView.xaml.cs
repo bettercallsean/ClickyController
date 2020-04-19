@@ -27,7 +27,8 @@ namespace ClickyControllerGUI.Views.CommandViews
         private void KeyPressedChecker(object sender, KeyEventArgs e)
         {
             e.Handled = true;
-            KeyToPress.Text = WindowsKeyToButtonDictionary[e.Key.ToString()];
+            if(WindowsKeyToButtonDictionary.ContainsKey(e.Key.ToString()))
+                KeyToPress.Text = WindowsKeyToButtonDictionary[e.Key.ToString()];
         }
     }
 }
