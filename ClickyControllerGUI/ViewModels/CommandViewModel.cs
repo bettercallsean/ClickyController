@@ -64,8 +64,8 @@ namespace ClickyControllerGUI.ViewModels
 
             ActionSelection = new List<string>()
             {
+                "Click",
                 "Down",
-                "Press",
                 "Up"
             };
         }
