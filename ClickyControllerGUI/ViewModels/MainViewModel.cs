@@ -141,6 +141,15 @@ namespace ClickyControllerGUI.ViewModels
             ChangesMadeToScript = false;
         }
 
+        public ICommand ExitCommand => new RelayCommand(o => ShutdownProgram());
+        private void ShutdownProgram()
+        {
+            // Contains the logic for asking the user if they would like to save their work if changes have been made
+            // It will create a new CommandList but that will be deleted as soon as the program is closed anyway so it doesn't make a difference
+            NewCommandList();
+
+            Application.Current.Shutdown();
+        }
 
     }
 }

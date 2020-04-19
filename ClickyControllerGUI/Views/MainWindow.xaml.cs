@@ -40,10 +40,5 @@ namespace ClickyControllerGUI
             xCoordinates.Text = string.Format("{0}", ClickyController.Mouse.XPosition);
             yCoordinates.Text = string.Format("{0}", ClickyController.Mouse.YPosition);
         }
-
-        private void ExitClicked(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
     }
 }

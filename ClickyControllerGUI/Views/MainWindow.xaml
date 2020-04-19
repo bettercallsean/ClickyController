@@ -27,7 +27,7 @@
                     <MenuItem Header="_Open" Command="{Binding ImportScriptCommand}"/>
                     <MenuItem Header="_Save" Command="{Binding SaveScriptCommand}"/>
                     <Separator />
-                    <MenuItem Header="_Exit" Click="ExitClicked"/>
+                    <MenuItem Header="_Exit" Command="{Binding ExitCommand}"/>
                 </MenuItem>
             </Menu>
         </DockPanel>
