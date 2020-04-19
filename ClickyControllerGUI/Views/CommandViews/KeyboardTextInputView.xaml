@@ -16,14 +16,18 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="6*"/>
-            <ColumnDefinition Width="6*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="1">
-            <TextBlock Text="Text:"/>
-        </StackPanel>
-        <StackPanel Grid.Column="2">
-            <TextBox Text="{Binding Text}"/>
-        </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        
+        
+        <TextBlock Grid.Row="1" Grid.Column="1"  Text="Text:"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Text}"
+                 TextWrapping="WrapWithOverflow"/>
     </Grid>
 </Window>
