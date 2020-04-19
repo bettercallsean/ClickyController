@@ -32,7 +32,7 @@
             <TextBlock Text="Mouse Action" />
             
         </StackPanel>
-        <StackPanel Grid.Column="2" Grid.Row="1" DataContext="{Binding Source={StaticResource MouseClickViewModel}}">
+        <StackPanel Grid.Column="2" Grid.Row="1">
             <ComboBox ItemsSource="{Binding ButtonSelection}" SelectedValue="{Binding Button}" Margin="0, 8"
                       SelectedIndex="0"/>
             <ComboBox ItemsSource="{Binding ActionSelection}" SelectedValue="{Binding Action}" 
