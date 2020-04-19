@@ -7,6 +7,7 @@ using ClickyController;
 using ClickyControllerGUI.Models;
 using ClickyControllerGUI.Views.CommandViews;
 using ClickyControllerGUI.Utilities;
+using Newtonsoft.Json;
 
 namespace ClickyControllerGUI.ViewModels
 {
@@ -28,6 +29,7 @@ namespace ClickyControllerGUI.ViewModels
         // Stores the corresponding View for each command, which is then opened
         // when the user edits the command
         private string _view;
+        [JsonIgnore]
         public string View
         {
             get => _view;
