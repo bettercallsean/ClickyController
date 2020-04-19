@@ -19,159 +19,175 @@
 
     </Window.Resources>
 
-    <Grid x:Name="LayoutBase" Margin="15" VerticalAlignment="Stretch" DataContext="{Binding Source={StaticResource MainViewModel}}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="10"/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="10"/>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
+    <StackPanel DataContext="{Binding Source={StaticResource MainViewModel}}">
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_File">
+                    <MenuItem Header="_New" Command="{Binding NewCommandListCommand}"/>
+                    <MenuItem Header="_Open" Command="{Binding ImportScriptCommand}"/>
+                    <MenuItem Header="_Save" Command="{Binding SaveScriptCommand}"/>
+                    <Separator />
+                    <MenuItem Header="_Exit" Click="ExitClicked"/>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        
+        <Grid x:Name="LayoutBase" Margin="15" VerticalAlignment="Stretch" >
 
-        <StackPanel Grid.Column="0" x:Name="CommandListOptions">
-            <TreeView x:Name="CommandOptionsList" ItemsSource="{Binding CommandListOptions}" >
-                <TreeView.ItemContainerStyle>
-                    <Style TargetType="{x:Type TreeViewItem}">
-                        <Setter Property="IsExpanded" Value="True"/>
-                    </Style>
-                </TreeView.ItemContainerStyle>
-                <TreeView.ItemTemplate>
-                    <HierarchicalDataTemplate ItemsSource="{Binding Path=Value}">
-                        <TextBlock Text="{Binding Path=Key}" />
-                        <HierarchicalDataTemplate.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="3*"/>
-                                        <ColumnDefinition Width="1*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0" Text="{Binding Path=Key}" Margin="0, 0, 5, 0"/>
-                                    <Button Grid.Column="1" Content="+" Command="{Binding AddItemToListCommand, Mode=OneWay, Source={StaticResource MainViewModel}}"
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" x:Name="CommandListOptions">
+                <TreeView x:Name="CommandOptionsList" ItemsSource="{Binding CommandListOptions}" >
+                    <TreeView.ItemContainerStyle>
+                        <Style TargetType="{x:Type TreeViewItem}">
+                            <Setter Property="IsExpanded" Value="True"/>
+                        </Style>
+                    </TreeView.ItemContainerStyle>
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding Path=Value}">
+                            <TextBlock Text="{Binding Path=Key}" />
+                            <HierarchicalDataTemplate.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="3*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{Binding Path=Key}" Margin="0, 0, 5, 0"/>
+                                        <Button Grid.Column="1" Content="+" Command="{Binding AddItemToListCommand, Mode=OneWay, Source={StaticResource MainViewModel}}"
                                     CommandParameter="{Binding Path=Value}" Width="25">
-                                        <Button.Style>
-                                            <Style TargetType="{x:Type Button}">
-                                                <Setter Property="Visibility" Value="Hidden"/>
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type TreeViewItem}},Path=IsMouseOver}" Value="True">
-                                                        <Setter Property="Visibility" Value="Visible"/>
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Button.Style>
-                                    </Button>
-                                </Grid>
-                            </DataTemplate>
-                        </HierarchicalDataTemplate.ItemTemplate>
-                    </HierarchicalDataTemplate>
-                </TreeView.ItemTemplate>
-            </TreeView>
+                                            <Button.Style>
+                                                <Style TargetType="{x:Type Button}">
+                                                    <Setter Property="Visibility" Value="Hidden"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type TreeViewItem}},Path=IsMouseOver}" Value="True">
+                                                            <Setter Property="Visibility" Value="Visible"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                    </Grid>
+                                </DataTemplate>
+                            </HierarchicalDataTemplate.ItemTemplate>
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
+                </TreeView>
 
-            <StackPanel Orientation="Vertical" Margin="0, 20">
-                <TextBlock Text="Mouse Coordinates" FontWeight="Bold" >
-                    <TextBlock.TextDecorations>
-                        <TextDecoration/>
-                    </TextBlock.TextDecorations>
-                </TextBlock>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="X Coordinates: "/>
-                    <TextBlock x:Name="xCoordinates" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Y Coordinates: "/>
-                    <TextBlock x:Name="yCoordinates" />
+                <StackPanel Orientation="Vertical" Margin="0, 20">
+                    <TextBlock Text="Mouse Coordinates" FontWeight="Bold" >
+                        <TextBlock.TextDecorations>
+                            <TextDecoration/>
+                        </TextBlock.TextDecorations>
+                    </TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="X Coordinates: "/>
+                        <TextBlock x:Name="xCoordinates" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Y Coordinates: "/>
+                        <TextBlock x:Name="yCoordinates" />
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
-        </StackPanel>
 
-        <StackPanel Grid.Column="2" x:Name="CommandListPanel">
-            <ListView Name="CommandList" ItemsSource="{Binding CommandList}" 
+            <StackPanel Grid.Column="2" x:Name="CommandListPanel">
+                <ListView Name="CommandList" ItemsSource="{Binding CommandList}" 
                       Height="{Binding ElementName=LayoutBase, Path=ActualHeight}"
                       SelectedIndex="{Binding SelectedCommandIndex, Mode=TwoWay}"
                       dd:DragDrop.IsDropTarget="True" dd:DragDrop.IsDragSource="True"
                       DataContext="{Binding Source={StaticResource MainViewModel}}"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                    </Style>
-                </ListView.ItemContainerStyle>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
 
-                <ListView.InputBindings>
-                    <KeyBinding Key="Delete" Command="{Binding RemoveItemFromCommandListCommand, Source={StaticResource MainViewModel}}" 
+                    <ListView.InputBindings>
+                        <KeyBinding Key="Delete" Command="{Binding RemoveItemFromCommandListCommand, Source={StaticResource MainViewModel}}" 
                                 CommandParameter="{Binding ElementName=CommandList, Path=SelectedItem}"/>
-                </ListView.InputBindings>
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding ViewModel, Converter={StaticResource ViewModelToDisplayNameConverter}}"
+                    </ListView.InputBindings>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn DisplayMemberBinding="{Binding ViewModel, Converter={StaticResource ViewModelToDisplayNameConverter}}"
                                         Width="{c:Binding ElementName=CommandList, Path=ActualWidth * 0.3}">
-                            <GridViewColumnHeader Content="Command"/>
-                        </GridViewColumn>
+                                <GridViewColumnHeader Content="Command"/>
+                            </GridViewColumn>
 
-                        <GridViewColumn  Width="{c:Binding ElementName=CommandList, Path=ActualWidth * 0.5}">
-                            <GridViewColumnHeader Content="Parameters"/>
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Grid.Column="2" Text="{Binding Parameters}"/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
+                            <GridViewColumn  Width="{c:Binding ElementName=CommandList, Path=ActualWidth * 0.5}">
+                                <GridViewColumnHeader Content="Parameters"/>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Grid.Column="2" Text="{Binding Parameters}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
 
-                        <GridViewColumn Width="{c:Binding ElementName=CommandList, Path=ActualWidth * 0.2 - 3}" x:Name="ButtonColumn">
-                            <GridViewColumnHeader IsEnabled="False"/>
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <ComboBox Text="...">
-                                        <ComboBox.Style>
-                                            <Style TargetType="{x:Type ComboBox}">
-                                                <Setter Property="Visibility" Value="Hidden"/>
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}}, Path=IsMouseOver}" Value="True">
-                                                       <Setter Property="Visibility" Value="Visible"/>
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </ComboBox.Style>
-                                        <Button Grid.Column="3" Content="Edit" Command="{Binding EditCommandInfoCommand, Mode=OneWay, Source={StaticResource MainViewModel}}"
+                            <GridViewColumn Width="{c:Binding ElementName=CommandList, Path=ActualWidth * 0.2 - 3}" x:Name="ButtonColumn">
+                                <GridViewColumnHeader IsEnabled="False"/>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <ComboBox Text="...">
+                                            <ComboBox.Style>
+                                                <Style TargetType="{x:Type ComboBox}">
+                                                    <Setter Property="Visibility" Value="Hidden"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}}, Path=IsMouseOver}" Value="True">
+                                                            <Setter Property="Visibility" Value="Visible"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </ComboBox.Style>
+                                            <Button Grid.Column="3" Content="Edit" Command="{Binding EditCommandInfoCommand, Mode=OneWay, Source={StaticResource MainViewModel}}"
                                     CommandParameter="{Binding}" Width="{c:Binding ElementName=ButtonColumn, Path=ActualWidth}"/>
 
 
-                                        <Button Grid.Column="3" Content="Delete" Command="{Binding RemoveItemFromCommandListCommand, Source={StaticResource MainViewModel}}"
+                                            <Button Grid.Column="3" Content="Delete" Command="{Binding RemoveItemFromCommandListCommand, Source={StaticResource MainViewModel}}"
                                     CommandParameter="{Binding}" Width="{c:Binding ElementName=ButtonColumn, Path=ActualWidth}" />
-                                    </ComboBox>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </StackPanel>
+                                        </ComboBox>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
 
-        <StackPanel Grid.Column="4" >
-            <StackPanel.Resources>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Margin" Value="0,0,0,10"/>
-                </Style>
-            </StackPanel.Resources>
+            <StackPanel Grid.Column="4" >
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Margin" Value="0,0,0,10"/>
+                    </Style>
+                </StackPanel.Resources>
 
-            <Button Height="40" Command="{Binding RunScriptCommand}">
-                <StackPanel Orientation="Horizontal">
-                    <Image Source="/Resources/Icons/Play.png"/>
-                    <TextBlock Text="Run" VerticalAlignment="Center"/>
-                </StackPanel>
-            </Button>
-            <Button Height="26" Command="{Binding ImportScriptCommand}">
-                <StackPanel Orientation="Horizontal">
-                    <Image Source="/Resources/Icons/Box.png" Margin="0, 0, 5, 0"/>
-                    <TextBlock Text="Import" VerticalAlignment="Center"/>
-                </StackPanel>
-            </Button>
-            <Button Height="26" Command="{Binding SaveScriptCommand}">
-                <StackPanel Orientation="Horizontal">
-                    <Image Source="/Resources/Icons/Floppy.png" Margin="0, 0, 5, 0"/>
-                    <TextBlock Text="Save" VerticalAlignment="Center"/>
-                </StackPanel>
-            </Button>
-        </StackPanel>
-    </Grid>
+                <Button Height="40" Command="{Binding RunScriptCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Resources/Icons/Play.png"/>
+                        <TextBlock Text="Run" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+                <Button Height="26" Command="{Binding ImportScriptCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Resources/Icons/Box.png" Margin="0, 0, 5, 0"/>
+                        <TextBlock Text="Import" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+                <Button Height="26" Command="{Binding SaveScriptCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Resources/Icons/Floppy.png" Margin="0, 0, 5, 0"/>
+                        <TextBlock Text="Save" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </StackPanel>
+    
 
 </Window>
