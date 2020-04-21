@@ -176,7 +176,7 @@
                 <Button Height="26" Command="{Binding ImportScriptCommand}">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Resources/Icons/Box.png" Margin="0, 0, 5, 0"/>
-                        <TextBlock Text="Import" VerticalAlignment="Center"/>
+                        <TextBlock Text="Open" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
                 <Button Height="26" Command="{Binding SaveScriptCommand}">
