@@ -104,8 +104,8 @@ namespace ClickyController
             // relative to where the mouse cursor is currently located on screen.
             if(relativeToMousePosition)
             {
-                xPosition = XPosition + xPosition;
-                yPosition = YPosition + yPosition;
+                xPosition = XCoordinate + xPosition;
+                yPosition = YCoordinate + yPosition;
             }
 
             SetCursorPos(xPosition, yPosition);
@@ -187,12 +187,12 @@ namespace ClickyController
             set => _mousePosition = value;
         }
 
-        public static int XPosition
+        public static int XCoordinate
         {
             get => MousePosition.xPosition;
             private set => _mousePosition.xPosition = value;
         }
-        public static int YPosition
+        public static int YCoordinate
         { 
             get => MousePosition.yPosition;
             private set => _mousePosition.yPosition = value;
