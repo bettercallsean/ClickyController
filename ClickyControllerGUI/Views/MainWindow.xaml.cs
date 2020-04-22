@@ -37,8 +37,8 @@ namespace ClickyControllerGUI
 
         public void GetMouseCoordinates(object sender, EventArgs e)
         {
-            xCoordinates.Text = string.Format("{0}", ClickyController.Mouse.XCoordinate);
-            yCoordinates.Text = string.Format("{0}", ClickyController.Mouse.YCoordinate);
+            XCoordinates.Text = string.Format("{0}", ClickyController.Mouse.XCoordinate);
+            YCoordinates.Text = string.Format("{0}", ClickyController.Mouse.YCoordinate);
         }
     }
 }

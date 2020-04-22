@@ -42,7 +42,7 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Column="0" x:Name="CommandListOptions">
+            <StackPanel Grid.Column="0">
                 <TreeView x:Name="CommandOptionsList" ItemsSource="{Binding CommandListOptions}" >
                     <TreeView.ItemContainerStyle>
                         <Style TargetType="{x:Type TreeViewItem}">
@@ -88,16 +88,16 @@
                     </TextBlock>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="X Coordinates: "/>
-                        <TextBlock x:Name="xCoordinates" />
+                        <TextBlock x:Name="XCoordinates" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Y Coordinates: "/>
-                        <TextBlock x:Name="yCoordinates" />
+                        <TextBlock x:Name="YCoordinates" />
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
 
-            <StackPanel Grid.Column="2" x:Name="CommandListPanel">
+            <StackPanel Grid.Column="2">
                 <ListView Name="CommandList" ItemsSource="{Binding CommandList}" 
                       Height="{Binding ElementName=LayoutBase, Path=ActualHeight}"
                       SelectedIndex="{Binding SelectedCommandIndex, Mode=TwoWay}"
@@ -125,7 +125,7 @@
                                 <GridViewColumnHeader Content="Parameters"/>
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Grid.Column="2" Text="{Binding Parameters}"/>
+                                        <TextBlock Text="{Binding Parameters}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>

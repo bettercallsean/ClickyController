@@ -52,12 +52,12 @@ namespace ClickyControllerGUI.ViewModels
             set { _changesMadeToScript = value; OnPropertyChanged(); }
         }
 
-        public ICommand AddItemToListCommand => new RelayCommand(o => AddItemToCommandList(o));
+        public ICommand AddItemToListCommand => new RelayCommand(AddItemToCommandList);
         
 
         private void AddItemToCommandList(object commandType)
         {
-            Type objectType = Type.GetType("ClickyControllerGUI.ViewModels." + commandType.ToString() + ", ClickyControllerGUI");
+            Type objectType = Type.GetType("ClickyControllerGUI.ViewModels." + commandType + ", ClickyControllerGUI");
             CommandViewModel command = (CommandViewModel)Activator.CreateInstance(objectType);
             command.ViewModel = commandType.ToString();
 
@@ -67,7 +67,7 @@ namespace ClickyControllerGUI.ViewModels
             EditCommandInfo(command);
         }
 
-        public ICommand RemoveItemFromCommandListCommand => new RelayCommand(o => RemoveItemFromCommandList(o));
+        public ICommand RemoveItemFromCommandListCommand => new RelayCommand(RemoveItemFromCommandList);
         private void RemoveItemFromCommandList(object command)
         {
             if (CommandList.Count <= 0) return;
@@ -110,7 +110,7 @@ namespace ClickyControllerGUI.ViewModels
         // but I've spent about 8 hours trying to get dialog boxes to open and everything I've
         // tried either doesn't work or requires code thats as long as the entire works of Shakespeare.
         // Please forgive me
-        public ICommand EditCommandInfoCommand => new RelayCommand(o => EditCommandInfo(o));
+        public ICommand EditCommandInfoCommand => new RelayCommand(EditCommandInfo);
         public void EditCommandInfo(object commandToEdit)
         { 
             CommandViewModel cvm = (CommandViewModel)commandToEdit;
@@ -122,13 +122,13 @@ namespace ClickyControllerGUI.ViewModels
             view.ShowDialog();
         }
 
-        public ICommand RunScriptCommand => new RelayCommand(o => _script.Run(CommandList.ToList()));
+        public ICommand RunScriptCommand => new RelayCommand(o => ScriptViewModel.Run(CommandList.ToList()));
         public ICommand ImportScriptCommand => new RelayCommand(o => ScriptReader());
         public ICommand SaveScriptCommand => new RelayCommand(o => SaveScript());
 
         private void ScriptReader()
         {
-            List<CommandViewModel> commandList = _script.ScriptReader();
+            List<CommandViewModel> commandList = ScriptViewModel.ScriptReader();
 
             if (commandList == null) return;
 
@@ -137,7 +137,7 @@ namespace ClickyControllerGUI.ViewModels
 
         private void SaveScript()
         {
-            _script.ScriptWriter(CommandList.ToList());
+            ScriptViewModel.ScriptWriter(CommandList.ToList());
             ChangesMadeToScript = false;
         }
 
