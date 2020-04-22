@@ -72,7 +72,7 @@ namespace ClickyControllerGUI.ViewModels
 
 
 
-        public override string Parameters => string.Format("{0} {1}", Button, Action);
+        public override string Parameters => $"{Button} {Action}";
 
         public string Button
         {
@@ -118,14 +118,14 @@ namespace ClickyControllerGUI.ViewModels
 
     public class MouseMoveViewModel : CommandViewModel
     {
-        MouseMove _mouseMove = new MouseMove();
+        readonly MouseMove _mouseMove = new MouseMove();
 
         public MouseMoveViewModel()
         {
             View = "MouseMoveView";
         }
 
-        public override string Parameters => string.Format("{0}, {1}", XCoordinates, YCoordinates);
+        public override string Parameters => $"{XCoordinates}, {YCoordinates}";
 
         public int XCoordinates
         {
@@ -206,7 +206,7 @@ namespace ClickyControllerGUI.ViewModels
             };
         }
 
-        public override string Parameters => string.Format("Key {0} - {1}", ButtonAction, Character);
+        public override string Parameters => $"Key {ButtonAction} - {Character}";
 
         private List<string> _buttonActionList;
         public List<string> ButtonActionList
@@ -295,7 +295,7 @@ namespace ClickyControllerGUI.ViewModels
             View = "WaitView";
         }
 
-        public override string Parameters => string.Format("{0} seconds", Seconds);
+        public override string Parameters => $"{Seconds} seconds";
 
         public int Seconds 
         { 
