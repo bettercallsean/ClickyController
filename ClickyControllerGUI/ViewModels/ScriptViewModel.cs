@@ -12,12 +12,7 @@ namespace ClickyControllerGUI.ViewModels
 {
     public class ScriptViewModel
     {
-        public ScriptViewModel()
-        {
-
-        }
-
-        public List<CommandViewModel> ScriptReader()
+        public static List<CommandViewModel> ScriptReader()
         {
             try
             {
@@ -48,7 +43,7 @@ namespace ClickyControllerGUI.ViewModels
 
         }
 
-        public void ScriptWriter(List<CommandViewModel> commandList)
+        public static void ScriptWriter(List<CommandViewModel> commandList)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
@@ -57,18 +52,17 @@ namespace ClickyControllerGUI.ViewModels
                 Title = "Save a script"
             };
 
-            if (saveFileDialog.ShowDialog() == true && saveFileDialog.FileName != "")
-            {
-                using StreamWriter file = new StreamWriter(saveFileDialog.FileName);
-                JsonSerializer serializer = new JsonSerializer();
-                serializer.Serialize(file, commandList);
-            }
+            if (saveFileDialog.ShowDialog() != true || saveFileDialog.FileName == "") return;
+            
+            using StreamWriter file = new StreamWriter(saveFileDialog.FileName);
+            JsonSerializer serializer = new JsonSerializer();
+            serializer.Serialize(file, commandList);
 
-            
-            
+
+
         }
 
-        public void Run(List<CommandViewModel> commandList)
+        public static void Run(List<CommandViewModel> commandList)
         {
             foreach(CommandViewModel command in commandList)
             {
