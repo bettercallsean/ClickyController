@@ -5,12 +5,6 @@ using System.Text;
 
 namespace ClickyController
 {
-    internal struct POINT
-    {
-        internal int xPosition;
-        internal int yPosition;
-    }
-
     public class Mouse : Controller
     {
         // Windows API that returns the position of the cursor with its X and Y coordinates
@@ -20,6 +14,12 @@ namespace ClickyController
         // Windows API that moves the mouse to the given X/Y coordinates
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         private static extern bool SetCursorPos(int x, int y);
+
+        private struct POINT
+        {
+            internal int xPosition;
+            internal int yPosition;
+        }
 
         private static POINT _mousePosition;
 
