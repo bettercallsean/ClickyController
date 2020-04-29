@@ -69,12 +69,13 @@ namespace ClickyController
             SendInput(2, inputs, INPUT.Size);
         }
 
-        private static void MouseAction(uint mouseActionCode, uint mouseData = 0)
-        {
-            
-            //  Performs a mouse action (that is, either Down or Release). This allows a user to perform an action like dragging the mouse
-            //  or long button presses. There's a whole range of possibilities, let your imagination run free.
+        //  Performs a mouse action (that is, either Down or Release). This allows a user to perform an action like dragging the mouse
+        //  or long button presses. There's a whole range of possibilities, let your imagination run free.
 
+        // mouseData is used by the Scroll functions and represents how many clicks of the scroll wheel they wish to do
+        // a negative value scrolls down and a positive value scrolls up
+        private static void MouseAction(uint mouseActionCode, uint mouseData = 0)
+        { 
             INPUT buttonAction = new INPUT
             {
                 type = 0,
@@ -158,7 +159,7 @@ namespace ClickyController
             MouseAction(0x0040);
         }
 
-        public static void ScrollDown()
+        public static void ScrollDown(uint clicks)
         {
             /* A single 'wheel click' is represented as the value 120. A positive value represents scrolling up (moving the wheel away from the user)
              * Whereas a negative value represents a scrolling down (moving the wheel towards the user). However, the DWORD equivalent in C# is uint,
@@ -166,13 +167,13 @@ namespace ClickyController
              * https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/unchecked
              */
 
-            uint wheelClickData = unchecked((uint)-120);
+            uint wheelClickData = unchecked((uint)-120) * clicks;
             MouseAction(0x0800, wheelClickData);
         }
 
-        public static void ScrollUp()
+        public static void ScrollUp(uint clicks)
         {
-            uint wheelClickData = 120;
+            uint wheelClickData = 120 * clicks;
             MouseAction(0x0800, wheelClickData);
         }
 
