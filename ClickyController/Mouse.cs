@@ -23,52 +23,6 @@ namespace ClickyController
 
         private static POINT _mousePosition;
 
-        private static void MouseClick(uint buttonDownActionCode, uint buttonReleaseActionCode)
-        {
-            // Performs a simple mouse click - the button is pressed and released almost instantly 
-            // (like when you click something with a normal mouse, crazy right?)
-
-            INPUT buttonDown = new INPUT
-            {
-                type = 0,
-                union =
-                {
-                    mouseInput = new MOUSEINPUT
-                    {
-                        xPosition = 0,
-                        yPosition = 0,
-                        mouseData = 0,
-                        mouseAction = buttonDownActionCode,
-                        time = 0,
-                        extraInfo = GetMessageExtraInfo()
-                    }
-                }
-            };
-
-
-            INPUT buttonRelease = new INPUT
-            {
-                type = 0,
-                union =
-                {
-                    mouseInput = new MOUSEINPUT
-                    {
-                        xPosition = 0,
-                        yPosition = 0,
-                        mouseData = 0,
-                        mouseAction = buttonReleaseActionCode,
-                        time = 0,
-                        extraInfo = GetMessageExtraInfo()
-                    }
-                }
-            };
-
-
-            INPUT[] inputs = new INPUT[] { buttonDown, buttonRelease };
-
-            SendInput(2, inputs, INPUT.Size);
-        }
-
         //  Performs a mouse action (that is, either Down or Release). This allows a user to perform an action like dragging the mouse
         //  or long button presses. There's a whole range of possibilities, let your imagination run free.
 
@@ -116,7 +70,8 @@ namespace ClickyController
         // hassle of making it yourself
         public static void LeftClick()
         {
-            MouseClick(0x0002, 0x0004);
+            MouseAction(0x0002);
+            MouseAction(0x0004);
         }
 
         public static void LeftDown()
@@ -131,7 +86,8 @@ namespace ClickyController
 
         public static void RightClick()
         {
-            MouseClick(0x0008, 0x0010);
+            MouseAction(0x0008);
+            MouseAction(0x0010);
         }
 
         public static void RightDown()
@@ -146,7 +102,8 @@ namespace ClickyController
 
         public static void MiddleClick()
         {
-            MouseClick(0x0020, 0x0040);
+            MouseAction(0x0020);
+            MouseAction(0x0040);
         }
 
         public static void MiddleDown()
