@@ -5,16 +5,32 @@ using System.Text;
 
 namespace ClickyController
 {
+    /// <summary>
+    /// Contains the functionality that would typically be associated with the mouse 
+    /// e.g mouse clicks, scrolling and moving the mouse
+    /// </summary>
     public class Mouse : Controller
     {
-        // Windows API that returns the position of the cursor with its X and Y coordinates
+        /// <summary>
+        /// Windows API that returns the position of the cursor with its X and Y coordinates
+        /// </summary>
+        /// <param name="mousePosition">POINT sruct containing the X and Y coordinates of the mouse</param>
+        /// <returns></returns>
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         private static extern bool GetCursorPos(out POINT mousePosition);
 
-        // Windows API that moves the mouse to the given X/Y coordinates
+        /// <summary>
+        /// Windows API that moves the mouse to the given X/Y coordinates
+        /// </summary>
+        /// <param name="x">The X coordinate to move the mouse to</param>
+        /// <param name="y">The Y coordinate to move the mouse to</param>
+        /// <returns></returns>
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         private static extern bool SetCursorPos(int x, int y);
 
+        /// <summary>
+        /// Holds the information about the mouse X and Y coordinates
+        /// </summary>
         private struct POINT
         {
             internal int xPosition;
@@ -23,11 +39,17 @@ namespace ClickyController
 
         private static POINT _mousePosition;
 
-        //  Performs a mouse action (that is, either Down or Release). This allows a user to perform an action like dragging the mouse
-        //  or long button presses. There's a whole range of possibilities, let your imagination run free.
+        //  
 
-        // mouseData is used by the Scroll functions and represents how many clicks of the scroll wheel they wish to do
+        // mouseData is 
         // a negative value scrolls down and a positive value scrolls up
+        /// <summary>
+        /// Performs a mouse action (that is, either Down or Release). This allows a user to perform an action like dragging the mouse 
+        /// or long button presses. 
+        /// </summary>
+        /// <param name="mouseActionCode">HEX code associated with the mouse button and the state for it to be in (Up or Down)</param>
+        /// <param name="mouseData">Used by the Scroll functions and represents how many clicks of the scroll wheel they wish to do.
+        /// A negative value scrolls down and a positive value scrolls up.</param>
         private static void MouseAction(uint mouseActionCode, uint mouseData = 0)
         { 
             INPUT buttonAction = new INPUT
@@ -53,6 +75,12 @@ namespace ClickyController
             SendInput(1, inputs, INPUT.Size);
         }
 
+        /// <summary>
+        /// Moves mouse to a certain position on the screen
+        /// </summary>
+        /// <param name="xPosition">The X coordinate to move the mouse to.</param>
+        /// <param name="yPosition">The Y coordinate to move the mosue to.</param>
+        /// <param name="relativeToMousePosition">Optional paramter: If enabled, will move the mouse relative to its current position on the screen</param>
         public static void MoveMouse(int xPosition, int yPosition, bool relativeToMousePosition = false)
         {
             // If relativeToMousePosition is true, the mouse is moved a given number of pixels along the X/Y axis
@@ -66,56 +94,85 @@ namespace ClickyController
             SetCursorPos(xPosition, yPosition);
         }
 
-        // Like a ready-meal, these methods perform most of the actions you would normally do with a mouse without the 
-        // hassle of making it yourself
+        /// <summary>
+        /// Performs a left click
+        /// </summary>
         public static void LeftClick()
         {
             MouseAction(0x0002);
             MouseAction(0x0004);
         }
 
+        /// <summary>
+        /// Holds to the left button down
+        /// </summary>
         public static void LeftDown()
         {
             MouseAction(0x0002);
         }
 
+        /// <summary>
+        ///  Lifts the left button up
+        /// </summary>
         public static void LeftUp()
         {
             MouseAction(0x0004);
         }
 
+        /// <summary>
+        /// Performs a right click
+        /// </summary>
         public static void RightClick()
         {
             MouseAction(0x0008);
             MouseAction(0x0010);
         }
 
+        /// <summary>
+        /// Holds the right button down
+        /// </summary>
         public static void RightDown()
         {
             MouseAction(0x0008);
         }
 
+        /// <summary>
+        /// Lifts the right button up
+        /// </summary>
         public static void RightUp()
         {
             MouseAction(0x0010);
         }
 
+        /// <summary>
+        /// Performs a click with the middle button (the scroll wheel)
+        /// </summary>
         public static void MiddleClick()
         {
             MouseAction(0x0020);
             MouseAction(0x0040);
         }
 
+        /// <summary>
+        /// Holds the middle mouse button down
+        /// </summary>
         public static void MiddleDown()
         {
             MouseAction(0x0020);
         }
 
+        /// <summary>
+        /// Lifts the middle mouse button up
+        /// </summary>
         public static void MiddleUp()
         {
             MouseAction(0x0040);
         }
 
+        /// <summary>
+        /// Scrolls the mouse wheel down
+        /// </summary>
+        /// <param name="clicks">The number of mouse wheel 'clicks' to scroll down by</param>
         public static void ScrollDown(uint clicks)
         {
             /* A single 'wheel click' is represented as the value 120. A positive value represents scrolling up (moving the wheel away from the user)
@@ -128,12 +185,19 @@ namespace ClickyController
             MouseAction(0x0800, wheelClickData);
         }
 
+        /// <summary>
+        /// Scrolls the mouse wheel up
+        /// </summary>
+        /// <param name="clicks">The number of mouse wheel 'clicks' to scroll up by</param>
         public static void ScrollUp(uint clicks)
         {
             uint wheelClickData = 120 * clicks;
             MouseAction(0x0800, wheelClickData);
         }
 
+        /// <summary>
+        /// Holds information about the current position of the mouse
+        /// </summary>
         private static POINT MousePosition
         {
             get
@@ -145,11 +209,18 @@ namespace ClickyController
             set => _mousePosition = value;
         }
 
+        /// <summary>
+        /// Returns the current X coordinate of the mouse
+        /// </summary>
         public static int XCoordinate
         {
             get => MousePosition.xPosition;
             private set => _mousePosition.xPosition = value;
         }
+
+        /// <summary>
+        /// Returns the current Y coordinate of the mouse
+        /// </summary>
         public static int YCoordinate
         { 
             get => MousePosition.yPosition;
