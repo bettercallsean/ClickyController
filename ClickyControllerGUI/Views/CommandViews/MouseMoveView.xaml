@@ -7,7 +7,7 @@
         xmlns:viewmodel="clr-namespace:ClickyControllerGUI.ViewModels"
         mc:Ignorable="d"
         xmlns:md="https://github.com/fantasticfiasco/mvvm-dialogs"
-        Title="Move Mouse" Height="150" Width="200">
+        Title="Move Mouse" Height="150" Width="250">
 
     <Window.Resources>
         <viewmodel:MouseMoveViewModel x:Key="MouseMoveViewModel"/>

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ClickyControllerGUI.Views.CommandViews"
         xmlns:viewmodel="clr-namespace:ClickyControllerGUI.ViewModels"
         mc:Ignorable="d"
-        Title="Keyboard Character" Height="150" Width="200">
+        Title="Keyboard Character" Height="150" Width="250">
 
     <Window.Resources>
         <viewmodel:KeyboardCharacterInputViewModel x:Key="KeyboardCharacterInputViewModel"/>
