@@ -26,7 +26,7 @@ namespace ClickyControllerGUI.ViewModels
         public string View
         {
             get => _view;
-            set { _view = value; OnPropertyChanged(); }
+            internal set { _view = value; OnPropertyChanged(); }
         }
 
         // Acts as a string representation of the saved parameters. This is what is displayed to the user on the MainWindow
@@ -172,14 +172,14 @@ namespace ClickyControllerGUI.ViewModels
         public bool ValidXCoordinates
         {
             get => _validXCoordinates;
-            set { _validXCoordinates = value; OnPropertyChanged(); }
+            internal set { _validXCoordinates = value; OnPropertyChanged(); }
         }
 
         private bool _validYCoordinates;
         public bool ValidYCoordinates
         {
             get => _validYCoordinates;
-            set { _validYCoordinates = value; OnPropertyChanged(); }
+            internal set { _validYCoordinates = value; OnPropertyChanged(); }
         }
 
         private bool _moveRelative;
@@ -210,7 +210,7 @@ namespace ClickyControllerGUI.ViewModels
             };
         }
 
-        public override string Parameters => $"Key {ButtonAction} - {Character}";
+        public override string Parameters => $"{Character} - Key {ButtonAction}";
 
         private List<string> _buttonActionList;
         public List<string> ButtonActionList
