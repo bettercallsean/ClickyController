@@ -1,23 +1,15 @@
-﻿using ClickyControllerGUI.Models;
-using Microsoft.Win32;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Input;
-using System.Reflection;
-using ClickyControllerGUI.Utilities;
-using ClickyControllerGUI.Views.CommandViews;
 
 namespace ClickyControllerGUI.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
-        private readonly ScriptViewModel _script = new ScriptViewModel();
-
         public MainViewModel()
         {
             CommandList = new ObservableCollection<CommandViewModel>();

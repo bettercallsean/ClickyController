@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace ClickyControllerGUI.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
+        // Notifies the UI when a property has been changed so that the updates are relfected in the UI
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -18,6 +15,7 @@ namespace ClickyControllerGUI.ViewModels
         }
     }
 
+    // Used to allow buttons to interact with the logic in the ViewModel
     public class RelayCommand : ICommand
     {
         private readonly Action<object> _execute;

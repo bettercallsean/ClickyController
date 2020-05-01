@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
-using System.Windows.Input;
-using ClickyController;
+﻿using System.Collections.Generic;
 using ClickyControllerGUI.Models;
-using ClickyControllerGUI.Views.CommandViews;
-using ClickyControllerGUI.Utilities;
 using Newtonsoft.Json;
 
 namespace ClickyControllerGUI.ViewModels
@@ -125,7 +118,18 @@ namespace ClickyControllerGUI.ViewModels
             View = "MouseMoveView";
         }
 
-        public override string Parameters => $"{XCoordinates}, {YCoordinates}";
+        public override string Parameters
+        {
+            get
+            {
+                // Changes what is displayed in the parameters box based on whether they are moving
+                // the mouse relative to its current position or not.
+                if (MoveRelative)
+                    return $"Relative: {XCoordinates}, {YCoordinates}";
+                else
+                    return $"{XCoordinates}, {YCoordinates}";
+            }
+        }
 
         public int XCoordinates
         {
@@ -232,6 +236,8 @@ namespace ClickyControllerGUI.ViewModels
             get => _keyboardCharacterInput.Character; 
             set 
             {
+                // The key entered needs to be present in the VirtualCode dictionary in order to be assigned
+                // to the Character variable
                 if(ClickyController.Keyboard.VirtualCodeKeyExists(value.ToString()))
                 {
                     _keyboardCharacterInput.Character = value;
@@ -302,6 +308,8 @@ namespace ClickyControllerGUI.ViewModels
             get => _wait.Seconds; 
             set 
             {
+                // The value entered needs to be both a valid int and needs to be positive number to be assigned to 
+                // the seconds Variable
                 if (int.TryParse(value.ToString(), out int seconds) && seconds >= 0)
                 {
                     _wait.Seconds = seconds;

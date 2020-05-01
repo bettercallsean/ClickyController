@@ -1,11 +1,8 @@
-﻿using ClickyControllerGUI.Models;
-using ClickyControllerGUI.Utilities;
+﻿using ClickyControllerGUI.Utilities;
 using Microsoft.Win32;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Windows;
 
 namespace ClickyControllerGUI.ViewModels
