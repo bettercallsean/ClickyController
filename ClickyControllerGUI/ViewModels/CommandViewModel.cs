@@ -302,7 +302,7 @@ namespace ClickyControllerGUI.ViewModels
             get => _wait.Seconds; 
             set 
             {
-                if (int.TryParse(value.ToString(), out int seconds))
+                if (int.TryParse(value.ToString(), out int seconds) && seconds >= 0)
                 {
                     _wait.Seconds = seconds;
                     ValidSeconds = true;
