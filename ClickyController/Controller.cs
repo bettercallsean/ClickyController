@@ -94,7 +94,8 @@ namespace ClickyController
         /// <param name="seconds">Number of seconds to pause the program for</param>
         public static void Wait(int seconds)
         {
-            Thread.Sleep(seconds * 1000);
+            if(seconds >= 0)
+                Thread.Sleep(seconds * 1000);
         }
     }
 }
