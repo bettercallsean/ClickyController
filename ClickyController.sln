@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClickyController", "ClickyC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "Test\Test.csproj", "{2194E385-A0F0-4263-916A-05B424C70327}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClickyControllerGUI", "ClickyControllerGUI\ClickyControllerGUI.csproj", "{C01FC3CF-EF4F-4FAA-BB10-7DFE1FA85CED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClickyControllerGUI", "ClickyControllerGUI\ClickyControllerGUI.csproj", "{C01FC3CF-EF4F-4FAA-BB10-7DFE1FA85CED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClickyController.UnitTests", "ClickyController.UnitTests\ClickyController.UnitTests.csproj", "{8B4C06DB-DAF6-441B-BEAA-4C63D94E4641}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{C01FC3CF-EF4F-4FAA-BB10-7DFE1FA85CED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C01FC3CF-EF4F-4FAA-BB10-7DFE1FA85CED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C01FC3CF-EF4F-4FAA-BB10-7DFE1FA85CED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B4C06DB-DAF6-441B-BEAA-4C63D94E4641}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B4C06DB-DAF6-441B-BEAA-4C63D94E4641}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B4C06DB-DAF6-441B-BEAA-4C63D94E4641}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B4C06DB-DAF6-441B-BEAA-4C63D94E4641}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
