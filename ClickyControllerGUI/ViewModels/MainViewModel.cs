@@ -80,7 +80,7 @@ namespace ClickyControllerGUI.ViewModels
         }
 
         public ICommand NewCommandListCommand => new RelayCommand(o => NewCommandList());
-        public void NewCommandList()
+        private void NewCommandList()
         {
             if(ChangesMadeToScript)
             {
@@ -103,7 +103,7 @@ namespace ClickyControllerGUI.ViewModels
         // tried either doesn't work or requires code thats as long as the entire works of Shakespeare.
         // Please forgive me
         public ICommand EditCommandInfoCommand => new RelayCommand(EditCommandInfo);
-        public void EditCommandInfo(object commandToEdit)
+        private void EditCommandInfo(object commandToEdit)
         { 
             CommandViewModel cvm = (CommandViewModel)commandToEdit;
             Type commandView = Type.GetType("ClickyControllerGUI.Views.CommandViews." + cvm.View + ", ClickyControllerGUI");
