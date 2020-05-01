@@ -37,12 +37,7 @@ namespace ClickyController
             internal int yPosition;
         }
 
-        private static POINT _mousePosition;
-
-        //  
-
-        // mouseData is 
-        // a negative value scrolls down and a positive value scrolls up
+        
         /// <summary>
         /// Performs a mouse action (that is, either Down or Release). This allows a user to perform an action like dragging the mouse 
         /// or long button presses. 
@@ -195,6 +190,7 @@ namespace ClickyController
             MouseAction(0x0800, wheelClickData);
         }
 
+        private static POINT _mousePosition;
         /// <summary>
         /// Holds information about the current position of the mouse
         /// </summary>
