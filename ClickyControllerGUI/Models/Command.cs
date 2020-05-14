@@ -43,7 +43,7 @@ namespace ClickyControllerGUI.Models
                         break;
                 }
             }
-            else if (Action == "Press")
+            else if (Action == "Click")
             {
                 switch (Button)
                 {
