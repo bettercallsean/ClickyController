@@ -125,7 +125,7 @@
                                 <GridViewColumnHeader Content="Parameters"/>
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Parameters}"/>
+                                        <TextBlock Text="{Binding Parameters}" TextTrimming="CharacterEllipsis"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
