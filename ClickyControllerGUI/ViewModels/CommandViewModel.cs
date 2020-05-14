@@ -182,11 +182,10 @@ namespace ClickyControllerGUI.ViewModels
             internal set { _validYCoordinates = value; OnPropertyChanged(); }
         }
 
-        private bool _moveRelative;
         public bool MoveRelative
         {
-            get => _moveRelative;
-            set { _moveRelative = value; OnPropertyChanged(); }
+            get => _mouseMove.Relative;
+            set { _mouseMove.Relative = value; OnPropertyChanged(); }
         }
 
         public override void Execute()
