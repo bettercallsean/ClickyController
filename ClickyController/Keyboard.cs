@@ -1,6 +1,7 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using ClickyController.Properties;
+using Newtonsoft.Json;
 
 namespace ClickyController
 {
@@ -10,11 +11,11 @@ namespace ClickyController
     public class Keyboard : Controller
     {
         // Maps the user specified key to its corresponding Windows Virtual Key
-        private static readonly Dictionary<string, ushort> KeyToVirtualKeyDictionary = JsonConvert.DeserializeObject<Dictionary<string, ushort>>(Properties.Resources.VirtualKeyCodes);
+        private static readonly Dictionary<string, ushort> KeyToVirtualKeyDictionary = JsonConvert.DeserializeObject<Dictionary<string, ushort>>(Resources.VirtualKeyCodes);
         // Contains characters that can only be accessed by holding the 'Shift' key e.g. ! @ £
-        private static readonly Dictionary<string, string> KeyToVirtualKeyShiftDictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(Properties.Resources.VirtualKeyCodesShift);
+        private static readonly Dictionary<string, string> KeyToVirtualKeyShiftDictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(Resources.VirtualKeyCodesShift);
         // Maps the user specified key to its corresponding Hardware Scan code
-        private static readonly Dictionary<string, ushort> KeyToScanCodeDictionary = JsonConvert.DeserializeObject<Dictionary<string, ushort>>(Properties.Resources.ScanCodes);
+        private static readonly Dictionary<string, ushort> KeyToScanCodeDictionary = JsonConvert.DeserializeObject<Dictionary<string, ushort>>(Resources.ScanCodes);
 
         /// <summary>
         /// Performs a simple key press
@@ -89,7 +90,7 @@ namespace ClickyController
             };
 
 
-            INPUT[] inputs = new INPUT[] { keyPress, keyRelease };
+            INPUT[] inputs = { keyPress, keyRelease };
 
             if (holdShift)
             {
@@ -111,12 +112,12 @@ namespace ClickyController
             foreach (char letter in textEntry)
             {
                 if (char.IsUpper(letter))
-                    {
-                        // Simulates holding 'SHIFT' in order to create a capitalised version of a character 
-                        KeyDown("SHIFT");
-                        KeyPress(letter.ToString());
-                        KeyUp("SHIFT");
-                    }
+                {
+                    // Simulates holding 'SHIFT' in order to create a capitalised version of a character 
+                    KeyDown("SHIFT");
+                    KeyPress(letter.ToString());
+                    KeyUp("SHIFT");
+                }
                 else
                     KeyPress(letter.ToString());
             }
@@ -149,7 +150,7 @@ namespace ClickyController
             };
 
 
-            INPUT[] inputs = new INPUT[] { keyPress };
+            INPUT[] inputs = { keyPress };
 
             SendInput(1, inputs, INPUT.Size);
         }
@@ -180,7 +181,7 @@ namespace ClickyController
             };
 
 
-            INPUT[] inputs = new INPUT[] { keyPress };
+            INPUT[] inputs = { keyPress };
 
             SendInput(1, inputs, INPUT.Size);
         }
@@ -227,7 +228,7 @@ namespace ClickyController
         /// ScanCodes are the codes sent directly by your keyboard hardware and can be useful in apps/games that take their input 
         /// directly from the keyboard directly.
         /// </summary>
-        /// <param name="character">Name of the key or character the user wishses to press</param>
+        /// <param name="character">Name of the key or character the user wishes to press</param>
         public static void KeyPressScanCode(string character)
         {
             character = character.ToLower();
@@ -268,7 +269,7 @@ namespace ClickyController
             };
 
 
-            INPUT[] inputs = new INPUT[] { keyDown, keyRelease };
+            INPUT[] inputs = { keyDown, keyRelease };
 
             SendInput(2, inputs, INPUT.Size);
 
@@ -277,7 +278,7 @@ namespace ClickyController
         /// <summary>
         /// Holds a key down using its scan code
         /// </summary>
-        /// <param name="character">Name of the key or character the user wishses to hold down</param>
+        /// <param name="character">Name of the key or character the user wishes to hold down</param>
         public static void KeyDownScanCode(string character)
         {
             character = character.ToLower();
@@ -299,7 +300,7 @@ namespace ClickyController
             };
 
 
-            INPUT[] inputs = new INPUT[] { keyPress };
+            INPUT[] inputs = { keyPress };
 
             SendInput(1, inputs, INPUT.Size);
         }
@@ -307,7 +308,7 @@ namespace ClickyController
         /// <summary>
         /// Releases a key using its scan code
         /// </summary>
-        /// <param name="character">Name of the key or character the user wishses to release</param>
+        /// <param name="character">Name of the key or character the user wishes to release</param>
         public static void KeyUpScanCode(string character)
         {
             character = character.ToLower();
@@ -329,7 +330,7 @@ namespace ClickyController
             };
 
 
-            INPUT[] inputs = new INPUT[] { keyPress };
+            INPUT[] inputs = { keyPress };
 
             SendInput(1, inputs, INPUT.Size);
         }
@@ -337,31 +338,25 @@ namespace ClickyController
         /// <summary>
         /// Checks whether a key or character has a Virtual Code stored in the Virtual Key dictionary
         /// </summary>
-        /// <param name="character">Name of the key or character the user wishses to check</param>
+        /// <param name="character">Name of the key or character the user wishes to check</param>
         /// <returns></returns>
         public static bool VirtualCodeKeyExists(string character)
         {
             // Since the keys are stored in lowercase, we need to convert the input first
             character = character.ToLower();
-            if (KeyToVirtualKeyDictionary.ContainsKey(character))
-                return true;
-            else
-                return false;
+            return KeyToVirtualKeyDictionary.ContainsKey(character);
         }
 
         /// <summary>
         /// Checks whether a key or character has a Scan Code stored in the Scan Key dictionary
         /// </summary>
-        /// <param name="character">Name of the key or character the user wishses to check</param>
+        /// <param name="character">Name of the key or character the user wishes to check</param>
         /// <returns></returns>
         public static bool ScanCodeKeyExists(string character)
         {
             // Since the keys are stored in lowercase, we need to convert the input first
             character = character.ToLower();
-            if (KeyToScanCodeDictionary.ContainsKey(character))
-                return true;
-            else
-                return false;
+            return KeyToScanCodeDictionary.ContainsKey(character);
         }
 
     }

@@ -11,7 +11,7 @@ namespace ClickyController
         /// <summary>
         /// Windows API that returns the position of the cursor with its X and Y coordinates
         /// </summary>
-        /// <param name="mousePosition">POINT sruct containing the X and Y coordinates of the mouse</param>
+        /// <param name="mousePosition">POINT struct containing the X and Y coordinates of the mouse</param>
         /// <returns></returns>
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         private static extern bool GetCursorPos(out POINT mousePosition);
@@ -62,7 +62,7 @@ namespace ClickyController
             };
 
 
-            INPUT[] inputs = new INPUT[] { buttonAction };
+            INPUT[] inputs = { buttonAction };
 
             SendInput(1, inputs, INPUT.Size);
         }
@@ -71,8 +71,8 @@ namespace ClickyController
         /// Moves mouse to a certain position on the screen
         /// </summary>
         /// <param name="xPosition">The X coordinate to move the mouse to.</param>
-        /// <param name="yPosition">The Y coordinate to move the mosue to.</param>
-        /// <param name="relativeToMousePosition">Optional paramter: If enabled, will move the mouse relative to its current position on the screen</param>
+        /// <param name="yPosition">The Y coordinate to move the mouse to.</param>
+        /// <param name="relativeToMousePosition">Optional parameter: If enabled, will move the mouse relative to its current position on the screen</param>
         public static void MoveMouse(int xPosition, int yPosition, bool relativeToMousePosition = false)
         {
             // If relativeToMousePosition is true, the mouse is moved a given number of pixels along the X/Y axis
@@ -198,27 +198,16 @@ namespace ClickyController
                 GetCursorPos(out _mousePosition);
                 return _mousePosition;
             }
-
-            set => _mousePosition = value;
         }
 
         /// <summary>
         /// Returns the current X coordinate of the mouse
         /// </summary>
-        public static int XCoordinate
-        {
-            get => MousePosition.xPosition;
-            private set => _mousePosition.xPosition = value;
-        }
+        public static int XCoordinate => MousePosition.xPosition;
 
         /// <summary>
         /// Returns the current Y coordinate of the mouse
         /// </summary>
-        public static int YCoordinate
-        { 
-            get => MousePosition.yPosition;
-            private set => _mousePosition.yPosition = value;
-        }
-
+        public static int YCoordinate => MousePosition.yPosition;
     }
 }
