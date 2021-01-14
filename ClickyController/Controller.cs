@@ -30,7 +30,7 @@ namespace ClickyController
         internal static extern IntPtr GetMessageExtraInfo();
 
         /// <summary>
-        /// Contains the information needed by 'SendInput' function to create a simulted mouse/keyboard event
+        /// Contains the information needed by 'SendInput' function to create a simulated mouse/keyboard event
         /// More information can be found here https://docs.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-input
         /// </summary>
         [StructLayout(LayoutKind.Sequential)]
@@ -38,10 +38,7 @@ namespace ClickyController
         {
             internal uint type;
             internal InputUnion union;
-            public static int Size
-            {
-                get { return Marshal.SizeOf(typeof(INPUT)); }
-            }
+            public static int Size => Marshal.SizeOf(typeof(INPUT));
         }
 
         /// <summary>
@@ -94,7 +91,7 @@ namespace ClickyController
         /// <param name="seconds">Number of seconds to pause the program for</param>
         public static void Wait(int seconds)
         {
-            if(seconds >= 0)
+            if(seconds > 0)
                 Thread.Sleep(seconds * 1000);
         }
     }
