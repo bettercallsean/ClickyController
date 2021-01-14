@@ -4,14 +4,16 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Authors>Sean Edwards</Authors>
     <Company />
-    <Description>A library to control the mouse and keyboard</Description>
+    <Description>A library to control mouse and keyboard input on Windows.</Description>
     <RepositoryUrl>https://github.com/bettercallsean/ClickyController</RepositoryUrl>
+    <PackageVersion>1.0</PackageVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebugType>portable</DebugType>
     <DebugSymbols>true</DebugSymbols>
-    <DocumentationFile>\\Mac\Google Drive\Year 3\Project\ClickyController\ClickyController\Docs\ClickyController.xml</DocumentationFile>
+    <DocumentationFile>D:\Google Drive\Year 3\Project\ClickyController\ClickyController\ClickyController.xml</DocumentationFile>
+    <OutputPath>D:\Google Drive\Year 3\Project\ClickyController\Docs\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
