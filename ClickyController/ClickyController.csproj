@@ -1,24 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <Authors>Sean Edwards</Authors>
     <Company />
     <Description>A library to control mouse and keyboard input on Windows.</Description>
     <RepositoryUrl>https://github.com/bettercallsean/ClickyController</RepositoryUrl>
-    <PackageVersion>1.0</PackageVersion>
+    <PackageVersion>1.1</PackageVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebugType>portable</DebugType>
     <DebugSymbols>true</DebugSymbols>
-    <DocumentationFile>D:\Google Drive\Year 3\Project\ClickyController\ClickyController\ClickyController.xml</DocumentationFile>
-    <OutputPath>D:\Google Drive\Year 3\Project\ClickyController\Docs\</OutputPath>
+    <DocumentationFile>..\ClickyController\Docs\ClickyController.xml</DocumentationFile>
+    <OutputPath>..\ClickyController\Docs\</OutputPath>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-  </ItemGroup>
 
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
